@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:id="@+id/province_list_head_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/province_letter_listview_padding"
+        android:paddingLeft="@dimen/province_item_padding"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="热门城市"
+        android:textColor="@color/gray_666666"
+        android:textSize="@dimen/large_textView_text_size"
+        />
+
+</LinearLayout>

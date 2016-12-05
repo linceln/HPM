@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffeeeeee"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffffff"
+        android:layout_marginTop="14dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearAvatar"
+            android:layout_width="fill_parent"
+            android:layout_height="58dp"
+            android:background="#ffffffff"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+            android:paddingRight="@dimen/mystore_linear_paddingRight">
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4.0dip"
+                android:layout_weight="1.0"
+                android:text="头像"
+                android:textColor="@color/mini_text_color_gray"
+                android:textSize="@dimen/mystore_tv3_textSize" />
+
+            <RelativeLayout
+                android:id="@+id/myaccount_userinfo__userpic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/myaccount_userpic_frame"
+                    android:layout_width="43.0dip"
+                    android:layout_height="43.0dip"
+                    android:src="@drawable/mystore_userpic_frame" />
+
+                <com.olsplus.balancemall.component.view.CircleImageView
+                    android:id="@+id/myaccount_user_photo"
+                    android:layout_width="43.0dip"
+                    android:layout_height="43.0dip"
+                    android:layout_alignBottom="@id/mystore_userpic_frame"
+                    android:layout_alignLeft="@id/mystore_userpic_frame"
+                    android:layout_alignRight="@id/mystore_userpic_frame"
+                    android:layout_alignTop="@id/mystore_userpic_frame"
+                    android:layout_marginBottom="6.0dip"
+                    android:layout_marginLeft="6.0dip"
+                    android:layout_marginRight="6.0dip"
+                    android:layout_marginTop="6.0dip" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2.0px"
+            android:layout_marginLeft="14.0dip"
+            android:background="#ffeeeeee" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/myaccount_gendar_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffffff"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#ffffffff"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/mystore_linear_paddingTop"
+            android:paddingTop="@dimen/mystore_linear_paddingBottom"
+            android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+            android:paddingRight="@dimen/mystore_linear_paddingRight">
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4.0dip"
+                android:layout_weight="1.0"
+                android:text="性别"
+                android:textColor="@color/mini_text_color_gray"
+                android:textSize="@dimen/mystore_tv3_textSize" />
+
+            <TextView
+                android:id="@+id/myaccount_gendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10.0dip"
+                android:textColor="@color/mini_account_color"
+                android:textSize="@dimen/mystore_tv3_textSize" />
+
+            <ImageView
+                android:layout_width="8.0dip"
+                android:layout_height="12.0dip"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="10.0dip"
+                android:background="@drawable/mystore_right_arrow" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2.0px"
+            android:layout_marginLeft="14.0dip"
+            android:layout_marginRight="10.0dip"
+            android:background="#ffeeeeee" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/myaccount_bind_phone_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffffff"
+        android:orientation="vertical"
+>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="#ffffffff"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/mystore_linear_paddingTop"
+            android:paddingTop="@dimen/mystore_linear_paddingBottom"
+            android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+            android:paddingRight="@dimen/mystore_linear_paddingRight">
+
+            <TextView
+                android:layout_width="0.0dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="4.0dip"
+                android:layout_weight="1.0"
+                android:text="绑定手机"
+                android:textColor="@color/mini_text_color_gray"
+                android:textSize="@dimen/mystore_tv3_textSize" />
+
+            <TextView
+                android:id="@+id/myaccount_bind_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10.0dip"
+                android:textColor="@color/mini_account_color"
+                android:textSize="@dimen/mystore_tv3_textSize" />
+
+            <ImageView
+                android:layout_width="8.0dip"
+                android:layout_height="12.0dip"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="10.0dip"
+                android:background="@drawable/mystore_right_arrow" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

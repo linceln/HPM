@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/cart_item_single_height"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <View
+        android:id="@+id/anchor_check"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/iv_pic" />
+
+    <View
+        android:id="@+id/anchor_pic_name"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignLeft="@id/iv_pic"
+        android:layout_alignRight="@+id/layout_tv" />
+
+    <CheckBox
+        android:id="@+id/cb_checked"
+        android:layout_width="@dimen/cart_cb_size"
+        android:layout_height="@dimen/cart_cb_size"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/cart_spacing"
+        android:background="@drawable/common_check_box_selector"
+        android:button="@null"
+        android:checked="true"
+        android:clickable="true" />
+
+    <CheckBox
+        android:id="@+id/btn_delete"
+        android:layout_width="@dimen/cart_cb_size"
+        android:layout_height="@dimen/cart_cb_size"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="@dimen/cart_spacing"
+        android:background="@drawable/common_check_box_selector"
+        android:button="@null"
+        android:clickable="true"
+        android:visibility="gone"
+      />
+
+    <View
+        android:id="@+id/up_line"
+        android:layout_width="@dimen/size_1px"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/iv_pic"
+        android:layout_marginLeft="25.0dip"
+        android:layout_toRightOf="@id/cb_checked"
+        android:visibility="gone"
+        android:background="@color/cart_gray_devider" />
+
+    <ImageView
+        android:id="@+id/iv_pic_border"
+        android:layout_width="70.0dip"
+        android:layout_height="50.0dip"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/cb_checked"
+        android:visibility="gone"
+        android:background="@drawable/common_border_no_corner" />
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="@dimen/cart_iv_pic_size"
+        android:layout_height="@dimen/cart_iv_pic_size"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:layout_marginLeft="1.0dip"
+        android:layout_toRightOf="@id/cb_checked" />
+
+    <View
+        android:id="@+id/down_line"
+        android:layout_width="@dimen/size_1px"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/iv_pic"
+        android:layout_marginLeft="25.0dip"
+        android:visibility="gone"
+        android:layout_toRightOf="@id/cb_checked"
+        android:background="@color/cart_gray_devider" />
+
+    <RelativeLayout
+        android:id="@+id/layout_tv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_pic_border"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/cart_spacing"
+        android:layout_marginRight="14dp"
+        android:layout_toRightOf="@id/iv_pic">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:textColor="#ff111111"
+            android:textSize="@dimen/cart_tv_size_normal" />
+
+        <TextView
+            android:id="@+id/tv_sub_name"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="3dp"
+            android:maxLines="2"
+            android:textColor="#ff111111"
+            android:textSize="@dimen/cart_tv_size_normal" />
+
+
+        <LinearLayout
+            android:id="@+id/layout_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/tv_sub_name"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="￥"
+                android:textColor="@color/cart_price_1"
+                android:textSize="@dimen/cart_tv_size_normal"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥"
+                android:textColor="@color/cart_main_text_color"
+                android:textSize="@dimen/cart_tv_size_normal"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+   <!-- <include
+        android:id="@+id/include"
+        layout="@layout/cart_item_rightpart_view"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/cart_spacing_half" />
+-->
+
+
+    <View
+        android:id="@+id/single_devider"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/size_1px"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:background="#ffdddddd" />
+</RelativeLayout>

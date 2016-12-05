@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/cart_background_gray"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/action_bar_view"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/main_title_bar_height"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/common_main_actionbar_menu_selector"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/left_operation_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/double_margin" />
+
+        <TextView
+            android:id="@+id/actionbar_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:layout_centerInParent="true"
+            android:textSize="@dimen/large_textView_text_size" />
+
+
+        <TextView
+            android:id="@+id/right_operation_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#ffff0000"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="14.0sp" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_refresh"
+        android:layout_width="fill_parent"
+        android:layout_height="32.0dip"
+        android:background="#ffffffcc"
+        android:gravity="center"
+        android:layout_below="@id/action_bar_view"
+        android:text="加载失败，点击刷新"
+        android:textColor="@color/main_text_color"
+        android:textSize="14.0sp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/cart_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/cart_bottom_linear"
+        android:layout_below="@id/action_bar_view"
+        android:fadingEdgeLength="0.0dip" />
+
+    <com.olsplus.balancemall.app.cart.view.CartBottomView
+        android:id="@+id/cart_bottom_linear"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+   <!-- <com.xiaobai.main.app.cart.view.CartEmptyView
+        android:id="@+id/cart_empty_linear"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/action_bar_view"
+        android:visibility="gone" />-->
+</RelativeLayout>

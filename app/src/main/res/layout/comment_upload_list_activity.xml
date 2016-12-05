@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ffeeeeee">
+
+        <com.jude.easyrecyclerview.EasyRecyclerView
+            android:id="@+id/comment_listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="58.0dip"
+            app:scrollbarStyle="insideOverlay" />
+
+        <LinearLayout
+            android:id="@+id/comment_bottomview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1.0px"
+                android:background="#ffcccccc" />
+
+
+            <Button
+                android:id="@+id/submit_btn"
+                android:layout_width="105dip"
+                android:layout_height="50dp"
+                android:background="#fe2c2c"
+                android:layout_gravity="right"
+                android:text="发表评价"
+                android:textColor="@color/white"
+                android:textSize="15.0sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:id="@+id/province_list_foot_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="14dp"
+        android:paddingLeft="@dimen/province_item_padding"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/gray_999999"
+        android:textSize="@dimen/small_textView_text_size"
+        />
+
+</LinearLayout>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/more_linear"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/mystore_groupon_gray_bg_color"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="#ffffffff"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/mysettting_account_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="58dp"
+            android:background="#ffffffff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:background="#ffffffff"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/mystore_linear_paddingTop"
+                android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+                android:paddingRight="@dimen/mystore_linear_paddingRight"
+                android:paddingTop="@dimen/mystore_linear_paddingBottom">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4.0dip"
+                    android:layout_weight="1.0"
+                    android:text="个人资料"
+                    android:textColor="@color/mini_text_color_gray"
+                    android:textSize="@dimen/mystore_tv3_textSize" />
+
+
+                <ImageView
+                    android:layout_width="8.0dip"
+                    android:layout_height="12.0dip"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="10.0dip"
+                    android:background="@drawable/mystore_right_arrow" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2.0px"
+                android:layout_marginLeft="14.0dip"
+                android:layout_marginRight="10.0dip"
+                android:background="#ffeeeeee" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mysettting_password_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="58dp"
+            android:background="#ffffffff"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:background="#ffffffff"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/mystore_linear_paddingTop"
+                android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+                android:paddingRight="@dimen/mystore_linear_paddingRight"
+                android:paddingTop="@dimen/mystore_linear_paddingBottom">
+
+                <TextView
+                    android:layout_width="0.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="4.0dip"
+                    android:layout_weight="1.0"
+                    android:text="密码管理"
+                    android:textColor="@color/mini_text_color_gray"
+                    android:textSize="@dimen/mystore_tv3_textSize" />
+
+
+                <ImageView
+                    android:layout_width="8.0dip"
+                    android:layout_height="12.0dip"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="10.0dip"
+                    android:background="@drawable/mystore_right_arrow" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="2.0px"
+                android:layout_marginLeft="14.0dip"
+                android:layout_marginRight="10.0dip"
+                android:background="#ffeeeeee" />
+        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/mysettting_msg_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="58dp"
+                android:background="#ffffffff"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1.0"
+                    android:background="#ffffffff"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+                    android:paddingRight="@dimen/mystore_linear_paddingRight"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="0.0dip"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4.0dip"
+                        android:layout_weight="1.0"
+                        android:text="消息通知"
+                        android:textColor="@color/mini_text_color_gray"
+                        android:textSize="@dimen/mystore_tv3_textSize" />
+
+                    <CheckBox
+                        android:id="@+id/mysettting_msg_check_need"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|right"
+                        android:layout_marginRight="10.0dip"
+                        android:checked="true"
+                        android:button="@drawable/pay_checkout_invoice_check"
+                        />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="2.0px"
+                    android:layout_marginLeft="14.0dip"
+                    android:layout_marginRight="10.0dip"
+                    android:background="#ffeeeeee" />
+            </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/mysettting_clean_cache_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="58dp"
+                    android:background="#ffffffff"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0"
+                        android:background="#ffffffff"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/mystore_linear_paddingTop"
+                        android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+                        android:paddingRight="@dimen/mystore_linear_paddingRight"
+                        android:paddingTop="@dimen/mystore_linear_paddingBottom">
+
+                        <TextView
+                            android:layout_width="0.0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="4.0dip"
+                            android:layout_weight="1.0"
+                            android:text="消除缓存空间"
+                            android:textColor="@color/mini_text_color_gray"
+                            android:textSize="@dimen/mystore_tv3_textSize" />
+
+
+                        <ImageView
+                            android:layout_width="8.0dip"
+                            android:layout_height="12.0dip"
+                            android:layout_gravity="center|right"
+                            android:layout_marginRight="10.0dip"
+                            android:background="@drawable/mystore_right_arrow" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="2.0px"
+                        android:layout_marginLeft="14.0dip"
+                        android:layout_marginRight="10.0dip"
+                        android:background="#ffeeeeee" />
+                </LinearLayout>
+            </LinearLayout>
+        <Button
+            android:id="@+id/setting_logout_btn"
+            style="@style/big_redbtn_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/setting_setting_logout_btn_marginLeft"
+            android:layout_marginRight="@dimen/setting_setting_logout_btn_marginRight"
+            android:layout_marginTop="@dimen/setting_setting_logout_btn_marginTop"
+            android:gravity="center"
+            android:paddingBottom="10.0dip"
+            android:paddingTop="10.0dip"
+            android:text="退出当前账户"
+            android:textColor="@color/white"
+            android:textSize="@dimen/setting_setting_logout_btn_textSize" />
+    </LinearLayout>

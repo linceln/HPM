@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:id="@+id/common_bottom_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <View style="@style/DividerHorizontal" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/menu_root"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="3.0"
+            android:id="@+id/menu_home_layout">
+
+            <ImageView
+                android:id="@+id/menu_home_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/navigation_homebutton"
+                android:scaleType="centerInside" />
+
+
+        </LinearLayout>
+
+        <View style="@style/DividerVertical" />
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:id="@+id/menu_cart_layout">
+
+
+            <FrameLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/menu_cart_icon"
+                    android:layout_width="24.0dip"
+                    android:layout_height="24.0dip"
+                    android:src="@drawable/navigation_cartbutton"
+                    android:scaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/tips"
+                    android:textSize="8.0sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:layout_gravity="right"
+                    android:tag="tips_cart_number"
+                    android:background="@drawable/navi_cartnum_tips"
+                    android:paddingLeft="2.0dip"
+                    android:paddingRight="2.0dip"
+                    android:visibility="gone"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginTop="-2.0dip"
+                    android:layout_marginRight="-5.0dip"
+                    android:singleLine="true" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/menu_cart_text"
+                android:textSize="@dimen/tiny_text_size"
+                android:textColor="@drawable/navigation_text_color_selector"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="购物车"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:background="@android:color/transparent"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:id="@+id/menu_my_layout">
+
+
+            <FrameLayout
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/menu_my_icon"
+                    android:layout_width="24.0dip"
+                    android:layout_height="24.0dip"
+                    android:src="@drawable/navigation_mystorebutton"
+                    android:scaleType="centerInside" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/menu_my_text"
+                android:textSize="@dimen/tiny_text_size"
+                android:textColor="@drawable/navigation_text_color_selector"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:text="我的"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

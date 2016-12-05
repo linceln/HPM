@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fffafafa"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:background="#ffdddddd" />
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/myorder_list_listview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        app:layout_progress="@layout/progress_layout"
+        app:scrollbarStyle="insideOverlay"
+        />
+
+    <LinearLayout
+        android:gravity="top"
+        android:orientation="vertical"
+        android:id="@+id/myorder_null_linear"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/myorder_myorder_null_linear_margintop"
+        android:layout_weight="1.0">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/myorder_myorder_null_imageview_width"
+            android:layout_height="@dimen/myorder_myorder_null_imageview_height"
+            android:src="@drawable/mystore_order_without_data_icon" />
+
+        <TextView
+            android:textSize="@dimen/myorder_myorder_null_textsize"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/myorder_null_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

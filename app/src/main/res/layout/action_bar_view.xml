@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/action_bar_view"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/actionbar_bg"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/left_operation_ll"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/left_operation_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/double_margin"
+            android:src="@drawable/back_normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/actionbar_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_16sp" />
+
+        <TextView
+            android:id="@+id/actionbar_province_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7.0dip"
+            android:textColor="#ff999999"
+            android:textSize="@dimen/small_textView_text_size" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/right_operation_rl"
+        android:layout_width="65.0dip"
+        android:layout_height="48.0dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5.0dip"
+        android:visibility="invisible">
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/right_operation_iv"
+                android:layout_width="25.0dip"
+                android:layout_height="25.0dip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="27.0dip"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:id="@+id/right_operation_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#ffff0000"
+                android:textSize="14.0sp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/actionbar_message_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5.0dip"
+            android:layout_marginTop="2.0dip"
+            android:background="@drawable/badge_ifaux"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </RelativeLayout>
+</RelativeLayout>

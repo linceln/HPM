@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/pay_coupon_null_linear"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="60.0dip"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/mystore_my_coupon_layout_iv_width"
+            android:layout_height="@dimen/mystore_my_coupon_layout_iv_height"
+            android:background="@drawable/mystore_mycoupon_null_bg" />
+
+        <TextView
+            android:id="@+id/pay_coupon_null_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/my_coupon_layout_my_coupon_null_tv_marginTop"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.2"
+            android:text="没有可用优惠券"
+            android:textColor="#ff666666"
+            android:textSize="@dimen/my_coupon_layout_my_coupon_null_tv_textSize" />
+    </LinearLayout>
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
+        android:id="@+id/pay_coupon_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        app:layout_progress="@layout/progress_layout"
+        app:scrollbarStyle="insideOverlay"
+        />
+
+</LinearLayout>

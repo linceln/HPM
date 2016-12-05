@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:paddingBottom="10.0dip"
+        android:paddingLeft="14.0dip"
+        android:paddingTop="20.0dip"
+        android:text="支付方式"
+        android:textColor="#ff212121"
+        android:textSize="14.0sp" />
+
+    <LinearLayout
+        android:id="@+id/pay_checkout_payment_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="14.0dip"
+        android:paddingRight="14.0dip">
+
+
+        <LinearLayout
+            android:id="@+id/pay_ali_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/pay_ico_alipay"
+                android:drawablePadding="10dp"
+                android:text="支付宝"
+                android:textColor="#ff212121"
+                android:textSize="16.0sp" />
+
+            <CheckBox
+                android:id="@+id/bank_choose_ali_check"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:layout_gravity="center_vertical"
+                android:button="@drawable/pay_bank_choose_selector"
+                android:checked="true"
+                android:gravity="center" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/size_1px"
+            android:layout_marginLeft="14dp"
+            android:background="@color/cart_gray_devider" />
+
+        <LinearLayout
+            android:id="@+id/pay_wx_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/pay_icon_wepay"
+                android:drawablePadding="10dp"
+                android:text="微信支付"
+                android:textColor="#ff212121"
+                android:textSize="16.0sp" />
+
+            <CheckBox
+                android:id="@+id/bank_choose_weixin_check"
+                android:layout_width="24.0dip"
+                android:layout_height="24.0dip"
+                android:layout_gravity="center_vertical"
+                android:button="@drawable/pay_bank_choose_selector"
+                android:checked="false"
+                android:gravity="center" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

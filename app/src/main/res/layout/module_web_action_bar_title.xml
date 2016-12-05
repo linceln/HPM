@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/common_main_actionbar_menu_selector"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:gravity="center|left"
+        android:id="@+id/home"
+        android:background="@drawable/common_main_actionbar_menu_selector"
+        android:layout_width="35.0dip"
+        android:layout_height="fill_parent">
+
+        <ImageView
+            android:layout_width="25.0dip"
+            android:layout_height="25.0dip"
+            android:src="@drawable/back_normal"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <TextView
+        android:textSize="@dimen/large_textView_text_size"
+        android:textColor="@color/black"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:id="@id/title"
+        android:layout_width="0.0dip"
+        android:layout_height="fill_parent"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/default_zone"
+        android:layout_toRightOf="@id/home" />
+
+    <View
+        android:id="@+id/default_zone"
+        android:layout_width="35.0dip"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>

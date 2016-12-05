@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">禾平猫</string>
+    <string name="module_login_account">手机号</string>
+    <string name="module_login_password">密码</string>
+    <string name="module_login_user_hint">输入用户名或手机号码</string>
+    <string name="module_login_password_hint">请输入密码</string>
+    <string name="module_login_username_isempty">用户名不能为空</string>
+    <string name="module_login_password_isempty">密码不能为空</string>
+    <string name="module_login_vercode_isempty">验证码不能为空，请输入</string>
+    <string name="upomp_lthj_validateMobileMac_Length_prompt">请输入正确的短信验证码</string>
+    <string name="upomp_lthj_validateMobileMac_Same_prompt">短信验证码错误，请确认您填写的是否与您收到的短信验证码一致</string>
+    <string name="module_login_forget_password">忘记密码?</string>
+    <string name="module_login_auto_login">自动登录</string>
+    <string name="module_login_login">登录</string>
+    <string name="module_register_next">下一步</string>
+    <string name="module_register_code_hint">短信验证码</string>
+    <string name="module_register">完成</string>
+    <string name="upomp_lthj_save_account">登录成功!</string>
+    <string name="upomp_lthj_quick_bind_prompt">恭喜您注册成功!</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="frame_photo_from_camera">立即拍照</string>
+    <string name="frame_photo_from_album">图库上传</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <string name="update_updatetitle">发现新版本</string>
+    <string name="update_newversion">最新版本: </string>
+    <string name="update_updatecontent">更新内容</string>
+    <string name="update_updatenow">立即更新</string>
+    <string name="update_installnow">立即安装</string>
+    <string name="update_notnow">以后再说</string>
+    <string name="about">关于禾平猫</string>
+    <!--merchant-->
+    <string name="merchant_goods_count">共计%1s件商品</string>
+    <string name="merchant_goods_detail">%1$s/merchant/%2$s/%3$s/detail/%4$s</string>
+
+    <string name="url_upload_token">v1/%1$s/product/image/qiniu</string>
+    <string name="url_add_goods">v1/%1$s/product</string>
+
+    <!--Loading Dialog-->
+    <string name="loading_default">正在加载，请稍候...</string>
+    <string name="loading_login">正在登录，请稍候...</string>
+    <string name="loading_check">正在校验，请稍候...</string>
+    <string name="loading_upload">正在提交数据，请稍候...</string>
+    <string name="loading_insert">正在插入图片，请稍候...</string>
+
+</resources>

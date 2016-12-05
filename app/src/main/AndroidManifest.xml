@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.olsplus.balancemall">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <application
+        android:name=".core.app.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.olsplus.balancemall.core.glide.CustomCachingGlideModule"
+            android:value="GlideModule" />
+
+        <!--友盟  start-->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5844c28ff43e4845b60017c0" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+        <!--友盟  end-->
+
+        <activity
+            android:name=".app.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".app.login.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.MyStoreActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeDarkStatusBar"/>
+        <activity
+            android:name=".app.mystore.UserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.MyOrderListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.CommentUploadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.ReturnOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.message.MyMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.config.AboutNewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.config.PasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.config.FeedBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.config.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.mystore.config.BindPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.home.HomeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".app.login.RegisterActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".app.province.ProvinceSwitchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.province.BuildCityActivity"
+            android:launchMode="standard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.web.WebActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.cart.CartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.pay.CheckoutMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.pay.PaySuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".app.pay.voucher.MyCouponActivity"
+            android:screenOrientation="portrait" />
+        <!-- 支付宝wap支付 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:theme="@style/AppThemeDarkStatusBar" />
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:theme="@style/AppThemeDarkStatusBar" />
+
+        <!-- 微信支付回调 -->
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/AppThemeDarkStatusBar" />
+
+        <receiver android:name=".core.update.receiver.InstallReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.liuguangqiang.ipicker.IPickerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IPickerTheme" />
+        <activity
+            android:name="com.liuguangqiang.ipicker.crop.CropImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/IPickerTheme" />
+        <activity android:name=".app.merchant.MerchantActivity" />
+        <activity android:name=".app.merchant.order.MerchantOrderActivity" />
+        <activity android:name=".app.merchant.order.MerchantOrderDetailActivity" />
+        <activity android:name=".app.merchant.goods.GoodsActivity" />
+        <activity android:name=".app.merchant.goods.GoodsDetailActivity" />
+        <activity android:name=".app.merchant.earning.EarningActivity" />
+        <activity
+            android:name=".app.merchant.goods.AddGoodsActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".app.merchant.goods.RichTextActivity" />
+        <activity android:name=".app.login.RegisterMobileActivity" />
+        <activity android:name=".app.login.RegisterVerifActivity" />
+        <activity android:name=".app.login.RegisterPwdActivity" />
+        <activity android:name=".app.splash.SplashActivity" />
+    </application>
+
+</manifest>

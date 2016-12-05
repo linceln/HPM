@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_marginTop="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/rock_home_description_content_margin_left"
+        android:layout_marginTop="@dimen/rock_home_description_content_margin_top"
+        android:text="个人服务"
+        android:textSize="@dimen/text_size_14sp"
+        android:textColor="@color/color_gui_jiu_pei" />
+
+    <com.olsplus.balancemall.app.home.view.HomeFunctionView
+        android:id="@+id/home_functions_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/rock_home_description_content_margin_left"
+        android:layout_marginRight="@dimen/rock_home_description_content_margin_left"
+        android:layout_marginBottom="@dimen/rock_home_description_content_margin_bottom"
+        android:orientation="vertical"
+        />
+
+</LinearLayout>

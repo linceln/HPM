@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/module_item"
+    android:layout_width="fill_parent"
+    android:layout_height="72dp"
+    android:clickable="true"
+    android:descendantFocusability="beforeDescendants"
+    android:background="@drawable/home_fuctions_item_bg"
+    android:gravity="left"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation = "vertical"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        >
+
+        <TextView
+            android:id="@+id/module_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8.0dip"
+            android:layout_marginTop="10.0dip"
+            android:ellipsize="none"
+            android:singleLine="true"
+            android:textColor="@color/gray_333333"
+            android:text="洗衣"
+            android:textSize="@dimen/mini_text_size_large" />
+
+
+        <TextView
+            android:id="@+id/module_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/gray_a9a9a9"
+            android:text="专业洗衣"
+            android:textSize="@dimen/mini_text_size_14"
+             />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/module_icon"
+        android:layout_width="60.0dip"
+        android:layout_height="54.0dip"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="@dimen/rock_home_description_content_margin_right"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/ic_home_washing"
+        android:scaleType="fitXY" />
+
+
+</LinearLayout>

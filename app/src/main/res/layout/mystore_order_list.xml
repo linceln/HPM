@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fffafafa"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1.0dip"
+        android:background="#ffdddddd" />
+
+    <com.olsplus.balancemall.component.view.PagerSlidingTabStrip
+        android:id="@+id/indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:pstsTabPaddingLeftRight = "0dp"
+        app:pstsShouldExpand ="true"
+        app:pstsDividerColor="@color/transparent"
+        app:pstsIndicatorHeight="2dp"
+        app:pstsIndicatorColor="@color/discount_red"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/indicator" />
+
+
+
+    <LinearLayout
+        android:id="@+id/myorder_null_linear"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/myorder_myorder_null_linear_margintop"
+        android:layout_weight="1.0"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/myorder_myorder_null_imageview_width"
+            android:layout_height="@dimen/myorder_myorder_null_imageview_height"
+            android:layout_gravity="center"
+            android:src="@drawable/mystore_order_without_data_icon" />
+
+        <TextView
+            android:id="@+id/myorder_null_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20.0dip"
+            android:textSize="@dimen/myorder_myorder_null_textsize" />
+    </LinearLayout>
+</LinearLayout>

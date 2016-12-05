@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <FrameLayout
+        android:id="@+id/raybuy_title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0">
+
+        <WebView
+            android:id="@+id/webView"
+            android:background="@color/main_bg_color"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentTop="true" />
+
+        <ProgressBar
+            android:id="@+id/webview_progressbar"
+            android:layout_width="fill_parent"
+            android:layout_height="2.0dip"
+            android:progressDrawable="@drawable/progress_red"
+            android:layout_alignParentTop="true"
+            style="?android:attr/progressBarStyleHorizontal" />
+
+
+    </RelativeLayout>
+</LinearLayout>

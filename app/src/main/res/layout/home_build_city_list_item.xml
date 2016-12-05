@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/build_list_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/province_item_padding"
+        android:paddingTop="@dimen/province_letter_listview_padding"
+        android:singleLine="true"
+        android:textColor="@color/gray_333333"
+        android:textSize="@dimen/user_eidt_drop_down_text_size" />
+
+    <TextView
+        android:id="@+id/build_list_item_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingLeft="@dimen/province_item_padding"
+        android:paddingBottom="@dimen/province_letter_listview_padding"
+        android:singleLine="true"
+        android:textColor="@color/gray_999999"
+        android:textSize="@dimen/small_textView_text_size"
+        />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/home_build_item_mark_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:src="@drawable/home_province_item_selected"
+        android:layout_marginRight="@dimen/province_item_padding"
+        android:visibility="gone"
+        />
+
+</LinearLayout>
