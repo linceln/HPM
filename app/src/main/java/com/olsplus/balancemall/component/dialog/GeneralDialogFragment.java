@@ -8,39 +8,39 @@ import android.support.v4.app.DialogFragment;
 
 public class GeneralDialogFragment extends DialogFragment {
 
-	private String msg;
+    private String msg;
 
-	private OnPositiveClickListener listener;
+    private OnPositiveClickListener listener;
 
-	public void setMessage(String msg) {
+    public void setMessage(String msg) {
 
-		this.msg = msg;
-	}
+        this.msg = msg;
+    }
 
-	public void setOnPositiveClickListener(OnPositiveClickListener listener) {
+    public void setOnPositiveClickListener(OnPositiveClickListener listener) {
 
-		this.listener = listener;
-	}
+        this.listener = listener;
+    }
 
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		builder.setMessage(msg).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(msg).setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
-			public void onClick(DialogInterface dialog, int id) {
+            public void onClick(DialogInterface dialog, int id) {
 
-				if (listener != null) {
-					listener.onClick();
-				}
-			}
-		}).setNegativeButton("取消", null);
+                if (listener != null) {
+                    listener.onClick();
+                }
+            }
+        }).setNegativeButton("取消", null);
 //		.setNeutralButton("稍后", null);
-		return builder.create();
-	}
+        return builder.create();
+    }
 
-	public interface OnPositiveClickListener {
+    public interface OnPositiveClickListener {
 
-		public void onClick();
-	}
+        public void onClick();
+    }
 }

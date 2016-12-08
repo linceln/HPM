@@ -26,10 +26,10 @@ import rx.schedulers.Schedulers;
 
 public class CheckUpdateBusiness {
 
-    public static void checkUpdate( final UpdateCallback updateCallback) {
+    public static void checkUpdate(final UpdateCallback updateCallback) {
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
         String url = ApiConst.BASE_URL + "v1/version";
-        String sign = parseUpdateSign(url,timestamp);
+        String sign = parseUpdateSign(url, timestamp);
         HttpResultObserver respObserver = new HttpResultObserver<UpdateResult>() {
 
             @Override
@@ -43,18 +43,21 @@ public class CheckUpdateBusiness {
 
             @Override
             public void handleSuccessResp(UpdateResult data) {
-
-                updateCallback.onSuccess(data);
+                if (updateCallback != null) {
+                    updateCallback.onSuccess(data);
+                }
             }
 
             @Override
             public void handleFailedResp(String msg) {
-                updateCallback.onError();
+                if (updateCallback != null) {
+                    updateCallback.onError();
+                }
             }
         };
         HttpManager.getRetrofit()
                 .create(UpdateService.class)
-                .updateApp( HttpUtil.PLATFORM, HttpUtil.CHANNEL,timestamp,sign)
+                .updateApp(HttpUtil.PLATFORM, HttpUtil.CHANNEL, timestamp, sign)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(respObserver);
@@ -69,7 +72,6 @@ public class CheckUpdateBusiness {
         return sign;
     }
 
-    @SuppressWarnings("unused")
     public static void downloadApk(
             Context context, UpdateInfo updateInfo,
             String infoName, String storeApk) {
@@ -121,6 +123,4 @@ public class CheckUpdateBusiness {
     private static boolean isDownloadManagerAvailable() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
     }
-
-
 }

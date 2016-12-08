@@ -2,18 +2,12 @@ package com.olsplus.balancemall.app.home;
 
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.liuguangqiang.permissionhelper.PermissionHelper;
-import com.liuguangqiang.permissionhelper.annotations.PermissionGranted;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.bottom.BottomNavigateFragment;
 import com.olsplus.balancemall.app.login.LoginActivity;
@@ -21,7 +15,7 @@ import com.olsplus.balancemall.app.province.BuildCityActivity;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
 import com.olsplus.balancemall.core.event.TokenEvent;
-import com.olsplus.balancemall.core.update.UpdateUtil;
+import com.olsplus.balancemall.core.update.UpgradeUtil;
 import com.olsplus.balancemall.core.util.ActivityManager;
 import com.olsplus.balancemall.core.util.SPUtil;
 
@@ -77,9 +71,9 @@ public class HomeActivity extends MainActivity {
         long time = (Long) SPUtil.get(this, SPUtil.UPDATE_TIME, 0L);
         long currentTime = System.currentTimeMillis();
         if (currentTime - time >= 24 * 3600 * 1000) {
-            UpdateUtil.checkUpdate(this);
+            // 一天检查更新一次
+            UpgradeUtil.checkUpdate(this);
         }
-//        UpdateUtil.checkUpdate(this);
     }
 
     @Override

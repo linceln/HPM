@@ -86,7 +86,7 @@ public class UpgradeUtil {
      *
      * @param context
      */
-    private static void upgradeNormal(final Context context) {
+    public static void upgradeNormal(final Context context) {
         final UpgradeNormalDialog upgradeNormalDialog = new UpgradeNormalDialog();
         upgradeNormalDialog.setMessage(context.getString(R.string.upgrade_normal_msg));
         upgradeNormalDialog.setOnPositiveClickListener(new UpgradeNormalDialog.OnPositiveClickListener() {
@@ -96,6 +96,7 @@ public class UpgradeUtil {
                 toMarket(context);
             }
         });
+        upgradeNormalDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "UpgradeNormal");
     }
 
     /**
@@ -103,7 +104,7 @@ public class UpgradeUtil {
      *
      * @param context
      */
-    private static void upgradeForce(final Context context) {
+    public static void upgradeForce(final Context context) {
         final UpgradeForceDialog generalDialogFragment = new UpgradeForceDialog();
         generalDialogFragment.setMessage(context.getString(R.string.upgrade_force_msg));
         generalDialogFragment.setCancelable(false);
@@ -113,7 +114,7 @@ public class UpgradeUtil {
                 toMarket(context);
             }
         });
-        generalDialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "update");
+        generalDialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "UpgradeForce");
     }
 
     /**
