@@ -122,5 +122,4 @@ public class WarnDialog
 //            dialog.dismissLoading();
 //        }
 //    }
-
 }

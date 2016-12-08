@@ -2,9 +2,10 @@ package com.olsplus.balancemall.app.mystore;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,28 +14,25 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.liuguangqiang.ipicker.IPicker;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.mystore.bean.MyOrderReturn;
 import com.olsplus.balancemall.app.mystore.bean.RefundReason;
 import com.olsplus.balancemall.app.mystore.request.MyOrderImpl;
 import com.olsplus.balancemall.app.mystore.view.CommentImageView;
 import com.olsplus.balancemall.app.mystore.view.IReturnOrderView;
-import com.olsplus.balancemall.component.dialog.BottomActionDialog;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
-import com.olsplus.balancemall.core.util.BitmapUtil;
-import com.olsplus.balancemall.core.util.FileUtil;
+import com.olsplus.balancemall.core.util.SnackbarUtil;
 import com.olsplus.balancemall.core.util.ToastUtil;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReturnOrderActivity extends MainActivity implements IReturnOrderView {
+public class ReturnOrderActivity extends MainActivity implements IReturnOrderView, IPicker.OnSelectedListener {
 
     private Spinner reasonSp;
     private EditText amountEt;
@@ -44,15 +42,11 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
     private LinearLayout picLinear;
     private TextView picInfoTv;
     private TextView sumitTv;
-    private BottomActionDialog dialog;
-
     private MyOrderImpl myOrderImpl;
     private String orderId;
     private String productId;
     private String amount;
     private String reasonId;
-    private File file;
-    private List<String> imagePathList = new ArrayList<String>();
     private MyOrderReturn myOrderReturn;
 
 
@@ -81,7 +75,7 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
         super.handleIntent(intent);
         orderId = intent.getStringExtra("order_id");
         productId = intent.getStringExtra("product_id");
-        amount= intent.getStringExtra("order_amount");
+        amount = intent.getStringExtra("order_amount");
     }
 
 
@@ -92,18 +86,46 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
         mTitleName.setText("退款");
         reasonSp = (Spinner) findViewById(R.id.return_product_detail_reason_sp);
         amountEt = (EditText) findViewById(R.id.return_order_amount_tv);
-        returnAmountTv = (TextView)findViewById(R.id.return_amount_tv);
+        amountEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                double pay = 0;
+                if (!TextUtils.isEmpty(amount)) {
+                    pay = Double.parseDouble(amount);
+                }
+                double input = 0;
+                if (!TextUtils.isEmpty(editable.toString())) {
+                    input = Double.parseDouble(editable.toString());
+                }
+
+                if (input > pay) {
+                    amountEt.setText("");
+                    Toast.makeText(ReturnOrderActivity.this, "退款金额不能大于" + amount, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        });
+        returnAmountTv = (TextView) findViewById(R.id.return_amount_tv);
         explianEt = (EditText) findViewById(R.id.return_order_explian_et);
         LinearLayout addImageLayout = (LinearLayout) findViewById(R.id.return_order_add_ll);
         addImage = (ImageView) findViewById(R.id.return_order_add_iv);
         picLinear = (LinearLayout) findViewById(R.id.return_order_pic_container);
-        picInfoTv  = (TextView) findViewById(R.id.return_order_add_pic_info);
+        picInfoTv = (TextView) findViewById(R.id.return_order_add_pic_info);
         sumitTv = (TextView) findViewById(R.id.return_order_sumit);
         addImageLayout.setOnClickListener(this);
         addImage.setOnClickListener(this);
         sumitTv.setOnClickListener(this);
         initReasonSpiner();
-        returnAmountTv.setText("退款金额"+"(¥"+amount+")");
+        returnAmountTv.setText("退款金额" + "(¥" + amount + ")");
         myOrderReturn = new MyOrderReturn();
         myOrderImpl = new MyOrderImpl(this);
         myOrderImpl.setiReturnOrderView(this);
@@ -131,7 +153,6 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
         RefundReason refundReason5 = new RefundReason();
         refundReason5.setId("NOT_RECEIVED");
         refundReason5.setReason("未收到商品");
-
 
 
         refundReasonList.add(refundReason1);
@@ -179,7 +200,7 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
         myOrderReturn.setTotal(amount);
         myOrderReturn.setOrder_id(orderId);
         myOrderReturn.setProduct_id(productId);
-        if(myOrderImpl!=null){
+        if (myOrderImpl != null) {
             myOrderImpl.returnOrder(myOrderReturn);
         }
     }
@@ -192,172 +213,20 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
                 sumitReturnData();
                 break;
             case R.id.return_order_add_iv:
-                showDioalg();
+                showDialog();
                 break;
             case R.id.return_order_add_ll:
-                showDioalg();
+                showDialog();
                 break;
 
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 36) {
-                FileUtil.compressImageFromFile(this, file);
-                imagePathList.add(file.getAbsolutePath());
-//                uploadRefundImage(file.getAbsolutePath());
-                int count = imagePathList.size();
-                if(myOrderImpl!=null && count <= 3){
-                    myOrderImpl.uploadReturnImg(file.getAbsolutePath(),count-1);
-                }
-                fillPhotoContainer();
+    private void showDialog() {
 
-//                if (data != null) {
-//                    Bundle extras = data.getExtras();
-//                    Bitmap bitmap = (Bitmap) extras.get("data");
-//                    fillPhotoContainer(bitmap, null);
-//                }
-            }
-            if (requestCode == 37) {
-                if (data != null) {
-                    Uri uri = data.getData();
-                    Bitmap bitmap = BitmapUtil.getBitmapFromUri(uri);
-                    if (bitmap != null) {
-                        try {
-                            file = FileUtil.createPicCacheFile();
-                            FileOutputStream outputStream = new FileOutputStream(file); // 文件输出流
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, outputStream);
-                            try {
-                                if (outputStream != null) {
-                                    outputStream.close();
-                                }
-                                FileUtil.compressImageFromFile(this, file);
-                                imagePathList.add(file.getAbsolutePath());
-//                                uploadRefundImage(file.getAbsolutePath());
-                                int count = imagePathList.size();
-                                if(myOrderImpl!=null && count <= 3){
-                                    myOrderImpl.uploadReturnImg(file.getAbsolutePath(),count-1);
-                                }
-                                fillPhotoContainer();
-                            } catch (IOException e) {
-
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
-    /**
-     * 填充图片凭证
-     */
-    private void fillPhotoContainer() {
-        picInfoTv.setVisibility(View.GONE);
-        picLinear.setVisibility(View.VISIBLE);
-        int picCount = picLinear.getChildCount();
-        if (picCount >= 3) {
-            ToastUtil.showShort(this, "最多上传3张照片");
-            return;
-        }
-        picLinear.removeAllViews();
-//        int size = DensityUtil.setDensityMarge(this, 34f);
-        int pathCount = imagePathList.size();
-        for (int i = 0; i < pathCount; i++) {
-            final CommentImageView imageView = new CommentImageView(this);
-//            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(size, size);
-//            layoutParams.setMargins(0, 0, 15, 0);
-//            imageView.setLayoutParams(layoutParams);
-//            imageView.setPadding(1, 1, 1, 1);
-////            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//            imageView.setBackgroundDrawable(this.getResources().getDrawable(R.drawable.comment_border));
-            final String pic = imagePathList.get(i);
-            imageView.getDelView().setTag(i);
-            imageView.getDelView().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int position = (Integer) view.getTag();
-                    imagePathList.remove(position);
-                    picLinear.removeViewAt(position);
-                    myOrderReturn.getImgs().remove(position);
-                    if(picLinear.getChildCount() == 0){
-                        picLinear.setVisibility(View.GONE);
-                        picInfoTv.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
-            imageView.showImage(pic);
-            picLinear.addView(imageView);
-        }
-
-
-    }
-
-    private void showDioalg() {
-//        View view = LayoutInflater.from(this).inflate(R.layout.comment_choose_photo_dialog,
-//                null);
-//        TextView v0 = (TextView) view.findViewById(R.id.camera_tv);
-//        TextView v1 = (TextView) view.findViewById(R.id.gallery_tv);
-//        final AlertDialog dialog = new AlertDialog.Builder(this).setView(view).show();
-//        v0.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                file = FileUtil.createPicCacheFile();
-//                Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-//                intent.putExtra("output", Uri.fromFile(file));
-//                intent.putExtra("android.intent.extra.videoQuality", 0);
-//                startActivityForResult(intent, 36);
-//                dialog.dismissLoading();
-//
-//            }
-//        });
-//        v1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(intent, 37);
-//                dialog.dismissLoading();
-//            }
-//        });
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
-        }
-          dialog = new BottomActionDialog.Builder(this)
-                .addMenu("拍照", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        file = FileUtil.createPicCacheFile();
-                        Intent v2 = new Intent("android.media.action.IMAGE_CAPTURE");
-                        v2.putExtra("output", Uri.fromFile(file));
-                        v2.putExtra("android.intent.extra.videoQuality", 0);
-                        startActivityForResult(v2, 36);
-                        if (dialog != null) {
-                            dialog.dismiss();
-                        }
-                    }
-                }).addMenu("从手机相册选择", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent();
-                        intent.setType("image/*");
-                        intent.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(intent, 37);
-                        if (dialog != null) {
-                            dialog.dismiss();
-                        }
-                    }
-                }).create();
-
-        dialog.show();
+        IPicker.setLimit(3);
+        IPicker.setOnSelectedListener(this);
+        IPicker.open(this);
     }
 
     @Override
@@ -372,14 +241,75 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
         finish();
     }
 
+    /**
+     * 上传图片失败回调
+     *
+     * @param msg
+     * @param position
+     */
     @Override
-    public void updateReturnImgFail(String msg,int position) {
-        ToastUtil.showShort(this,"上传图片失败");
-        picLinear.removeViewAt(position);
+    public void updateReturnImgFail(String msg, int position) {
+        SnackbarUtil.showShort(mTitleName, msg);
     }
 
+    /**
+     * 上传图片每一张成功的回调
+     *
+     * @param img
+     */
     @Override
-    public void updateReturnImgSuccess(String img) {
+    public void updateReturnImgNext(String img) {
         myOrderReturn.getImgs().add(img);
+    }
+
+    /**
+     * 上传图片完成回调
+     */
+    @Override
+    public void updateReturnImgCompleted() {
+    }
+
+    /**
+     * 选择图片回调
+     *
+     * @param paths
+     */
+    @Override
+    public void onSelected(List<String> paths) {
+
+        fillPhotoContainer(paths);
+        if (myOrderImpl != null) {
+            myOrderImpl.uploadReturnImg(paths);
+        }
+    }
+
+    /**
+     * 填充图片凭证
+     */
+    private void fillPhotoContainer(final List<String> paths) {
+        picInfoTv.setVisibility(View.GONE);
+        picLinear.setVisibility(View.VISIBLE);
+        picLinear.removeAllViews();
+
+        for (int i = 0; i < paths.size(); i++) {
+            final CommentImageView imageView = new CommentImageView(this);
+            final String pic = paths.get(i);
+            imageView.getDelView().setTag(i);
+            imageView.getDelView().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = (Integer) view.getTag();
+                    paths.remove(position);
+                    picLinear.removeViewAt(position);
+                    myOrderReturn.getImgs().remove(position);
+                    if (picLinear.getChildCount() == 0) {
+                        picLinear.setVisibility(View.GONE);
+                        picInfoTv.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+            imageView.showImage(pic);
+            picLinear.addView(imageView);
+        }
     }
 }

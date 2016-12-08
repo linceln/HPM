@@ -1,6 +1,7 @@
 package com.olsplus.balancemall.app.mystore.request;
 
 
+import com.olsplus.balancemall.app.merchant.goods.bean.ImageUploadEntity;
 import com.olsplus.balancemall.app.mystore.bean.MyOrderDetailResult;
 import com.olsplus.balancemall.app.mystore.bean.MyOrderResult;
 import com.olsplus.balancemall.app.mystore.bean.ReturnImgResult;
@@ -42,6 +43,17 @@ public interface MyOrderService {
             @Query("order_id") String order_id
     );
 
+    // 上传退款凭证
+    @FormUrlEncoded
+    @POST("v1/upload/refund_img/qiniu")
+    Observable<ImageUploadEntity> getProofToken(
+            @Field("uid") String uid,
+            @Field("token") String token,
+            @Field("sign") String sign,
+            @Field("timestamp") String timestamp,
+            @Field("img") String img
+    );
+
     @FormUrlEncoded
     @POST("v1/order/cancel")
     Observable<BaseResultEntity> cancelOrder(
@@ -62,14 +74,14 @@ public interface MyOrderService {
             @Field("order_id") String order_id
     );
 
-    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST
     Observable<BaseResultEntity> requestReturnOrder(
             @Url String url,
             @Body RequestBody body
     );
 
-    @Headers({"Content-Type: application/json","Accept: application/json"})
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST
     Observable<BaseResultEntity> sumitComment(
             @Url String url,
@@ -83,6 +95,6 @@ public interface MyOrderService {
             @Query("token") String token,
             @Query("timestamp") String timestamp,
             @Query("sign") String sign,
-            @Part("img\";filename=\"temp.jpg")RequestBody  temp);
+            @Part("img\";filename=\"temp.jpg") RequestBody temp);
 
 }

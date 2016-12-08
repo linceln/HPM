@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.ValueCallback;
@@ -60,7 +61,7 @@ public class WebActivity extends MainActivity {
     protected void handleIntent(Intent intent) {
         super.handleIntent(intent);
         pageUrl = intent.getStringExtra("url");
-        title= intent.getStringExtra("title");
+        title = intent.getStringExtra("title");
     }
 
     @Override
@@ -76,7 +77,7 @@ public class WebActivity extends MainActivity {
             public void onClick(View v) {
                 if (webView.canGoBack()) {
                     webView.goBack();// 返回前一个页面
-                }else{
+                } else {
                     finish();
                 }
             }
@@ -84,29 +85,36 @@ public class WebActivity extends MainActivity {
 
     }
 
-    private void initWebSetting(){
+    @SuppressLint("SetJavaScriptEnabled")
+    private void initWebSetting() {
         if (Build.VERSION.SDK_INT >= 9) {
             this.webView.setOverScrollMode(2);
         }
         WebSettings ws = this.webView.getSettings();
-        DisplayMetrics metrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int mDensity = metrics.densityDpi;
-        if (mDensity == 120) {
-            ws.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
-        }else if (mDensity == 160) {
-            ws.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
-        }else if (mDensity == 240) {
-            ws.setDefaultZoom(WebSettings.ZoomDensity.FAR);
-        }
+//        DisplayMetrics metrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+//        int mDensity = metrics.densityDpi;
+//        if (mDensity == 120) {
+//            ws.setDefaultZoom(WebSettings.ZoomDensity.CLOSE);
+//        } else if (mDensity == 160) {
+//            ws.setDefaultZoom(WebSettings.ZoomDensity.MEDIUM);
+//        } else if (mDensity == 240) {
+//            ws.setDefaultZoom(WebSettings.ZoomDensity.FAR);
+//        }
+        ws.setDomStorageEnabled(true);
         ws.setCacheMode(WebSettings.LOAD_NO_CACHE);
         ws.setJavaScriptEnabled(true);
+        ws.setBlockNetworkImage(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Lollipop 之后不能混合用http和https
+            ws.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
         ws.setBuiltInZoomControls(false);
         ws.setSupportZoom(true);
-        ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
         ws.setUseWideViewPort(true);
         ws.setLoadWithOverviewMode(true);
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView arg3, int progress) {
                 webViewProgress.setProgress(progress);
@@ -131,7 +139,7 @@ public class WebActivity extends MainActivity {
             }
         });
 
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onLoadResource(WebView webView, String s) {
                 super.onLoadResource(webView, s);
@@ -152,16 +160,14 @@ public class WebActivity extends MainActivity {
 //                if(url.startsWith(ApiConst.BASE_IMAGE_URL)){
 //                    webView.loadUrl(url);
 //                }
-                if(url.startsWith("addtocart")){
+                if (url.startsWith("addtocart")) {
                     addCartRequest(url);
-                }
-                else if(url.startsWith("http://")){
+                } else if (url.startsWith("http://") || url.startsWith("https://")) {
                     webView.loadUrl(url);
-                }
-                else{
+                } else {
                     Intent intent = new Intent(WebActivity.this, CheckoutMainActivity.class);
-                    intent.putExtra("sumit_order_parmas",url);
-                    intent.putExtra("from","0");
+                    intent.putExtra("sumit_order_parmas", url);
+                    intent.putExtra("from", "0");
                     startActivity(intent);
                     finish();
                 }
@@ -169,13 +175,16 @@ public class WebActivity extends MainActivity {
             }
         });
         webView.loadUrl(pageUrl);
+//        webView.loadUrl("http://www.olsplus.com/service/mrmj/1/detail/36");
+//        webView.loadUrl("https://www.olsplus.com//merchant/service/mrmj/1/detail/36");
+
     }
 
     private void setH5Title(String titele) {
         if (titele == null) {
             return;
         }
-        if(titele.contains("blank")){
+        if (titele.contains("blank")) {
             return;
         }
         this.h5Title.setText(titele);
@@ -190,7 +199,7 @@ public class WebActivity extends MainActivity {
     /**
      * 添加购物车请求
      */
-    private void addCartRequest(String addCartJson){
+    private void addCartRequest(String addCartJson) {
         CartRequestImpl cartRequest = new CartRequestImpl(this);
         cartRequest.setiAddCartView(new IAddCartView() {
             @Override
@@ -198,12 +207,12 @@ public class WebActivity extends MainActivity {
 //                Intent intent = new Intent(WebActivity.this, CartActivity.class);
 //                intent.putExtra("from","0");
 //                startActivity(intent);
-                ToastUtil.showShort(WebActivity.this,"添加购物车成功");
+                ToastUtil.showShort(WebActivity.this, "添加购物车成功");
             }
 
             @Override
             public void showAddCartErrorView(String msg) {
-                ToastUtil.showShort(WebActivity.this,"添加购物车失败");
+                ToastUtil.showShort(WebActivity.this, "添加购物车失败");
             }
 
         });

@@ -186,7 +186,7 @@ public class DateUtil {
 
     public static String getSecond(long time) {
 
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time * 1000);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date(time));
 
     }
 

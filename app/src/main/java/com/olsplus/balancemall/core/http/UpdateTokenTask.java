@@ -26,7 +26,6 @@ public class UpdateTokenTask {
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
         String uid = (String) SPUtil.get(MyApplication.getApp(), SPUtil.UID, "");
         String token = (String) SPUtil.get(MyApplication.getApp(), SPUtil.TOKEN, "");
-        LogUtil.d("yongyuan.w","token2="+token);
         String sign = parseUpdateTokenSign(url, uid, token,timestamp);
         HttpManager.getRetrofit()
                 .create(TokenService.class)

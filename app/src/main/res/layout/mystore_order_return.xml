@@ -171,6 +171,7 @@
                     android:layout_height="48dp"
                     android:background="@drawable/common_border_no_corner_normal"
                     android:hint="请输入退款金额"
+                    android:inputType="numberDecimal"
                     android:padding="10dip"
                     android:singleLine="true"
                     android:text=""
@@ -234,8 +235,8 @@
                     android:id="@+id/return_order_pic_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical|right"
+                    android:orientation="horizontal"
                     android:visibility="gone">
 
                 </LinearLayout>
@@ -261,14 +262,14 @@
         android:id="@+id/return_order_sumit"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="14dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/common_border_no_corner_press"
         android:gravity="center"
         android:text="提 交"
         android:textColor="@color/white"
-        android:layout_marginBottom="14dp"
         android:textSize="16sp"
         android:visibility="visible" />
 </RelativeLayout>

@@ -6,6 +6,8 @@ import com.olsplus.balancemall.app.mystore.bean.MyOrderDetailResult;
 import com.olsplus.balancemall.app.mystore.bean.MyOrderResult;
 import com.olsplus.balancemall.app.mystore.bean.MyOrderReturn;
 
+import java.util.List;
+
 public interface IMyOrderRequest {
 
     interface  GetMyOrderListCallback{
@@ -68,7 +70,8 @@ public interface IMyOrderRequest {
 
     void deleteOrder(String orderId);
 
-    void uploadReturnImg(String pic,int position);
+//    void uploadReturnImg(String pic,int position);
+    void uploadReturnImg(List<String> paths);
 
     void returnOrder(MyOrderReturn data);
 

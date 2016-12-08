@@ -18,6 +18,7 @@ import com.olsplus.balancemall.app.login.bean.RegisterBean;
 import com.olsplus.balancemall.app.web.WebActivity;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.util.RegexUtil;
+import com.olsplus.balancemall.core.util.SnackbarUtil;
 import com.olsplus.balancemall.core.util.StrConst;
 
 import org.greenrobot.eventbus.EventBus;
@@ -109,7 +110,7 @@ public class RegisterMobileActivity extends BaseCompatActivity implements View.O
     private void next() {
         if (btnNext.isEnabled()) {
             if (!checkBoxClause.isChecked()) {
-                Toast.makeText(this, "请勾选使用条款和隐私协议", Toast.LENGTH_SHORT).show();
+                SnackbarUtil.showShort(btnNext, "请勾选使用条款和隐私协议");
                 return;
             }
 
@@ -126,7 +127,7 @@ public class RegisterMobileActivity extends BaseCompatActivity implements View.O
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
+        if (isChecked && RegexUtil.isMobileNum(etMobile.getText().toString().trim())) {
             btnNext.setEnabled(true);
         } else {
             btnNext.setEnabled(false);
@@ -135,7 +136,6 @@ public class RegisterMobileActivity extends BaseCompatActivity implements View.O
 
     @Subscribe
     public void onRegisterFinished(String str) {
-
         finish();
     }
 

@@ -223,6 +223,4 @@ public abstract class HttpResultObserver<T extends BaseResultEntity> extends Sub
         String sign = HttpUtil.sign(HttpUtil.POST, url, paramMap);
         return sign;
     }
-
-
 }

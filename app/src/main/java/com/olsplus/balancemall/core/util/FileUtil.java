@@ -53,10 +53,10 @@ public class FileUtil {
      */
     public static File cacheFile(Context context) {
         File imgFile;
-        try {
+        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
             imgFile = new File(context.getExternalCacheDir(), String.valueOf(System.currentTimeMillis()) + ".jpg");
-        } catch (Exception e) {
-            return null;
+        } else {
+            imgFile = new File(context.getCacheDir(), String.valueOf(System.currentTimeMillis()) + ".jpg");
         }
         return imgFile;
     }

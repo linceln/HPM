@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.olsplus.balancemall.app.merchant.goods.bean.ImageUploadEntity;
 import com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness;
+import com.olsplus.balancemall.app.mystore.bussiness.MyOrderBussiness;
 import com.olsplus.balancemall.app.mystore.bussiness.UserBusiness;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
@@ -29,62 +30,10 @@ public final class UploadManager {
 
     private static final String TAG = "UploadManager ==> ";
 
+    private static int size = 0;
+    private static int count = 0;
+
     private UploadManager() {
-    }
-
-    /**
-     * 上传商品图片
-     *
-     * @param context
-     * @param originalPaths 图片原始路径集合
-     * @param subscriber
-     */
-    public static void uploadGoodsImage(final Context context, final List<String> originalPaths, final Subscriber<String> subscriber) {
-
-        Observable.from(originalPaths) // 发送原图地址
-                .subscribeOn(Schedulers.io()) // 压缩过程在子线程执行
-                .map(new Func1<String, String>() {
-                    @Override
-                    public String call(String originalPath) {
-
-                        LogUtil.e(TAG + "Original Path", originalPath);
-                        LogUtil.e(TAG + "Original Length", new File(originalPath).length() / 1024 + "K");
-                        // 映射为压缩后的路径，耗时，在子线程执行，压缩后的图片保存在缓存文件夹下
-                        return compressSample(context, originalPath);
-                    }
-                })
-                .flatMap(new Func1<String, Observable<String>>() {
-                    @Override
-                    public Observable<String> call(String s) {
-
-                        // 压缩异常处理
-                        if (s == null) {
-                            return Observable.error(new Exception("图片不存在"));
-                        }
-                        return Observable.just(s);
-                    }
-                })
-                .flatMap(new Func1<String, Observable<ImageUploadEntity>>() {
-                    @Override
-                    public Observable<ImageUploadEntity> call(String compressedPath) {
-
-                        LogUtil.e(TAG + "Compressed Path", compressedPath);
-                        LogUtil.e(TAG + "Compressed Length", new File(compressedPath).length() / 1024 + "K");
-                        // 用压缩后的路径请求token和文件名
-                        return GoodsBusiness.getGoodsToken(context, compressedPath);
-                    }
-                })
-                .flatMap(new Func1<ImageUploadEntity, Observable<String>>() {
-                    @Override
-                    public Observable<String> call(final ImageUploadEntity imageUploadEntity) {
-                        // 通过得到的token和文件名将图片上传到七牛服务器
-                        return upload2QiNiu(imageUploadEntity);
-                    }
-                })
-                // TODO RxLifecycle
-//                .compose(((RxAppCompatActivity)context).bindUntilEvent(ActivityEvent.DESTROY))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
     }
 
     /**
@@ -95,6 +44,8 @@ public final class UploadManager {
      * @param subscriber
      */
     public static void uploadAvatar(final Context context, String originalPath, final Subscriber<String> subscriber) {
+        count = 0;
+        size = 1;
         Observable.just(originalPath) // 发送原图地址
                 .subscribeOn(Schedulers.io()) // 压缩过程在子线程执行
                 .map(new Func1<String, String>() {
@@ -142,6 +93,119 @@ public final class UploadManager {
     }
 
     /**
+     * 上传商品图片
+     *
+     * @param context
+     * @param originalPaths 图片原始路径集合
+     * @param subscriber
+     */
+    public static void uploadGoodsImage(final Context context, final List<String> originalPaths, final Subscriber<String> subscriber) {
+        count = 0;
+        size = originalPaths.size();
+        Observable.from(originalPaths) // 发送原图地址
+                .subscribeOn(Schedulers.io()) // 压缩过程在子线程执行
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String originalPath) {
+
+                        LogUtil.e(TAG + "Original Path", originalPath);
+                        LogUtil.e(TAG + "Original Length", new File(originalPath).length() / 1024 + "K");
+                        // 映射为压缩后的路径，耗时，在子线程执行，压缩后的图片保存在缓存文件夹下
+                        return compressSample(context, originalPath);
+                    }
+                })
+                .flatMap(new Func1<String, Observable<String>>() {
+                    @Override
+                    public Observable<String> call(String s) {
+
+                        // 压缩异常处理
+                        if (s == null) {
+                            return Observable.error(new Exception("图片不存在"));
+                        }
+                        return Observable.just(s);
+                    }
+                })
+                .flatMap(new Func1<String, Observable<ImageUploadEntity>>() {
+                    @Override
+                    public Observable<ImageUploadEntity> call(String compressedPath) {
+
+                        LogUtil.e(TAG + "Compressed Path", compressedPath);
+                        LogUtil.e(TAG + "Compressed Length", new File(compressedPath).length() / 1024 + "K");
+                        // 用压缩后的路径请求token和文件名
+                        return GoodsBusiness.getGoodsToken(context, compressedPath);
+                    }
+                })
+                .flatMap(new Func1<ImageUploadEntity, Observable<String>>() {
+                    @Override
+                    public Observable<String> call(final ImageUploadEntity imageUploadEntity) {
+                        // 通过得到的token和文件名将图片上传到七牛服务器
+                        return upload2QiNiu(imageUploadEntity);
+                    }
+                })
+                // TODO RxLifecycle
+//                .compose(((RxAppCompatActivity)context).bindUntilEvent(ActivityEvent.DESTROY))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 上传退款凭据
+     *
+     * @param context
+     * @param originalPaths
+     * @param subscriber
+     */
+    public static void uploadProof(final Context context, final List<String> originalPaths, final Subscriber<String> subscriber) {
+        count = 0;
+        size = originalPaths.size();
+        Observable.from(originalPaths) // 发送原图地址
+                .subscribeOn(Schedulers.io()) // 压缩过程在子线程执行
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String originalPath) {
+
+                        LogUtil.e(TAG + "Original Path", originalPath);
+                        LogUtil.e(TAG + "Original Length", new File(originalPath).length() / 1024 + "K");
+                        // 映射为压缩后的路径，耗时，在子线程执行，压缩后的图片保存在缓存文件夹下
+                        return compressSample(context, originalPath);
+                    }
+                })
+                .flatMap(new Func1<String, Observable<String>>() {
+                    @Override
+                    public Observable<String> call(String s) {
+
+                        // 压缩异常处理
+                        if (s == null) {
+                            return Observable.error(new Exception("图片不存在"));
+                        }
+                        return Observable.just(s);
+                    }
+                })
+                .flatMap(new Func1<String, Observable<ImageUploadEntity>>() {
+                    @Override
+                    public Observable<ImageUploadEntity> call(String compressedPath) {
+
+                        LogUtil.e(TAG + "Compressed Path", compressedPath);
+                        LogUtil.e(TAG + "Compressed Length", new File(compressedPath).length() / 1024 + "K");
+                        // 用压缩后的路径请求token和文件名
+                        return new MyOrderBussiness(context).getProofToken(compressedPath);
+                    }
+                })
+                .flatMap(new Func1<ImageUploadEntity, Observable<String>>() {
+                    @Override
+                    public Observable<String> call(final ImageUploadEntity imageUploadEntity) {
+                        // 通过得到的token和文件名将图片上传到七牛服务器
+                        return upload2QiNiu(imageUploadEntity);
+                    }
+                })
+                // TODO RxLifecycle
+//                .compose(((RxAppCompatActivity)context).bindUntilEvent(ActivityEvent.DESTROY))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
+    }
+
+
+    /**
      * 最终上传到七牛服务器
      *
      * @param entity
@@ -160,8 +224,13 @@ public final class UploadManager {
                         LogUtil.e(TAG + "responseInfo isOK", "" + responseInfo.isOK());
                         LogUtil.e(TAG + "responseInfo duration", "" + responseInfo.duration);
                         if (responseInfo.isOK()) {
+                            count++;
                             // 上传成功，返回图片url
                             stringEmitter.onNext(s);
+                            if (count == size) {
+                                stringEmitter.onCompleted();
+                            }
+
                         } else {
                             stringEmitter.onError(new Throwable(responseInfo.error));
                         }

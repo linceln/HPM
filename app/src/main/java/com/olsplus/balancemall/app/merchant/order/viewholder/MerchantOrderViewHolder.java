@@ -1,19 +1,25 @@
 package com.olsplus.balancemall.app.merchant.order.viewholder;
 
 import android.support.annotation.LayoutRes;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.order.adapter.MerchantOrderChildAdapter;
+import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderDetailEntity;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderEntity;
 import com.olsplus.balancemall.app.mystore.util.OrderHelper;
+import com.olsplus.balancemall.core.image.ImageHelper;
 import com.olsplus.balancemall.core.util.UIUtil;
+
+import org.w3c.dom.Text;
+
+import static android.R.id.list;
 
 
 public class MerchantOrderViewHolder extends BaseViewHolder<MerchantOrderEntity.OrdersBean> {
@@ -22,7 +28,7 @@ public class MerchantOrderViewHolder extends BaseViewHolder<MerchantOrderEntity.
     private final TextView tvItemOrderStatus;
     private final TextView tvItemGoodsNum;
     private final TextView tvItemOrderAmount;
-    private final RecyclerView recyclerBusinessOrderChild;
+    private final LinearLayout linearItemBusinessOrderChild;
     private final TextView tvItemDeleteOrder;
 
     public MerchantOrderViewHolder(ViewGroup parent, @LayoutRes int layoutRes) {
@@ -32,7 +38,8 @@ public class MerchantOrderViewHolder extends BaseViewHolder<MerchantOrderEntity.
         tvItemGoodsNum = $(R.id.tvItemGoodsNum);
         tvItemOrderAmount = $(R.id.tvItemOrderAmount);
         tvItemDeleteOrder = $(R.id.tvItemDeleteOrder);
-        recyclerBusinessOrderChild = $(R.id.recyclerBusinessOrderChild);
+        linearItemBusinessOrderChild = $(R.id.linearItemBusinessOrderChild);
+//        recyclerBusinessOrderChild = $(R.id.recyclerBusinessOrderChild);
     }
 
     @Override
@@ -50,10 +57,34 @@ public class MerchantOrderViewHolder extends BaseViewHolder<MerchantOrderEntity.
             tvItemDeleteOrder.setVisibility(View.GONE);
         }
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerBusinessOrderChild.setLayoutManager(linearLayoutManager);
-        MerchantOrderChildAdapter childAdapter = new MerchantOrderChildAdapter(getContext(), data.getSuborders());
-        recyclerBusinessOrderChild.setAdapter(childAdapter);
-        recyclerBusinessOrderChild.addItemDecoration(new DividerDecoration(getContext().getResources().getColor(android.R.color.transparent), 1));
+        // 动态添加子订单列表
+        if (data.getSuborders() != null && data.getSuborders().isEmpty()) {
+            linearItemBusinessOrderChild.setVisibility(View.GONE);
+        } else {
+            linearItemBusinessOrderChild.removeAllViews();
+            linearItemBusinessOrderChild.setVisibility(View.VISIBLE);
+            for (MerchantOrderEntity.OrdersBean.SubordersBean bean : data.getSuborders()) {
+                View view = LayoutInflater.from(getContext()).inflate(R.layout.recycler_item_merchant_order_child, linearItemBusinessOrderChild, false);
+
+                ImageView ivItemOrderImg = (ImageView) view.findViewById(R.id.ivItemOrderImg);
+                TextView tvItemOrderGoodsName = (TextView) view.findViewById(R.id.tvItemOrderGoodsName);
+                TextView tvItemOrderTime = (TextView) view.findViewById(R.id.tvItemOrderTime);
+                TextView tvItemOrderGoodsPrice = (TextView) view.findViewById(R.id.tvItemOrderGoodsPrice);
+                TextView tvItemNum = (TextView) view.findViewById(R.id.tvItemNum);
+
+                ImageHelper.display(getContext(), ivItemOrderImg, bean.getThumbnail());
+                tvItemOrderGoodsName.setText(bean.getTitle());
+                tvItemOrderTime.setText("预约时间：" + bean.getSchedule_time());
+                tvItemOrderGoodsPrice.setText(String.valueOf(bean.getProduct_price()));
+                tvItemNum.setText("x" + bean.getProduct_count());
+                linearItemBusinessOrderChild.addView(view);
+            }
+        }
+
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+//        recyclerBusinessOrderChild.setLayoutManager(linearLayoutManager);
+//        MerchantOrderChildAdapter childAdapter = new MerchantOrderChildAdapter(getContext(), data.getSuborders());
+//        recyclerBusinessOrderChild.setAdapter(childAdapter);
+//        recyclerBusinessOrderChild.addItemDecoration(new DividerDecoration(getContext().getResources().getColor(android.R.color.transparent), 1));
     }
 }

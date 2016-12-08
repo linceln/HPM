@@ -10,9 +10,9 @@ android {
     defaultConfig {
         applicationId "com.olsplus.balancemall"
         minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0.0"
+        targetSdkVersion 22
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,6 +33,7 @@ android {
 
     buildTypes {
         debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         release {
@@ -59,7 +60,7 @@ android {
         _360 {}
         baidu {}
         wandoujia {}
-        tencent{}
+        tencent {}
     }
 
     productFlavors.all {
@@ -74,11 +75,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
     compile files('libs/alipaySDK-20150818.jar')
-    compile 'com.android.support:support-v4:23.4.0'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
-    compile 'com.android.support:cardview-v7:23.4.0'
+    compile 'com.android.support:support-v4:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+//    compile 'com.android.support:cardview-v7:25.0.1'
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'com.jude:easyrecyclerview:4.0.2'
@@ -94,8 +96,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-
-    compile 'com.github.simonpercic:oklog3:2.0.0'
 
     compile 'com.liuguangqiang.ipicker:library:1.0.1'
 

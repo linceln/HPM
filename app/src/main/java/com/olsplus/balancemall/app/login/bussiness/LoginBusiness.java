@@ -321,7 +321,7 @@ public class LoginBusiness {
         paramMap.put("sms", sms);
         paramMap.put("type", type);
         paramMap.put("timestamp", timestamp);
-        String sign = HttpUtil.sign(HttpUtil.POST, UrlConst.merchant.login_check_sms, paramMap);
+        String sign = HttpUtil.sign(HttpUtil.POST, UrlConst.general.login_check_sms, paramMap);
 
         HttpManager.getRetrofit()
                 .create(LoginService.class)

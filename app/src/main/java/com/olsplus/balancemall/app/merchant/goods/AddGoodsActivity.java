@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -157,14 +158,14 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
                         // 显示用缩略图
                         ImageHelper.display(AddGoodsActivity.this, ivGoodsImage, product.getThumbnail());
                     }
-                    tvStartSaleTime.setText(DateUtil.getSecond(product.getStart_time()));
+                    tvStartSaleTime.setText(DateUtil.getSecond(product.getStart_time() * 1000));
                     if (TextUtils.isEmpty(product.getDesc())) {
                         tvRichText.setText("未添加");
                     } else {
                         html = product.getDesc().replace("=", "");
                         tvRichText.setText("已添加");
                     }
-                    time = DateUtil.getSecond(product.getStart_time() / 1000);
+                    time = DateUtil.getSecond(product.getStart_time());
 
                     List<EditGoodsEntity.ProductBean.SkuInfoBean> skuInfoBean = entity.getProduct().getSku_info();
                     if (!skuInfoBean.isEmpty()) {
@@ -275,6 +276,11 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
 //                ToastUtil.showShort(this, "请输入商品规格");
 //                return;
 //            }
+        }
+
+        if (TextUtils.isEmpty(html)) {
+            Toast.makeText(this, "请输入商品描述", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
         if (TextUtils.isEmpty(time)) {
@@ -410,7 +416,7 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
         goodsDetail.setInventory(list.get(0).getInventory());
         goodsDetail.setPrice(list.get(0).getPrice());
         goodsDetail.setImg(url);
-        goodsDetail.setStart_time(DateUtil.getTimestamp(time));
+        goodsDetail.setStart_time(DateUtil.getTimestamp(time) / 1000);
         goodsDetail.setTitle(goodsName);
         goodsDetail.setSku_info(list);
         if (type == editing) {

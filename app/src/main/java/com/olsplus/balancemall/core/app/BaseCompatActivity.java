@@ -201,17 +201,19 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
      * 点击任意位置隐藏软键盘---------end------------
      */
 
-    /** 友盟统计 ----------------------start---------------------- */
+    /**
+     * 友盟统计 ----------------------start----------------------
+     */
     @Override
     protected void onResume() {
-        MobclickAgent.onResume(this);
         super.onResume();
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
-        MobclickAgent.onPause(this);
         super.onPause();
+        MobclickAgent.onPause(this);
     }
     /** 友盟统计 ----------------------end---------------------- */
 }

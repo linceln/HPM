@@ -2,6 +2,7 @@ package com.olsplus.balancemall.app.merchant.goods;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -65,6 +66,11 @@ public class GoodsDetailActivity extends BaseCompatActivity implements View.OnCl
         webViewGoodsDetail = (WebView) findViewById(R.id.webViewGoodsDetail);
         WebSettings webSettings = webViewGoodsDetail.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setBlockNetworkImage(false);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // Lollipop 之后不能混合用http和https
+            webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
         webViewGoodsDetail.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {

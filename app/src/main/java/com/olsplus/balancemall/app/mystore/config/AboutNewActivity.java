@@ -7,13 +7,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.web.WebActivity;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
 import com.olsplus.balancemall.core.util.AppUtil;
 
-public class AboutNewActivity extends MainActivity{
+public class AboutNewActivity extends MainActivity {
 
     private TextView versionTv;
     private LinearLayout commentLl;
@@ -48,28 +49,32 @@ public class AboutNewActivity extends MainActivity{
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         versionTv = (TextView) findViewById(R.id.aboutnew_version);
-        commentLl = (LinearLayout)findViewById(R.id.aboutnew_comment);
-        privateLl = (LinearLayout)findViewById(R.id.aboutnew_private);
-        feedbackLl = (LinearLayout)findViewById(R.id.aboutnew_feedback);
+        commentLl = (LinearLayout) findViewById(R.id.aboutnew_comment);
+        privateLl = (LinearLayout) findViewById(R.id.aboutnew_private);
+        feedbackLl = (LinearLayout) findViewById(R.id.aboutnew_feedback);
         commentLl.setOnClickListener(this);
         privateLl.setOnClickListener(this);
         feedbackLl.setOnClickListener(this);
-        versionTv.setText(String.valueOf(AppUtil.getVersionName(this)));
+        if (BuildConfig.DEBUG) {
+            versionTv.setText(String.valueOf(AppUtil.getVersionName(this) + " Debug"));
+        } else {
+            versionTv.setText(String.valueOf(AppUtil.getVersionName(this)));
+        }
     }
 
     @Override
     public void onClick(View v) {
         Intent intent = null;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.aboutnew_feedback:
-                intent = new Intent(this,FeedBackActivity.class);
+                intent = new Intent(this, FeedBackActivity.class);
                 startActivity(intent);
                 break;
             case R.id.aboutnew_private:
-                intent = new Intent(this,WebActivity.class);
-                intent.putExtra("url","http://www.olsplus.com/agreement.html") ;
+                intent = new Intent(this, WebActivity.class);
+                intent.putExtra("url", "http://www.olsplus.com/agreement.html");
                 intent.putExtra("title", "使用条款和隐私政策");
                 startActivity(intent);
                 break;

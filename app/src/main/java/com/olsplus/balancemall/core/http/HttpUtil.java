@@ -55,7 +55,7 @@ public class HttpUtil {
         String secret = SECRET.substring(0, SECRET.length() - 2) + "+/";
         stringBuffer.append(secret);
         String signStr = stringBuffer.toString();
-        LogUtil.e("Sign String", signStr);
+//        LogUtil.e("Sign String", signStr);
         if (!TextUtils.isEmpty(signStr)) {
 
             String signData = EncrypUtil.eccryptSHA1(signStr);
@@ -91,7 +91,7 @@ public class HttpUtil {
         String secret = SECRET.substring(0, SECRET.length() - 2) + "+/";
         stringBuffer.append(secret);
         String signStr = stringBuffer.toString();
-        LogUtil.e("Sign String with Json", signStr);
+//        LogUtil.e("Sign String with Json", signStr);
         if (!TextUtils.isEmpty(signStr)) {
             String signData = EncrypUtil.eccryptSHA1(signStr);
             return signData;

@@ -1,5 +1,6 @@
 package com.olsplus.balancemall.app.login;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.liuguangqiang.permissionhelper.PermissionHelper;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.home.HomeActivity;
 import com.olsplus.balancemall.app.login.bean.LoginResultEntity;
@@ -64,15 +66,15 @@ public class LoginActivity extends MainActivity implements ILoginView, TextWatch
         initView();
         loginRequest = new LoginRequestImpl(this);
         loginRequest.setLoginView(this);
-
+        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
     }
 
     private void initView() {
         userNameEt = ((EditText) findViewById(R.id.username_editText));
         passwordEt = ((EditText) findViewById(R.id.password_editText));
         //TODO 登录删除账号密码
-        userNameEt.setText("15985846810");
-        passwordEt.setText("123456");
+//        userNameEt.setText("15985846810");
+//        passwordEt.setText("123456");
         UIUtil.setClearText(userNameEt, findViewById(R.id.username_txt_clear));
         UIUtil.setClearText(passwordEt, findViewById(R.id.password_txt_clear));
         userNameEt.addTextChangedListener(this);

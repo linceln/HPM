@@ -1,12 +1,19 @@
 package com.olsplus.balancemall.app.home;
 
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.liuguangqiang.permissionhelper.PermissionHelper;
+import com.liuguangqiang.permissionhelper.annotations.PermissionGranted;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.bottom.BottomNavigateFragment;
 import com.olsplus.balancemall.app.login.LoginActivity;
@@ -56,6 +63,12 @@ public class HomeActivity extends MainActivity {
         String buildingName = (String) SPUtil.get(this, SPUtil.BUILDING_NAME, "");
         titleTv.setText(buildingName);
         titleTv.setOnClickListener(this);
+        // 友盟统计需要的权限
+//        requestPhoneState();
+    }
+
+    private void requestPhoneState() {
+        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_PHONE_STATE);
     }
 
     @Override

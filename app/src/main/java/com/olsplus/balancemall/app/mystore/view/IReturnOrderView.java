@@ -9,5 +9,7 @@ public interface IReturnOrderView {
 
     void updateReturnImgFail(String msg,int position);
 
-    void updateReturnImgSuccess(String avater);
+    void updateReturnImgNext(String url);
+
+    void updateReturnImgCompleted();
 }

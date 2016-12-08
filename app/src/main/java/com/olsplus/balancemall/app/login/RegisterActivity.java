@@ -42,7 +42,7 @@ public class RegisterActivity extends MainActivity implements IRegisterView {
     private RelativeLayout passwordLinear;
     private EditText newPasswordEt;
     private EditText nameEt;
-    private Button regiesterBtn;
+    private Button registerBtn;
 
     private LoginRequestImpl loginRequest;
     private int time = 60;
@@ -119,8 +119,8 @@ public class RegisterActivity extends MainActivity implements IRegisterView {
         UIUtil.setClearText(nameEt, findViewById(R.id.name_txt_clear));
         newPasswordEt.addTextChangedListener(passwordWatcher);
         nameEt.addTextChangedListener(passwordWatcher);
-        regiesterBtn = (Button) findViewById(R.id.userland_button_register);
-        regiesterBtn.setOnClickListener(this);
+        registerBtn = (Button) findViewById(R.id.userland_button_register);
+        registerBtn.setOnClickListener(this);
     }
 
     private String mobileEditString() {
@@ -296,9 +296,9 @@ public class RegisterActivity extends MainActivity implements IRegisterView {
         @Override
         public void afterTextChanged(Editable editable) {
             if (!TextUtils.isEmpty(UIUtil.getText(newPasswordEt)) && !TextUtils.isEmpty(UIUtil.getText(nameEt))) {
-                regiesterBtn.setEnabled(true);
+                registerBtn.setEnabled(true);
             } else {
-                regiesterBtn.setEnabled(false);
+                registerBtn.setEnabled(false);
             }
         }
     };

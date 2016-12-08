@@ -2,15 +2,11 @@ package com.olsplus.balancemall.core.app;
 
 import android.app.Application;
 
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.core.netstate.NetChangeObserver;
 import com.olsplus.balancemall.core.netstate.NetWorkUtil;
 import com.olsplus.balancemall.core.netstate.NetworkStateReceiver;
-import com.olsplus.balancemall.core.util.LogUtil;
-import com.olsplus.balancemall.core.util.ToastUtil;
-
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
+import com.umeng.analytics.MobclickAgent;
 
 
 public class MyApplication extends Application {
@@ -18,7 +14,7 @@ public class MyApplication extends Application {
     private static MyApplication mApplication;
     private Boolean networkAvailable = false;
     private NetChangeObserver netChangeObserver;
-    private MainActivity  currentActivity;
+    private MainActivity currentActivity;
 
     public static MyApplication getApp() {
         if (mApplication != null && mApplication instanceof MyApplication) {
@@ -33,14 +29,20 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         mApplication = this;
 
-        //配置是否显示log
-        LogUtil.isDebug = true;
+        // 友盟统计场景设置
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        // 友盟日志信息加密
+        MobclickAgent.enableEncrypt(true);
+        // TODO 友盟测试开关
+        MobclickAgent.setDebugMode(BuildConfig.DEBUG);
 
-        //配置时候显示toast
-        ToastUtil.isShow = true;
+//        //配置是否显示log
+//        LogUtil.isDebug = true;
+
+//        //配置时候显示toast
+//        ToastUtil.isShow = true;
 
         //配置程序异常退出处理
 //        Thread.setDefaultUncaughtExceptionHandler(new LocalFileHandler(this));
@@ -48,24 +50,24 @@ public class MyApplication extends Application {
         initNetwork();
     }
 
-    public  OkHttpClient defaultOkHttpClient() {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(3, TimeUnit.SECONDS)
-                .writeTimeout(3, TimeUnit.SECONDS)
-                .readTimeout(3, TimeUnit.SECONDS)
-                .build();
-        return client;
-    }
+//    public  OkHttpClient defaultOkHttpClient() {
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .connectTimeout(3, TimeUnit.SECONDS)
+//                .writeTimeout(3, TimeUnit.SECONDS)
+//                .readTimeout(3, TimeUnit.SECONDS)
+//                .build();
+//        return client;
+//    }
 
     public static MyApplication getIntstance() {
         return mApplication;
     }
 
-    public void onActivityCreated(MainActivity mainActivity){
+    public void onActivityCreated(MainActivity mainActivity) {
         this.currentActivity = mainActivity;
     }
 
-    private void initNetwork(){
+    private void initNetwork() {
         networkAvailable = NetWorkUtil.isNetworkConnected(getApplicationContext());
         netChangeObserver = new NetChangeObserver() {
             @Override
@@ -87,11 +89,9 @@ public class MyApplication extends Application {
     /**
      * 当前没有网络连接
      */
-    public void onDisConnect()
-    {
+    public void onDisConnect() {
         networkAvailable = false;
-        if (currentActivity != null)
-        {
+        if (currentActivity != null) {
             currentActivity.onDisConnect();
         }
     }
@@ -99,11 +99,9 @@ public class MyApplication extends Application {
     /**
      * 网络连接连接时调用
      */
-    protected void onConnect(NetWorkUtil.netType type)
-    {
+    protected void onConnect(NetWorkUtil.netType type) {
         networkAvailable = true;
-        if (currentActivity != null)
-        {
+        if (currentActivity != null) {
             currentActivity.onConnect(type);
         }
     }

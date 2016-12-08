@@ -109,7 +109,7 @@ public class UserBusiness {
 //        paramMap.put("uploadfile", uploadfile);
 //        String sign = HttpUtil.sign(HttpUtil.POST, UrlConst.merchant.avatar_upload, paramMap);
 
-        String sign = parseUploadAvatarSign(UrlConst.merchant.avatar_upload, uid, token, timestamp, uploadfile);
+        String sign = parseUploadAvatarSign(UrlConst.general.avatar_upload, uid, token, timestamp, uploadfile);
 
         return HttpManager.getRetrofit()
                 .create(UserService.class)

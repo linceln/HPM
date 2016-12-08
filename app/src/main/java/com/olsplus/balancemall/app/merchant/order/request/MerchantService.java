@@ -75,7 +75,7 @@ public interface MerchantService {
 
     // 拒绝退款
     @FormUrlEncoded
-    @POST("v1/merchant/refund/refuseRefund")
+    @POST("v1/merchant/refund/refuse")
     Observable<BaseResultEntity> refuseRefund(
             @Field("uid") String uid,
             @Field(("token")) String token,

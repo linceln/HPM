@@ -2,6 +2,8 @@ package com.olsplus.balancemall.core.util;
 
 import android.util.Log;
 
+import com.olsplus.balancemall.BuildConfig;
+
 /**
  * Log统一管理类
  */
@@ -13,7 +15,7 @@ public class LogUtil {
     }
 
     // 是否需要打印log，可以在application的onCreate函数里面初始化
-    public static boolean isDebug = true;
+    public static boolean isDebug = BuildConfig.DEBUG;
     private static final String TAG = "LogUtil";
 
     // 下面四个是默认tag的函数 

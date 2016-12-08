@@ -15,6 +15,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.home.bean.PromoteTopic;
 import com.olsplus.balancemall.core.util.ApiConst;
+import com.olsplus.balancemall.core.util.LogUtil;
 import com.olsplus.balancemall.core.util.ScreenUtil;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class HomeFunctionView extends LinearLayout {
     private OnHomeFunctionClickListener onHomeFunctionClickListener;
 
     public interface OnHomeFunctionClickListener {
-        public void OnFunctionClick(String title,String url);
+        public void OnFunctionClick(String title, String url);
     }
 
 
@@ -74,7 +75,7 @@ public class HomeFunctionView extends LinearLayout {
             if (homePromotionDetail != null) {
                 moduleTv.setText(homePromotionDetail.getProvider_name());
                 moduleTipTv.setText(homePromotionDetail.getProvider_desc());
-                String imageUrl = ApiConst.BASE_IMAGE_URL+ homePromotionDetail.getIcon();
+                String imageUrl = ApiConst.BASE_IMAGE_URL + homePromotionDetail.getIcon();
                 Glide.with(getContext())
                         .load(imageUrl)
                         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -86,8 +87,8 @@ public class HomeFunctionView extends LinearLayout {
                             String res_path = homePromotionDetail.getRes_path();
                             String local_service_id = homePromotionDetail.getLocal_service_id();
                             String per_page = homePromotionDetail.getPer_page();
-                            String url =ApiConst.BASE_HTML_URL+res_path+"/"+local_service_id+"?"+"count="+per_page;
-                            onHomeFunctionClickListener.OnFunctionClick(homePromotionDetail.getProvider_name(),url);
+                            String url = ApiConst.BASE_HTML_URL + res_path + "/" + local_service_id + "?" + "count=" + per_page;
+                            onHomeFunctionClickListener.OnFunctionClick(homePromotionDetail.getProvider_name(), url);
                         }
                     }
                 });
