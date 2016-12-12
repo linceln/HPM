@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.liuguangqiang.permissionhelper.PermissionHelper;
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.home.HomeActivity;
 import com.olsplus.balancemall.app.login.bean.LoginResultEntity;
@@ -25,8 +26,8 @@ import com.olsplus.balancemall.core.util.ToastUtil;
 import com.olsplus.balancemall.core.util.UIUtil;
 import com.umeng.analytics.MobclickAgent;
 
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.showLoading;
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
 
 
 public class LoginActivity extends MainActivity implements ILoginView, TextWatcher {
@@ -58,8 +59,8 @@ public class LoginActivity extends MainActivity implements ILoginView, TextWatch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean isFrist = (Boolean) SPUtil.get(this, SPUtil.IS_FRIST, true);
-        if (!isFrist) {
+        boolean isFirst = (Boolean) SPUtil.get(this, SPUtil.IS_FRIST, true);
+        if (!isFirst) {
             goHome();
             return;
         }
@@ -72,9 +73,12 @@ public class LoginActivity extends MainActivity implements ILoginView, TextWatch
     private void initView() {
         userNameEt = ((EditText) findViewById(R.id.username_editText));
         passwordEt = ((EditText) findViewById(R.id.password_editText));
-        //TODO 登录删除账号密码
-//        userNameEt.setText("15985846810");
-//        passwordEt.setText("123456");
+
+        if (BuildConfig.DEBUG) {
+            userNameEt.setText("15985846810");
+            passwordEt.setText("123456");
+        }
+
         UIUtil.setClearText(userNameEt, findViewById(R.id.username_txt_clear));
         UIUtil.setClearText(passwordEt, findViewById(R.id.password_txt_clear));
         userNameEt.addTextChangedListener(this);

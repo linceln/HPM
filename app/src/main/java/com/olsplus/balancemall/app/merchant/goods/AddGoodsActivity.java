@@ -6,7 +6,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,8 +44,8 @@ import java.util.concurrent.TimeUnit;
 import rx.Subscriber;
 import rx.functions.Action1;
 
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.dismissLoading;
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
 import static com.olsplus.balancemall.core.util.StrConst.extra.goods_edit_type;
 import static com.olsplus.balancemall.core.util.StrConst.input.adding;
 import static com.olsplus.balancemall.core.util.StrConst.input.editing;

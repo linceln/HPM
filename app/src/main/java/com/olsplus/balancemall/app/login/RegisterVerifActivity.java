@@ -11,12 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jakewharton.rxbinding.view.RxView;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.login.bean.RegisterBean;
 import com.olsplus.balancemall.app.login.bussiness.LoginBusiness;
 import com.olsplus.balancemall.app.login.request.ILoginRequest;
-import com.olsplus.balancemall.component.dialog.ProgressDialogFragment;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
 import com.olsplus.balancemall.core.http.RequestCallback;
@@ -26,12 +24,8 @@ import com.olsplus.balancemall.core.util.StrConst;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.concurrent.TimeUnit;
-
-import rx.functions.Action1;
-
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.showLoading;
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
 
 
 import static com.olsplus.balancemall.core.util.StrConst.checkSms.REGISTER;
@@ -45,7 +39,6 @@ public class RegisterVerifActivity extends BaseCompatActivity implements View.On
     private TextView tvGetVerif;
     private CountDown countDown;
     private LoginBusiness loginBusiness;
-    private ProgressDialogFragment progressDialogFragment;
 
     @Override
     protected int getLayoutResId() {

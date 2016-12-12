@@ -1,43 +1,48 @@
 package com.olsplus.balancemall.core.update;
 
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.R;
+import com.olsplus.balancemall.component.dialog.DownloadDialog;
 import com.olsplus.balancemall.component.dialog.UpgradeForceDialog;
 import com.olsplus.balancemall.component.dialog.UpgradeNormalDialog;
 import com.olsplus.balancemall.core.util.AppUtil;
 import com.olsplus.balancemall.core.util.LogUtil;
 import com.olsplus.balancemall.core.util.SPUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import okhttp3.ResponseBody;
+import rx.Subscriber;
+
 
 public class UpgradeUtil {
-
-    private static final String APP_NAME = "";
-    private static final String INFO_NAME = "";
-    private static final String STORE_APK = "HePingMao";
 
     public static void checkUpdate(final Context context) {
         // 保存检查更新时间
         SPUtil.put(context, SPUtil.UPDATE_TIME, System.currentTimeMillis());
-
 
         CheckUpdateBusiness.checkUpdate(new UpdateCallback() {
             @Override
             public void onSuccess(UpdateResult data) {
 
                 UpdateInfo version = data.getVersion();
+
+                if (BuildConfig.DEBUG) {
+                    upgradeNormal(context, "http://file1.updrv.com/soft/2016/20161208/drivethelife6_setup.exe");
+                }
+
                 if (version != null) {
                     // 当前版本
                     LogUtil.e("Update", "Local Version: v" + AppUtil.getVersionName(context));
@@ -59,15 +64,12 @@ public class UpgradeUtil {
                             int three3 = Integer.parseInt(cloudValues[2]);
                             if (one1 > one) {
                                 // 大版本变化强制更新
-//                                showUpdateDialog(context, true, data.getVersion());
-                                upgradeForce(context);
+                                upgradeForce(context, version.getUrl());
                             } else if (two2 > two) {
                                 // 小版本变化选择更新
-//                                showUpdateDialog(context, false, data.getVersion());
-                                upgradeNormal(context);
+                                upgradeNormal(context, version.getUrl());
                             } else if (two2 == two && three3 > three) {
-//                                showUpdateDialog(context, false, data.getVersion());
-                                upgradeNormal(context);
+                                upgradeNormal(context, version.getUrl());
                             }
                         }
                     }
@@ -75,8 +77,8 @@ public class UpgradeUtil {
             }
 
             @Override
-            public void onError() {
-                LogUtil.e("Update", "update error....");
+            public void onError(String msg) {
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -86,17 +88,20 @@ public class UpgradeUtil {
      *
      * @param context
      */
-    public static void upgradeNormal(final Context context) {
+    public static void upgradeNormal(final Context context, final String url) {
         final UpgradeNormalDialog upgradeNormalDialog = new UpgradeNormalDialog();
         upgradeNormalDialog.setMessage(context.getString(R.string.upgrade_normal_msg));
         upgradeNormalDialog.setOnPositiveClickListener(new UpgradeNormalDialog.OnPositiveClickListener() {
             @Override
             public void onClick() {
+                // 跳转下载进度Dialog
                 upgradeNormalDialog.dismiss();
-                toMarket(context);
+                downloadApk(context, url);
             }
         });
-        upgradeNormalDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "UpgradeNormal");
+        if (context instanceof AppCompatActivity) {
+            upgradeNormalDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "UpgradeNormal");
+        }
     }
 
     /**
@@ -104,72 +109,35 @@ public class UpgradeUtil {
      *
      * @param context
      */
-    public static void upgradeForce(final Context context) {
+    public static void upgradeForce(final Context context, final String url) {
         final UpgradeForceDialog generalDialogFragment = new UpgradeForceDialog();
         generalDialogFragment.setMessage(context.getString(R.string.upgrade_force_msg));
         generalDialogFragment.setCancelable(false);
         generalDialogFragment.setOnPositiveClickListener(new UpgradeForceDialog.OnPositiveClickListener() {
             @Override
             public void onClick() {
-                toMarket(context);
+                // 跳转下载进度Dialog
+                downloadApk(context, url);
             }
         });
-        generalDialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "UpgradeForce");
+        if (context instanceof AppCompatActivity) {
+            generalDialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "UpgradeForce");
+        }
     }
 
     /**
-     * 跳转到应用市场详情页
+     * 下载APK
      *
-     * @param context
+     * @param url
      */
-    public static void toMarket(Context context) {
-        //这里开始执行一个应用市场跳转逻辑
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        //跳转到应用市场，非Google Play市场一般情况也实现了这个接口
-        intent.setData(Uri.parse("market://details?id=" + context.getPackageName()));
-        //存在手机里没安装应用市场的情况，跳转会报异常，做一个接收判断
-        if (intent.resolveActivity(context.getPackageManager()) != null) { //可以接收
-            context.startActivity(intent);
-        } else {
-            Toast.makeText(context, "您的系统中没有安装应用市场", Toast.LENGTH_SHORT).show();
-        }
+    private static void downloadApk(final Context context, String url) {
+
+//        // 下载进度Dialog
+        final DownloadDialog downloadDialog = new DownloadDialog();
+        downloadDialog.setCancelable(false);
+        downloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "");
+
+        CheckUpdateBusiness.downloadApk(context, url, downloadDialog);
     }
-
-    private static void showUpdateDialog(final Context context, boolean isNeed, final UpdateInfo updateInfo) {
-
-        LogUtil.e("Update", "...show update dialog...");
-        final Dialog dialog = new Dialog(context, R.style.Dialog);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.update_dialog, null);
-        dialog.setContentView(view);
-        TextView titleTv = (TextView) view.findViewById(R.id.update_title);
-        TextView textViewMsg = (TextView) view.findViewById(R.id.update_content);
-        Button buttonCancel = (Button) view.findViewById(R.id.update_id_cancel);
-        Button buttonConfirm = (Button) view.findViewById(R.id.update_id_ok);
-        titleTv.setText("版本更新");
-        textViewMsg.setText(updateInfo.getInfo());
-        if (isNeed) {
-            buttonCancel.setVisibility(View.GONE);
-        } else {
-            buttonCancel.setVisibility(View.VISIBLE);
-            buttonCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                }
-            });
-        }
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LogUtil.e("Update", "download click....");
-                CheckUpdateBusiness.downloadApk(context, updateInfo, INFO_NAME, STORE_APK);
-                dialog.dismiss();
-            }
-        });
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.show();
-    }
-
 
 }

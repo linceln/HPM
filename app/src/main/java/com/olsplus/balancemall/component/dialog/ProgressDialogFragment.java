@@ -41,7 +41,6 @@ public class ProgressDialogFragment extends DialogFragment {
             tvProgress.setText(message);
         }
         builder.setCustomTitle(view);
-        builder.setCancelable(false);
         return builder.create();
     }
 }

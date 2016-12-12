@@ -29,8 +29,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.showLoading;
-import static com.olsplus.balancemall.core.util.LoadingDialogManager.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
 
 public class MerchantOrderDetailActivity extends BaseCompatActivity implements MerchantOrderDetailAdapter.OnOrderOperationListener, View.OnClickListener {
 

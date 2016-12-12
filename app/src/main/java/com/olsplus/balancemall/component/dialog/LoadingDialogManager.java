@@ -1,4 +1,4 @@
-package com.olsplus.balancemall.core.util;
+package com.olsplus.balancemall.component.dialog;
 
 
 import android.support.v4.app.FragmentActivity;

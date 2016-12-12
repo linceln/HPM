@@ -3,6 +3,7 @@ package com.olsplus.balancemall.core.http;
 
 import android.support.annotation.NonNull;
 
+import com.olsplus.balancemall.core.update.FileResponseBody;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.LogUtil;
 
@@ -26,6 +27,7 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 import okio.Buffer;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -44,6 +46,7 @@ public class HttpManager {
                             .writeTimeout(6, TimeUnit.SECONDS)
                             .readTimeout(6, TimeUnit.SECONDS)
 //                            .sslSocketFactory(getSslSocketFactory(context.getResources().openRawResource(R.raw.olsplus)))
+                            .addInterceptor(new ProgressInterceptor())// 添加下载进度
                             .addInterceptor(new LogInterceptor())
                             .build();
                     retrofit = new retrofit2.Retrofit.Builder()
@@ -56,6 +59,17 @@ public class HttpManager {
             }
         }
         return retrofit;
+    }
+
+    private static class ProgressInterceptor implements Interceptor {
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Response originalResponse = chain.proceed(chain.request());
+            return originalResponse.newBuilder()
+                    .body(new FileResponseBody(originalResponse.body()))
+                    .build();
+        }
     }
 
     private static SSLSocketFactory getSslSocketFactory(InputStream certificates) {
@@ -124,6 +138,11 @@ public class HttpManager {
             return response.newBuilder()
                     .body(okhttp3.ResponseBody.create(mediaType, content))
                     .build();
+
+//            Response originalResponse = chain.proceed(chain.request());
+//            return response.newBuilder()
+//                    .body(new FileResponseBody(response.body()))
+//                    .build();
         }
 
         @NonNull

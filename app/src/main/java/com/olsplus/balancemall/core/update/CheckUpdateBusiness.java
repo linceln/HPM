@@ -1,27 +1,32 @@
 package com.olsplus.balancemall.core.update;
 
 
-import android.app.DownloadManager;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Environment;
-import android.preference.PreferenceManager;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
-
+import com.olsplus.balancemall.component.dialog.DownloadDialog;
 import com.olsplus.balancemall.core.http.HttpManager;
 import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpUtil;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.DateUtil;
-import com.olsplus.balancemall.core.util.SPUtil;
+import com.olsplus.balancemall.core.util.LogUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.ResponseBody;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class CheckUpdateBusiness {
@@ -51,7 +56,7 @@ public class CheckUpdateBusiness {
             @Override
             public void handleFailedResp(String msg) {
                 if (updateCallback != null) {
-                    updateCallback.onError();
+                    updateCallback.onError(msg);
                 }
             }
         };
@@ -72,55 +77,143 @@ public class CheckUpdateBusiness {
         return sign;
     }
 
-    public static void downloadApk(
-            Context context, UpdateInfo updateInfo,
-            String infoName, String storeApk) {
-        if (!isDownloadManagerAvailable()) {
-            return;
-        }
+    /**
+     * 下载APK
+     */
+    public static void downloadApk(final Context context, String url, final DownloadDialog downloadDialog) {
+        HttpManager.getRetrofit()
+                .create(UpdateService.class)
+                .download(url)
+                .subscribeOn(Schedulers.io())
+                .doOnNext(new Action1<ResponseBody>() {
+                    @Override
+                    public void call(ResponseBody responseBody) {
+                        // IO线程写入文件
+                        writeResponseBodyToDisk(context, responseBody);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ResponseBody>() {
+                    @Override
+                    public void onCompleted() {
+                        downloadDialog.dismiss();
+                        LogUtil.e("onCompleted", "onCompleted");
+                    }
 
-        String description = updateInfo.getInfo();
-        String appUrl = updateInfo.getUrl();
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        downloadDialog.dismiss();
+                        LogUtil.e("onError", "onError" + e.getMessage());
 
-        if (appUrl == null || appUrl.isEmpty()) {
-            Log.e("yongyuan.w", "请填写\"App下载地址\"");
-            return;
-        }
+                    }
 
-        appUrl = appUrl.trim(); // 去掉首尾空格
+                    @Override
+                    public void onNext(ResponseBody responseBody) {
+                        LogUtil.e("onNext", "onNext" + responseBody.contentLength());
+                    }
+                });
+    }
 
-        if (!appUrl.startsWith("http")) {
-            appUrl = "http://" + appUrl; // 添加Http信息
-        }
+    private static boolean writeResponseBodyToDisk(Context context, ResponseBody body) {
 
-        Log.e("yongyuan.w", "appUrl: " + appUrl);
-
-        DownloadManager.Request request;
+        // APK文件缓存路径
+        File futureStudioIconFile = new File(context.getExternalCacheDir(), "upgrade.apk");
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
         try {
-            request = new DownloadManager.Request(Uri.parse(appUrl));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-        request.setTitle(infoName);
-        request.setDescription(description);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            request.allowScanningByMediaScanner();
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        }
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, storeApk);
+            byte[] fileReader = new byte[1024];
+            // 文件大小
+            long fileSize = body.contentLength();
+            long fileSizeDownloaded = 0;
 
-        Context appContext = context.getApplicationContext();
-        DownloadManager manager = (DownloadManager)
-                appContext.getSystemService(Context.DOWNLOAD_SERVICE);
+            inputStream = body.byteStream();
+            outputStream = new FileOutputStream(futureStudioIconFile);
 
-        // 存储下载Key
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(appContext);
-        sp.edit().putLong(SPUtil.DOWNLOAD_APK_ID_PREFS, manager.enqueue(request)).apply();
+            while (true) {
+                int read = inputStream.read(fileReader);
+                if (read == -1) {
+                    break;
+                }
+                outputStream.write(fileReader, 0, read);
+                // 已下载文件大小
+                fileSizeDownloaded += read;
+            }
+            outputStream.flush();
+            Intent install = new Intent(Intent.ACTION_VIEW);
+            install.setDataAndType(Uri.fromFile(futureStudioIconFile), "application/vnd.android.package-archive");
+            install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(install);
+            return true;
+        } catch (IOException e) {
+            return false;
+        } finally {
+
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
-    // 最小版本号大于9
-    private static boolean isDownloadManagerAvailable() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
-    }
+//    public static void downloadApk(Context context, UpdateInfo updateInfo, String infoName, String storeApk) {
+//        if (!isDownloadManagerAvailable()) {
+//            return;
+//        }
+//
+//        String description = updateInfo.getInfo();
+//        String appUrl = updateInfo.getUrl();
+//
+//        if (appUrl == null || appUrl.isEmpty()) {
+//            Log.e("yongyuan.w", "请填写\"App下载地址\"");
+//            return;
+//        }
+//
+//        appUrl = appUrl.trim(); // 去掉首尾空格
+//
+//        if (!appUrl.startsWith("http")) {
+//            appUrl = "http://" + appUrl; // 添加Http信息
+//        }
+//
+//        Log.e("yongyuan.w", "appUrl: " + appUrl);
+//
+//        DownloadManager.Request request;
+//        try {
+//            request = new DownloadManager.Request(Uri.parse(appUrl));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return;
+//        }
+//        request.setTitle(infoName);
+//        request.setDescription(description);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+//            request.allowScanningByMediaScanner();
+//            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+//        }
+//        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, storeApk);
+//
+//        Context appContext = context.getApplicationContext();
+//        DownloadManager manager = (DownloadManager)
+//                appContext.getSystemService(Context.DOWNLOAD_SERVICE);
+//
+//        // 存储下载Key
+//        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(appContext);
+//        sp.edit().putLong(SPUtil.DOWNLOAD_APK_ID_PREFS, manager.enqueue(request)).apply();
+//    }
+//
+//    // 最小版本号大于9
+//    private static boolean isDownloadManagerAvailable() {
+//        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
+//    }
 }

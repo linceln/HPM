@@ -2,12 +2,18 @@ package com.olsplus.balancemall.app.home;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.liuguangqiang.permissionhelper.PermissionHelper;
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.bottom.BottomNavigateFragment;
 import com.olsplus.balancemall.app.login.LoginActivity;
@@ -21,6 +27,8 @@ import com.olsplus.balancemall.core.util.SPUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.lang.ref.WeakReference;
 
 public class HomeActivity extends MainActivity {
 
@@ -70,9 +78,14 @@ public class HomeActivity extends MainActivity {
         super.onResume();
         long time = (Long) SPUtil.get(this, SPUtil.UPDATE_TIME, 0L);
         long currentTime = System.currentTimeMillis();
-        if (currentTime - time >= 24 * 3600 * 1000) {
-            // 一天检查更新一次
+
+        if (BuildConfig.DEBUG) {
             UpgradeUtil.checkUpdate(this);
+        } else {
+            if (currentTime - time >= 24 * 3600 * 1000) {
+                // 一天检查更新一次
+                UpgradeUtil.checkUpdate(this);
+            }
         }
     }
 
@@ -118,5 +131,29 @@ public class HomeActivity extends MainActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    private static class UpgradeHandler extends Handler {
+
+        private final WeakReference<AppCompatActivity> weakReference;
+
+        public UpgradeHandler(AppCompatActivity activity) {
+            weakReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (weakReference != null) {
+                AppCompatActivity activity = weakReference.get();
+                switch (msg.what) {
+                    case 0:
+                        Toast.makeText(activity, (String) msg.obj, Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+
+                        break;
+                }
+            }
+        }
     }
 }
