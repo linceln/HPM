@@ -1,6 +1,7 @@
 package com.olsplus.balancemall.app.merchant.goods.bean;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 public class GoodsDetail {
@@ -87,7 +88,7 @@ public class GoodsDetail {
         this.sku_info = sku_info;
     }
 
-    public static class SkuInfo {
+    public static class SkuInfo implements Serializable{
         private String property;
         private double price;
         private int inventory;

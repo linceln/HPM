@@ -34,7 +34,7 @@ public class UpgradeUtil {
                     version = new UpdateInfo();
                     version.setUrl("http://dldir1.qq.com/weixin/android/weixin6331android940.apk");
                     version.setInfo("最新版本更新！！！！！！！");
-                    version.setNumber("2.0.2");
+                    version.setNumber("1.0.2");
                 }
 
                 if (version != null) {

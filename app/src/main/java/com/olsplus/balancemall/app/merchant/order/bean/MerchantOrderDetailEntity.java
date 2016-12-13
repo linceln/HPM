@@ -2,6 +2,7 @@ package com.olsplus.balancemall.app.merchant.order.bean;
 
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -17,7 +18,7 @@ public class MerchantOrderDetailEntity extends BaseResultEntity {
         this.order_detail = order_detail;
     }
 
-    public static class OrderDetailBean {
+    public static class OrderDetailBean implements Serializable {
         /**
          * order_id : 1611072133332103305
          * total : 0.01
@@ -122,7 +123,7 @@ public class MerchantOrderDetailEntity extends BaseResultEntity {
             this.suborders = suborders;
         }
 
-        public static class SubordersBean {
+        public static class SubordersBean implements Serializable{
             /**
              * title : 测试商品
              * total : 0.01

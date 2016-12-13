@@ -104,7 +104,7 @@ public class CheckUpdateBusiness {
                                 downloadDialog.dismiss();
                             }
                         }
-                        LogUtil.e("onCompleted", "onCompleted");
+//                        LogUtil.e("onCompleted", "onCompleted");
                     }
 
                     @Override
@@ -115,13 +115,13 @@ public class CheckUpdateBusiness {
                             }
                         }
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        LogUtil.e("onError", "onError" + e.getMessage());
+//                        LogUtil.e("onError", "onError" + e.getMessage());
 
                     }
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        LogUtil.e("onNext", "onNext" + responseBody.contentLength());
+//                        LogUtil.e("onNext", "onNext" + responseBody.contentLength());
                     }
                 });
     }

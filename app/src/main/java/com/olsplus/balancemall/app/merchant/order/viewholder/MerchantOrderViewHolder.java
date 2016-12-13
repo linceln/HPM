@@ -10,16 +10,10 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.olsplus.balancemall.R;
-import com.olsplus.balancemall.app.merchant.order.adapter.MerchantOrderChildAdapter;
-import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderDetailEntity;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderEntity;
 import com.olsplus.balancemall.app.mystore.util.OrderHelper;
 import com.olsplus.balancemall.core.image.ImageHelper;
 import com.olsplus.balancemall.core.util.UIUtil;
-
-import org.w3c.dom.Text;
-
-import static android.R.id.list;
 
 
 public class MerchantOrderViewHolder extends BaseViewHolder<MerchantOrderEntity.OrdersBean> {

@@ -2,6 +2,8 @@ package com.olsplus.balancemall.app.merchant.goods.bean;
 
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
 
+import java.io.Serializable;
+
 
 public class AddResultEntity extends BaseResultEntity {
 
@@ -20,7 +22,7 @@ public class AddResultEntity extends BaseResultEntity {
         this.product = product;
     }
 
-    public static class ProductBean {
+    public static class ProductBean implements Serializable{
         /**
          * id : 2
          * title : 商品名称

@@ -3,6 +3,7 @@ package com.olsplus.balancemall.app.merchant.goods.bean;
 
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class GoodsListEntity extends BaseResultEntity{
@@ -17,7 +18,7 @@ public class GoodsListEntity extends BaseResultEntity{
         this.product_list = product_list;
     }
 
-    public static class ProductListBean {
+    public static class ProductListBean implements Serializable{
         /**
          * id : 36
          * title : 气质风尚妆

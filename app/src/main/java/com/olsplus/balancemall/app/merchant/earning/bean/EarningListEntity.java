@@ -2,6 +2,7 @@ package com.olsplus.balancemall.app.merchant.earning.bean;
 
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class EarningListEntity extends BaseResultEntity {
@@ -17,7 +18,7 @@ public class EarningListEntity extends BaseResultEntity {
         this.data = data;
     }
 
-    public static class DataBean {
+    public static class DataBean implements Serializable{
         /**
          * type : REFUND
          * order_id : 1609212133333652251
