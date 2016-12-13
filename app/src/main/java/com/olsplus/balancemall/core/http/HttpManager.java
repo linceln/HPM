@@ -3,6 +3,7 @@ package com.olsplus.balancemall.core.http;
 
 import android.support.annotation.NonNull;
 
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.core.update.FileResponseBody;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.LogUtil;
@@ -41,14 +42,18 @@ public class HttpManager {
         if (retrofit == null) {
             synchronized (HttpManager.class) {
                 if (retrofit == null) {
-                    OkHttpClient client = new OkHttpClient.Builder()
+
+                    OkHttpClient.Builder builder = new OkHttpClient.Builder()
                             .connectTimeout(20, TimeUnit.SECONDS)
                             .writeTimeout(6, TimeUnit.SECONDS)
                             .readTimeout(6, TimeUnit.SECONDS)
 //                            .sslSocketFactory(getSslSocketFactory(context.getResources().openRawResource(R.raw.olsplus)))
-                            .addInterceptor(new ProgressInterceptor())// 添加下载进度
-                            .addInterceptor(new LogInterceptor())
-                            .build();
+                            .addInterceptor(new ProgressInterceptor());
+                    if (BuildConfig.DEBUG) {
+//                        builder.addInterceptor(new LogInterceptor());
+                    }
+
+                    OkHttpClient client = builder.build();
                     retrofit = new retrofit2.Retrofit.Builder()
                             .baseUrl(ApiConst.BASE_URL)
                             .addConverterFactory(GsonConverterFactory.create())

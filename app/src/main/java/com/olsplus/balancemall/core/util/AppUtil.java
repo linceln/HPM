@@ -3,6 +3,10 @@ package com.olsplus.balancemall.core.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import java.util.List;
 
 /**
  * app相关辅助类
@@ -66,4 +70,30 @@ public class AppUtil {
         }
         return 0;
     }
+
+    /**
+     * 是否在后台运行
+     *
+     * @param context
+     * @return
+     */
+    public static boolean isBackground(Context context) {
+
+        android.app.ActivityManager activityManager = (android.app.ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<android.app.ActivityManager.RunningAppProcessInfo> appProcesses = activityManager.getRunningAppProcesses();
+        for (android.app.ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
+            if (appProcess.processName.equals(context.getPackageName())) {
+                if (appProcess.importance == android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
+                    LogUtil.e(String.format("Background App:", appProcess.processName));
+                    return true;
+                } else {
+                    LogUtil.e(String.format("Foreground App:", appProcess.processName));
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+
 }

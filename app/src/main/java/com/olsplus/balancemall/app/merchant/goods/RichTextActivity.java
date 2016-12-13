@@ -197,6 +197,9 @@ public class RichTextActivity extends BaseCompatActivity implements IPicker.OnSe
     @Override
     protected void onDestroy() {
         hideSoftInput();
+        if (editor != null) {
+            editor.destroy();
+        }
         super.onDestroy();
     }
 

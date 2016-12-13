@@ -40,7 +40,7 @@ public class ProgressDialogFragment extends DialogFragment {
         if (!TextUtils.isEmpty(message)) {
             tvProgress.setText(message);
         }
-        builder.setCustomTitle(view);
+        builder.setView(view);
         return builder.create();
     }
 }

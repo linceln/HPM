@@ -8,11 +8,11 @@ import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import rx.Observable;
 
-public interface UpdateService {
+public interface CheckUpgradeService {
 
 
     @GET("v1/version")
-    Observable<UpdateResult> updateApp(
+    Observable<UpdateResult> checkUpgrade(
             @Query("platform") String platform,
             @Query("channel") String channel,
             @Query("timestamp") String timestamp,
@@ -22,5 +22,5 @@ public interface UpdateService {
     // 下载文件
     @Streaming
     @GET
-    Observable<ResponseBody> download(@Url String url);
+    Observable<ResponseBody> downloadApk(@Url String url);
 }

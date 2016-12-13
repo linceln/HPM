@@ -4,7 +4,6 @@ package com.olsplus.balancemall.core.update;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.olsplus.balancemall.component.dialog.DownloadDialog;
@@ -12,8 +11,11 @@ import com.olsplus.balancemall.core.http.HttpManager;
 import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpUtil;
 import com.olsplus.balancemall.core.util.ApiConst;
+import com.olsplus.balancemall.core.util.AppUtil;
 import com.olsplus.balancemall.core.util.DateUtil;
 import com.olsplus.balancemall.core.util.LogUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -61,15 +63,15 @@ public class CheckUpdateBusiness {
             }
         };
         HttpManager.getRetrofit()
-                .create(UpdateService.class)
-                .updateApp(HttpUtil.PLATFORM, HttpUtil.CHANNEL, timestamp, sign)
+                .create(CheckUpgradeService.class)
+                .checkUpgrade(HttpUtil.PLATFORM, HttpUtil.CHANNEL, timestamp, sign)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(respObserver);
     }
 
     private static String parseUpdateSign(String url, String timestamp) {
-        Map<String, String> paramMap = new HashMap<String, String>();
+        Map<String, String> paramMap = new HashMap<>();
         paramMap.put("channel", HttpUtil.CHANNEL);
         paramMap.put("platform", HttpUtil.PLATFORM);
         paramMap.put("timestamp", timestamp);
@@ -82,28 +84,37 @@ public class CheckUpdateBusiness {
      */
     public static void downloadApk(final Context context, String url, final DownloadDialog downloadDialog) {
         HttpManager.getRetrofit()
-                .create(UpdateService.class)
-                .download(url)
+                .create(CheckUpgradeService.class)
+                .downloadApk(url)
                 .subscribeOn(Schedulers.io())
                 .doOnNext(new Action1<ResponseBody>() {
                     @Override
                     public void call(ResponseBody responseBody) {
                         // IO线程写入文件
-                        writeResponseBodyToDisk(context, responseBody);
+                        boolean b = writeResponseBodyToDisk(context, responseBody);
+                        EventBus.getDefault().post(b);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResponseBody>() {
                     @Override
                     public void onCompleted() {
-                        downloadDialog.dismiss();
+                        if (!AppUtil.isBackground(context)) {
+                            if (downloadDialog != null) {
+                                downloadDialog.dismiss();
+                            }
+                        }
                         LogUtil.e("onCompleted", "onCompleted");
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        if (!AppUtil.isBackground(context)) {
+                            if (downloadDialog != null) {
+                                downloadDialog.dismiss();
+                            }
+                        }
                         Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        downloadDialog.dismiss();
                         LogUtil.e("onError", "onError" + e.getMessage());
 
                     }

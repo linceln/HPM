@@ -2,34 +2,24 @@ package com.olsplus.balancemall.core.update;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.olsplus.balancemall.BuildConfig;
-import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.component.dialog.DownloadDialog;
+import com.olsplus.balancemall.component.dialog.GeneralDialogFragment;
 import com.olsplus.balancemall.component.dialog.UpgradeForceDialog;
 import com.olsplus.balancemall.component.dialog.UpgradeNormalDialog;
 import com.olsplus.balancemall.core.util.AppUtil;
 import com.olsplus.balancemall.core.util.LogUtil;
+import com.olsplus.balancemall.core.util.NetworkUtil;
 import com.olsplus.balancemall.core.util.SPUtil;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import okhttp3.ResponseBody;
-import rx.Subscriber;
 
 
 public class UpgradeUtil {
 
-    public static void checkUpdate(final Context context) {
+    public static void checkUpdate(final Context context, final DownloadDialog downloadDialog) {
         // 保存检查更新时间
         SPUtil.put(context, SPUtil.UPDATE_TIME, System.currentTimeMillis());
 
@@ -40,19 +30,23 @@ public class UpgradeUtil {
                 UpdateInfo version = data.getVersion();
 
                 if (BuildConfig.DEBUG) {
-                    upgradeNormal(context, "http://file1.updrv.com/soft/2016/20161208/drivethelife6_setup.exe");
+                    // 测试
+                    version = new UpdateInfo();
+                    version.setUrl("http://dldir1.qq.com/weixin/android/weixin6331android940.apk");
+                    version.setInfo("最新版本更新！！！！！！！");
+                    version.setNumber("2.0.2");
                 }
 
                 if (version != null) {
                     // 当前版本
                     LogUtil.e("Update", "Local Version: v" + AppUtil.getVersionName(context));
                     // 云端版本
-                    LogUtil.e("Update", "Cloud Version: v" + data.getVersion().getNumber());
+                    LogUtil.e("Update", "Cloud Version: v" + version.getNumber());
 
                     String versionNum = version.getNumber();
                     if (!TextUtils.isEmpty(versionNum)) {
                         String cloudValues[] = versionNum.split("\\.");
-                        if (null != cloudValues && cloudValues.length >= 2) {
+                        if (cloudValues.length >= 2) {
                             String currentVersion = AppUtil.getVersionName(context);
                             String currentValues[] = currentVersion.split("\\.");
                             int one = Integer.parseInt(currentValues[0]);
@@ -64,12 +58,12 @@ public class UpgradeUtil {
                             int three3 = Integer.parseInt(cloudValues[2]);
                             if (one1 > one) {
                                 // 大版本变化强制更新
-                                upgradeForce(context, version.getUrl());
+                                upgradeForce(context, version, downloadDialog);
                             } else if (two2 > two) {
                                 // 小版本变化选择更新
-                                upgradeNormal(context, version.getUrl());
+                                upgradeNormal(context, version, downloadDialog);
                             } else if (two2 == two && three3 > three) {
-                                upgradeNormal(context, version.getUrl());
+                                upgradeNormal(context, version, downloadDialog);
                             }
                         }
                     }
@@ -87,16 +81,19 @@ public class UpgradeUtil {
      * 选择更新
      *
      * @param context
+     * @param version
+     * @param downloadDialog
      */
-    public static void upgradeNormal(final Context context, final String url) {
+    public static void upgradeNormal(final Context context, final UpdateInfo version, final DownloadDialog downloadDialog) {
         final UpgradeNormalDialog upgradeNormalDialog = new UpgradeNormalDialog();
-        upgradeNormalDialog.setMessage(context.getString(R.string.upgrade_normal_msg));
+//        upgradeNormalDialog.setMessage(context.getString(R.string.upgrade_normal_msg));
+        upgradeNormalDialog.setMessage(version.getInfo());
         upgradeNormalDialog.setOnPositiveClickListener(new UpgradeNormalDialog.OnPositiveClickListener() {
             @Override
             public void onClick() {
                 // 跳转下载进度Dialog
                 upgradeNormalDialog.dismiss();
-                downloadApk(context, url);
+                downloadApk(context, version.getUrl(), downloadDialog);
             }
         });
         if (context instanceof AppCompatActivity) {
@@ -108,16 +105,19 @@ public class UpgradeUtil {
      * 强制更新
      *
      * @param context
+     * @param version
+     * @param downloadDialog
      */
-    public static void upgradeForce(final Context context, final String url) {
+    public static void upgradeForce(final Context context, final UpdateInfo version, final DownloadDialog downloadDialog) {
         final UpgradeForceDialog generalDialogFragment = new UpgradeForceDialog();
-        generalDialogFragment.setMessage(context.getString(R.string.upgrade_force_msg));
+//        generalDialogFragment.setMessage(context.getString(R.string.upgrade_force_msg));
+        generalDialogFragment.setMessage(version.getInfo());
         generalDialogFragment.setCancelable(false);
         generalDialogFragment.setOnPositiveClickListener(new UpgradeForceDialog.OnPositiveClickListener() {
             @Override
             public void onClick() {
                 // 跳转下载进度Dialog
-                downloadApk(context, url);
+                downloadApk(context, version.getUrl(), downloadDialog);
             }
         });
         if (context instanceof AppCompatActivity) {
@@ -129,15 +129,30 @@ public class UpgradeUtil {
      * 下载APK
      *
      * @param url
+     * @param downloadDialog
      */
-    private static void downloadApk(final Context context, String url) {
+    private static void downloadApk(final Context context, final String url, final DownloadDialog downloadDialog) {
 
-//        // 下载进度Dialog
-        final DownloadDialog downloadDialog = new DownloadDialog();
-        downloadDialog.setCancelable(false);
-        downloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "");
+        //  判断网络连接
+        if (NetworkUtil.isWifiConnected(context)) {// wifi连接
 
-        CheckUpdateBusiness.downloadApk(context, url, downloadDialog);
+            // 下载进度Dialog
+            downloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "下载进度");
+
+            CheckUpdateBusiness.downloadApk(context, url, downloadDialog);
+        } else {
+            GeneralDialogFragment generalDialogFragment = new GeneralDialogFragment();
+            generalDialogFragment.setMessage("当前使用手机流量联网，是否继续更新？");
+            generalDialogFragment.setOnPositiveClickListener(new GeneralDialogFragment.OnPositiveClickListener() {
+                @Override
+                public void onClick() {
+                    // 下载进度Dialog
+                    downloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "下载进度");
+
+                    CheckUpdateBusiness.downloadApk(context, url, downloadDialog);
+                }
+            });
+            generalDialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "");
+        }
     }
-
 }

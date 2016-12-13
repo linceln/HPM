@@ -1,7 +1,5 @@
 package com.olsplus.balancemall.core.update;
 
-import com.olsplus.balancemall.core.util.LogUtil;
-
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;

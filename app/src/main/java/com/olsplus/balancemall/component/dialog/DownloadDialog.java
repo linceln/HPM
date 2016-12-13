@@ -45,6 +45,7 @@ public class DownloadDialog extends DialogFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getProgress(final FileSizeEvent fileSize) {
 
+        // 接收APK更新的下载进度
         pb.setIndeterminate(false);
         pb.setMax(100);
         pb.setProgress(0);
@@ -62,8 +63,8 @@ public class DownloadDialog extends DialogFragment {
         pb = (ProgressBar) view.findViewById(R.id.pbDownload);
         pb.setIndeterminate(true);
         tv = (TextView) view.findViewById(R.id.tvProgressDownload);
-        tv.setText("正在连接中，请稍候...");
-        builder.setCustomTitle(view);
+        tv.setText("正在下载，请稍候...");
+        builder.setView(view);
 
         return builder.create();
     }

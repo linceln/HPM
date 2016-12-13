@@ -1,23 +1,17 @@
 package com.olsplus.balancemall.app.home;
 
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.liuguangqiang.permissionhelper.PermissionHelper;
 import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.bottom.BottomNavigateFragment;
 import com.olsplus.balancemall.app.login.LoginActivity;
 import com.olsplus.balancemall.app.province.BuildCityActivity;
+import com.olsplus.balancemall.component.dialog.DownloadDialog;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
 import com.olsplus.balancemall.core.event.TokenEvent;
@@ -28,12 +22,12 @@ import com.olsplus.balancemall.core.util.SPUtil;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.lang.ref.WeakReference;
-
 public class HomeActivity extends MainActivity {
 
     private TextView titleTv;
     private CmsHomeFragment cmsHomeFragment;
+    private DownloadDialog downloadDialog;
+    private boolean isCompleted;
 
     @Override
     protected BaseFragment getFirstFragment() {
@@ -58,7 +52,9 @@ public class HomeActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
         setBottomFragment(new BottomNavigateFragment());
         super.onCreate(savedInstanceState);
         titleTv = (TextView) findViewById(R.id.building_tv);
@@ -66,25 +62,49 @@ public class HomeActivity extends MainActivity {
         titleTv.setText(buildingName);
         titleTv.setOnClickListener(this);
         // 友盟统计需要的权限
-//        requestPhoneState();
+        requestPhoneState();
+        // 检查更新
+        checkUpgrade();
     }
 
     private void requestPhoneState() {
-        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_PHONE_STATE);
+//        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_PHONE_STATE);
+    }
+
+    /**
+     * 是否下载完成
+     *
+     * @param isCompleted
+     */
+    @Subscribe
+    public void isDownloadCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        long time = (Long) SPUtil.get(this, SPUtil.UPDATE_TIME, 0L);
+    protected void onRestart() {
+        // 按Home键之后下载完成，返回界面Dialog消失
+        if (downloadDialog != null && isCompleted) {
+            downloadDialog.dismiss();
+            downloadDialog = null;
+        }
+        super.onRestart();
+    }
+
+    private void checkUpgrade() {
+
+        downloadDialog = new DownloadDialog();
+        downloadDialog.setCancelable(false);
+
+        long time = (long) SPUtil.get(this, SPUtil.UPDATE_TIME, 0L);
         long currentTime = System.currentTimeMillis();
 
         if (BuildConfig.DEBUG) {
-            UpgradeUtil.checkUpdate(this);
+            UpgradeUtil.checkUpdate(this, downloadDialog);
         } else {
+            // 一天检查更新一次
             if (currentTime - time >= 24 * 3600 * 1000) {
-                // 一天检查更新一次
-                UpgradeUtil.checkUpdate(this);
+                UpgradeUtil.checkUpdate(this, downloadDialog);
             }
         }
     }
@@ -130,30 +150,8 @@ public class HomeActivity extends MainActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
-    }
-
-    private static class UpgradeHandler extends Handler {
-
-        private final WeakReference<AppCompatActivity> weakReference;
-
-        public UpgradeHandler(AppCompatActivity activity) {
-            weakReference = new WeakReference<>(activity);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            if (weakReference != null) {
-                AppCompatActivity activity = weakReference.get();
-                switch (msg.what) {
-                    case 0:
-                        Toast.makeText(activity, (String) msg.obj, Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-
-                        break;
-                }
-            }
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
         }
     }
 }
