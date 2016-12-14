@@ -14,12 +14,12 @@ import android.widget.Toast;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
-import com.liuguangqiang.ipicker.IPicker;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.goods.adapter.AddGoodsAdapter;
 import com.olsplus.balancemall.app.merchant.goods.bean.EditGoodsEntity;
 import com.olsplus.balancemall.app.merchant.goods.bean.GoodsDetail;
 import com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness;
+import com.olsplus.balancemall.component.imagepicker.IPicker;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
 import com.olsplus.balancemall.core.http.RequestCallback;

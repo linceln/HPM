@@ -68,6 +68,7 @@ public class LoginActivity extends MainActivity implements ILoginView, TextWatch
         loginRequest = new LoginRequestImpl(this);
         loginRequest.setLoginView(this);
         PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_PHONE_STATE);
     }
 
     private void initView() {

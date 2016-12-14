@@ -49,7 +49,7 @@
         <activity
             android:name=".app.mystore.MyStoreActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeDarkStatusBar"/>
+            android:theme="@style/AppThemeDarkStatusBar" />
         <activity
             android:name=".app.mystore.UserInfoActivity"
             android:screenOrientation="portrait" />
@@ -143,13 +143,11 @@
         </receiver>
 
         <activity
-            android:name="com.liuguangqiang.ipicker.IPickerActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/IPickerTheme" />
+            android:name="com.olsplus.balancemall.component.imagepicker.IPickerActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name="com.liuguangqiang.ipicker.crop.CropImageActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/IPickerTheme" />
+            android:name="com.olsplus.balancemall.component.imagepicker.CropImageActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".app.merchant.MerchantActivity" />
         <activity android:name=".app.merchant.order.MerchantOrderActivity" />
         <activity android:name=".app.merchant.order.MerchantOrderDetailActivity" />

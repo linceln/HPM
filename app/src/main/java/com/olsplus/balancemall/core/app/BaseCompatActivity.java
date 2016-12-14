@@ -57,6 +57,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.back_normal);
         }
     }
@@ -83,7 +84,8 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     /**
      * Initialize Animations, only after API 21
      */
-    protected abstract void setupWindowAnimations();
+    protected void setupWindowAnimations() {
+    }
 
     /**
      * Initialize Views
@@ -128,9 +130,9 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home: // 顶栏返回键
-                finish();
-                break;
+//            case android.R.id.home: // 顶栏返回键
+//                finish();
+//                break;
             case R.id.action_home:// 回到首页
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);

@@ -85,7 +85,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
-//    compile files('libs/alipaySDK-20150818.jar')
+
     compile 'com.android.support:support-v4:24.0.0'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
@@ -98,7 +98,7 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.2.3'
     compile 'com.trello:rxlifecycle-components:1.0'
-//    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.8.2@aar'
+    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
     compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     compile 'com.artemzin.rxjava:proguard-rules:1.2.3.0'
 
@@ -107,7 +107,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
 
-    compile 'com.liuguangqiang.ipicker:library:1.0.1'
+    compile 'com.github.liuguangqiang.permissionhelper:permissionhelper:0.1.0'
 
     compile 'com.wdullaer:materialdatetimepicker:3.0.0'
     compile 'com.github.mr5:icarus:0.1.14'

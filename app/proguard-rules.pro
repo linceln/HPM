@@ -36,13 +36,11 @@
 }
 #支付宝
 #-libraryjars libs/alipaySDK-20150818.jar
--keep class com.alipay.android.**{*;}
-#-keep class com.alipay.android.app.IAlixPay{*;}
-##-keep class com.alipay.android.app.IAlixPay$Stub{*;}
-#-keep class com.alipay.android.app.IAlixPay$*{*;}
-#-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
-##-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
-#-keep class com.alipay.android.app.IRemoteServiceCallback$*{*;}
+#-keep class com.alipay.android.**{*;}
+-keep class com.alipay.android.app.IAlixPay{*;}
+-keep class com.alipay.android.app.IAlixPay$Stub{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback{*;}
+-keep class com.alipay.android.app.IRemoteServiceCallback$Stub{*;}
 -keep class com.alipay.sdk.app.PayTask{ public *;}
 -keep class com.alipay.sdk.app.AuthTask{ public *;}
 -keep class com.alipay.apmobilesecuritysdk.face.**{*;}
@@ -81,10 +79,8 @@
 -dontwarn retrofit2.adapter.rxjava.CompletableHelper$**
 #Okio
 -dontwarn okio.**
-#相册
--keep class com.liuguangqiang.**{*;}
-#RecyclerView
--keep class com.jude.**{*;}
+#RxPermission
+-dontwarn com.tbruyelle.**
 
 # 抛出异常时保留代码行号
 -keepattributes SourceFile,LineNumberTable
@@ -134,14 +130,6 @@
     void *(**On*Event);
 }
 
-#JavaBean
--keep class * extends com.olsplus.balancemall.core.bean.BaseResultEntity {
-    #忽略get和set方法
-    public void set*(***);
-    public *** get*();
-    public *** is*();
-}
-
 #WebView
 -keepclassmembers class * extends android.webkit.WebViewClient {
     public void *(android.webkit.WebView, java.lang.String, android.graphics.Bitmap);
@@ -150,6 +138,7 @@
 -keepclassmembers class * extends android.webkit.WebViewClient {
     public void *(android.webkit.WebView, java.lang.String);
 }
+
 #JS
 -keepclassmembers class com.olsplus.balancemall.app.merchant.goods.RichTextActivity$JSInterfacel {
     <methods>;

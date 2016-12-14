@@ -17,8 +17,8 @@ import com.github.mr5.icarus.TextViewToolbar;
 import com.github.mr5.icarus.button.Button;
 import com.github.mr5.icarus.button.TextViewButton;
 import com.github.mr5.icarus.entity.Options;
-import com.liuguangqiang.ipicker.IPicker;
 import com.olsplus.balancemall.R;
+import com.olsplus.balancemall.component.imagepicker.IPicker;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.Base64Util;
@@ -34,9 +34,9 @@ import java.util.List;
 
 import rx.Subscriber;
 
-import static com.olsplus.balancemall.core.util.UploadManager.uploadGoodsImage;
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
 import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.core.util.UploadManager.uploadGoodsImage;
 
 public class RichTextActivity extends BaseCompatActivity implements IPicker.OnSelectedListener {
 

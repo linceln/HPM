@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#fff84848</color>
     <color name="bg">#eeeeee</color>
-    <item type="color" name="main_color_1">padding</item>
+    <item name="main_color_1" type="color">padding</item>
     <color name="com_sina_weibo_sdk_blue">#ff3b5998</color>
     <color name="com_sina_weibo_sdk_loginview_text_color">#ffffffff</color>
     <color name="msp_dialog_tiltle_blue">#ff2277bb</color>
@@ -379,4 +379,11 @@
     <color name="color_crophand_progress_greytext">#ffc9c9c9</color>
     <!-- pay -->
     <color name="navpage">#FFE1E8EB</color>
+    <color name="placeholder">#666666</color>
+    <color name="background">#3d4049</color>
+
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
 </resources>

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">禾平猫</string>
     <string name="module_login_account">手机号</string>
     <string name="module_login_password">密码</string>
@@ -46,4 +46,20 @@
     <!--Update-->
     <string name="upgrade_normal_msg">发现新版本！</string>
     <string name="upgrade_force_msg">发现新版本！</string>
+    <!--IPicker-->
+    <string name="title_act_picker">选择照片</string>
+    <string name="action_done">完成</string>
+
+    <string name="btn_setting">设置</string>
+    <string name="no_permission_camera">对不起, 没有拍照的权限。</string>
+    <string name="no_permission_gallery">对不起, 没有访问照片的权限。</string>
+    <string name="format_max_size">最多只能选%1$d张图片哦。</string>
+
+    <!--crop-->
+    <string name="crop__title">裁剪图片</string>
+    <string name="crop__saving">保存中</string>
+    <string name="crop__wait">请稍候</string>
+    <string name="crop__pick_error">没有图片资源</string>
+    <string name="crop__done">完成</string>
+    <string name="crop__cancel" tools:ignore="ButtonCase">取消</string>
 </resources>

@@ -33,7 +33,7 @@ public class UpgradeUtil {
                     // 测试
                     version = new UpdateInfo();
                     version.setUrl("http://dldir1.qq.com/weixin/android/weixin6331android940.apk");
-                    version.setInfo("最新版本更新！！！！！！！");
+                    version.setInfo("发现新版本，是否立即更新？");
                     version.setNumber("1.0.2");
                 }
 

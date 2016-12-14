@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.liuguangqiang.ipicker.IPicker;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.mystore.config.BindPhoneActivity;
 import com.olsplus.balancemall.app.mystore.request.UserImpl;
 import com.olsplus.balancemall.app.mystore.view.IUserView;
 import com.olsplus.balancemall.component.dialog.BottomActionDialog;
+import com.olsplus.balancemall.component.imagepicker.IPicker;
 import com.olsplus.balancemall.component.view.CircleImageView;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
@@ -31,7 +31,7 @@ import java.util.List;
 public class UserInfoActivity extends MainActivity implements IUserView, IPicker.OnSelectedListener {
 
     private CircleImageView photoImage;
-    private TextView gendarTv;
+    private TextView genderTv;
     private TextView phoneTv;
     private BottomActionDialog dialog;
     private String picPath;
@@ -71,7 +71,7 @@ public class UserInfoActivity extends MainActivity implements IUserView, IPicker
         LinearLayout gendarLinear = ((LinearLayout) findViewById(R.id.myaccount_gendar_layout));
         LinearLayout bindPhoneLinear = ((LinearLayout) findViewById(R.id.myaccount_bind_phone_layout));
         photoImage = (CircleImageView) findViewById(R.id.myaccount_user_photo);
-        gendarTv = (TextView) findViewById(R.id.myaccount_gendar);
+        genderTv = (TextView) findViewById(R.id.myaccount_gendar);
         phoneTv = (TextView) findViewById(R.id.myaccount_bind_phone);
         photoLinear.setOnClickListener(this);
         gendarLinear.setOnClickListener(this);
@@ -90,7 +90,7 @@ public class UserInfoActivity extends MainActivity implements IUserView, IPicker
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .into(photoImage);
 
-        gendarTv.setText((String) SPUtil.get(this, SPUtil.GENDER, ""));
+        genderTv.setText((String) SPUtil.get(this, SPUtil.GENDER, ""));
         phoneTv.setText((String) SPUtil.get(this, SPUtil.PHONE, ""));
     }
 
@@ -109,74 +109,12 @@ public class UserInfoActivity extends MainActivity implements IUserView, IPicker
         }
     }
 
-
-    //    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 333) {
-//            File tempPicFile = new File(picPath);
-//            try {
-//                Intent v0 = new Intent("com.android.camera.action.CROP");
-//                v0.setDataAndType(Uri.fromFile(tempPicFile), "image/*");
-//                v0.putExtra("crop", "true");
-//                v0.putExtra("aspectX", 1);
-//                v0.putExtra("aspectY", 1);
-//                v0.putExtra("outputX", 200);
-//                v0.putExtra("outputY", 200);
-//                v0.putExtra("scale", true);
-//                v0.putExtra("output", Uri.fromFile(tempPicFile));
-//                v0.putExtra("return-data", false);
-//                v0.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-//                v0.putExtra("noFaceDetection", true);
-//                startActivityForResult(v0, 444);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        } else if (requestCode == 444) {
-//            if (resultCode == RESULT_OK) {
-//                updateAvatar();
-//            }
-//        } else if (requestCode == 777) {
-//            Uri uri = null;
-//            if (data == null) {
-//                return;
-//            }
-//            if (data.getData() != null) {
-//                uri = data.getData();
-//            }
-//            if (uri == null) {
-//                return;
-//            }
-//            File tempPicFile = new File(picPath);
-//            Intent intent = new Intent("com.android.camera.action.CROP");
-//            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-//                String url = FileUtil.getPath(this, uri);
-//                intent.setDataAndType(Uri.fromFile(new File(url)), "image/*");
-//            } else {
-//                intent.setDataAndType(uri, "image/*");
-//            }
-//            intent.putExtra("crop", "true");
-//            intent.putExtra("aspectX", 1);
-//            intent.putExtra("aspectY", 1);
-//            intent.putExtra("outputX", 200);
-//            intent.putExtra("outputY", 200);
-//            intent.putExtra("scale", true);
-//            intent.putExtra("output", Uri.fromFile(tempPicFile));
-//            intent.putExtra("return-data", false);
-//            intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-//            intent.putExtra("noFaceDetection", true);
-//            startActivityForResult(intent, 444);
-//        }
-//    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.linearAvatar:
-
                 IPicker.setLimit(1);
-                // TODO 头像大小200x200
-//                IPicker.setCropEnable(true);
+                IPicker.setCropEnable(true);
                 IPicker.open(this);
                 IPicker.setOnSelectedListener(this);
                 break;
@@ -242,7 +180,7 @@ public class UserInfoActivity extends MainActivity implements IUserView, IPicker
 
     @Override
     public void updateGenderSuccess(String gender) {
-        gendarTv.setText(gender);
+        genderTv.setText(gender);
     }
 
 
