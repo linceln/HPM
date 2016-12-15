@@ -153,7 +153,7 @@ public class BitmapUtil {
         if (bitmap == null) {
             return null;
         } else {
-            return compressQuality(bitmap, FileUtil.cacheFile(context));
+            return compressQuality(bitmap, FileUtil.cacheImageFile(context));
         }
     }
 

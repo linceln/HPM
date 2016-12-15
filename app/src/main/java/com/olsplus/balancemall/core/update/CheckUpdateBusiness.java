@@ -4,8 +4,10 @@ package com.olsplus.balancemall.core.update;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Toast;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.component.dialog.DownloadDialog;
 import com.olsplus.balancemall.core.http.HttpManager;
 import com.olsplus.balancemall.core.http.HttpResultObserver;
@@ -13,9 +15,8 @@ import com.olsplus.balancemall.core.http.HttpUtil;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.AppUtil;
 import com.olsplus.balancemall.core.util.DateUtil;
+import com.olsplus.balancemall.core.util.FileUtil;
 import com.olsplus.balancemall.core.util.LogUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,7 +29,7 @@ import java.util.Map;
 import okhttp3.ResponseBody;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 public class CheckUpdateBusiness {
@@ -87,16 +88,15 @@ public class CheckUpdateBusiness {
                 .create(CheckUpgradeService.class)
                 .downloadApk(url)
                 .subscribeOn(Schedulers.io())
-                .doOnNext(new Action1<ResponseBody>() {
+                .map(new Func1<ResponseBody, Boolean>() {
                     @Override
-                    public void call(ResponseBody responseBody) {
+                    public Boolean call(ResponseBody responseBody) {
                         // IO线程写入文件
-                        boolean b = writeResponseBodyToDisk(context, responseBody);
-                        EventBus.getDefault().post(b);
+                        return writeResponseBodyToDisk(context, responseBody);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ResponseBody>() {
+                .subscribe(new Subscriber<Boolean>() {
                     @Override
                     public void onCompleted() {
                         if (!AppUtil.isBackground(context)) {
@@ -104,7 +104,6 @@ public class CheckUpdateBusiness {
                                 downloadDialog.dismiss();
                             }
                         }
-//                        LogUtil.e("onCompleted", "onCompleted");
                     }
 
                     @Override
@@ -114,14 +113,11 @@ public class CheckUpdateBusiness {
                                 downloadDialog.dismiss();
                             }
                         }
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                        LogUtil.e("onError", "onError" + e.getMessage());
-
+                        LogUtil.e("DownloadAPK", e.getMessage());
                     }
 
                     @Override
-                    public void onNext(ResponseBody responseBody) {
-//                        LogUtil.e("onNext", "onNext" + responseBody.contentLength());
+                    public void onNext(Boolean downloadCompleted) {
                     }
                 });
     }
@@ -129,7 +125,7 @@ public class CheckUpdateBusiness {
     private static boolean writeResponseBodyToDisk(Context context, ResponseBody body) {
 
         // APK文件缓存路径
-        File futureStudioIconFile = new File(context.getExternalCacheDir(), "upgrade.apk");
+        File apkFile = FileUtil.cacheApkFile(context);
         InputStream inputStream = null;
         OutputStream outputStream = null;
         try {
@@ -139,7 +135,7 @@ public class CheckUpdateBusiness {
             long fileSizeDownloaded = 0;
 
             inputStream = body.byteStream();
-            outputStream = new FileOutputStream(futureStudioIconFile);
+            outputStream = new FileOutputStream(apkFile);
 
             while (true) {
                 int read = inputStream.read(fileReader);
@@ -151,10 +147,34 @@ public class CheckUpdateBusiness {
                 fileSizeDownloaded += read;
             }
             outputStream.flush();
-            Intent install = new Intent(Intent.ACTION_VIEW);
-            install.setDataAndType(Uri.fromFile(futureStudioIconFile), "application/vnd.android.package-archive");
-            install.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(install);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                // SDK24以上
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri contentUri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".fileprovider", apkFile);
+                intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            } else {
+                // SDK24以下
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+            // TODO 安装完成删除安装包，需要在Activity中回调
+//            if (requestCode == REQUEST_INSTALL) {
+//                if (resultCode == Activity.RESULT_OK) {
+//                    if (apkFile.exists()) {
+//                        apkFile.delete();
+//                    }
+//                }
+//            } else if (resultCode == Activity.RESULT_CANCELED) {
+//            } else {
+//            }
+
+
             return true;
         } catch (IOException e) {
             return false;
@@ -227,4 +247,5 @@ public class CheckUpdateBusiness {
 //    private static boolean isDownloadManagerAvailable() {
 //        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD;
 //    }
+
 }

@@ -2,7 +2,6 @@ package com.olsplus.balancemall.app.mystore;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -82,7 +81,7 @@ public class UserInfoActivity extends MainActivity implements IUserView, IPicker
     private void initData() {
         userImpl = new UserImpl(this);
         userImpl.setUserView(this);
-        picPath = Environment.getExternalStorageDirectory() + "/xiaobai/temp.jpg";
+//        picPath = Environment.getExternalStorageDirectory() + "/xiaobai/temp.jpg";
         String avatar = (String) SPUtil.get(this, SPUtil.AVATAR, "");
         String imageUrl = ApiConst.BASE_IMAGE_URL + avatar;
         Glide.with(this)

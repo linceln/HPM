@@ -1,6 +1,5 @@
 package com.olsplus.balancemall.app.login;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.liuguangqiang.permissionhelper.PermissionHelper;
 import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.home.HomeActivity;
@@ -26,8 +24,8 @@ import com.olsplus.balancemall.core.util.ToastUtil;
 import com.olsplus.balancemall.core.util.UIUtil;
 import com.umeng.analytics.MobclickAgent;
 
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
 import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
 
 
 public class LoginActivity extends MainActivity implements ILoginView, TextWatcher {
@@ -67,8 +65,6 @@ public class LoginActivity extends MainActivity implements ILoginView, TextWatch
         initView();
         loginRequest = new LoginRequestImpl(this);
         loginRequest.setLoginView(this);
-        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_PHONE_STATE);
     }
 
     private void initView() {

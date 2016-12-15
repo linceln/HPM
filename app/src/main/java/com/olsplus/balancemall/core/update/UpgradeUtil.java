@@ -4,7 +4,6 @@ package com.olsplus.balancemall.core.update;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.component.dialog.DownloadDialog;
@@ -72,7 +71,7 @@ public class UpgradeUtil {
 
             @Override
             public void onError(String msg) {
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
             }
         });
     }

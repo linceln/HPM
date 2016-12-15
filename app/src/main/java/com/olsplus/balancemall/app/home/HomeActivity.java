@@ -61,14 +61,8 @@ public class HomeActivity extends MainActivity {
         String buildingName = (String) SPUtil.get(this, SPUtil.BUILDING_NAME, "");
         titleTv.setText(buildingName);
         titleTv.setOnClickListener(this);
-        // 友盟统计需要的权限
-        requestPhoneState();
         // 检查更新
         checkUpgrade();
-    }
-
-    private void requestPhoneState() {
-//        PermissionHelper.getInstance().requestPermission(this, Manifest.permission.READ_PHONE_STATE);
     }
 
     /**

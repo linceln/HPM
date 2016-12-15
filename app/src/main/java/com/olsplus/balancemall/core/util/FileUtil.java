@@ -51,16 +51,53 @@ public class FileUtil {
      * @param context
      * @return
      */
-    public static File cacheFile(Context context) {
-        File imgFile;
+    public static File cacheImageFile(Context context) {
+
+        File file;
         if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
-            imgFile = new File(context.getExternalCacheDir(), String.valueOf(System.currentTimeMillis()) + ".jpg");
+            // sdcard
+            file = new File(context.getExternalCacheDir(), "compress");
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            file = new File(file, String.valueOf(System.currentTimeMillis()) + ".jpg");
         } else {
-            imgFile = new File(context.getCacheDir(), String.valueOf(System.currentTimeMillis()) + ".jpg");
+            // 内存
+            file = new File(context.getCacheDir(), "compress");
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            file = new File(file, String.valueOf(System.currentTimeMillis()) + ".jpg");
         }
-        return imgFile;
+        return file;
     }
 
+    /**
+     * 缓存下载的更新包
+     *
+     * @param context
+     * @return
+     */
+    public static File cacheApkFile(Context context) {
+
+        File file;
+        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED)) {
+            // sdcard
+            file = new File(context.getExternalCacheDir(), "upgrade");
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            file = new File(file, "HePingMao.apk");
+        } else {
+            // 内存
+            file = new File(context.getCacheDir(), "upgrade");
+            if (!file.exists()) {
+                file.mkdir();
+            }
+            file = new File(file, "HePingMao.apk");
+        }
+        return file;
+    }
 
     /**
      * 在指定的位置创建指定的文件

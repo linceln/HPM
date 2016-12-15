@@ -3,8 +3,6 @@ package com.olsplus.balancemall.core.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 
 import java.util.List;
 
@@ -84,10 +82,10 @@ public class AppUtil {
         for (android.app.ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(context.getPackageName())) {
                 if (appProcess.importance == android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-                    LogUtil.e(String.format("Background App:", appProcess.processName));
+//                    LogUtil.e(String.format("Background App:", appProcess.processName));
                     return true;
                 } else {
-                    LogUtil.e(String.format("Foreground App:", appProcess.processName));
+//                    LogUtil.e(String.format("Foreground App:", appProcess.processName));
                     return false;
                 }
             }

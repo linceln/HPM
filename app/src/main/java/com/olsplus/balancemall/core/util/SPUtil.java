@@ -14,7 +14,7 @@ public class SPUtil {
     /**
      * 保存在手机里面的文件名
      */
-    public static final String FILE_NAME = "xiaobai_share_data";
+    public static final String FILE_NAME = "hepingmao";
 
     public static final String IS_FRIST = "is_frist";
 
