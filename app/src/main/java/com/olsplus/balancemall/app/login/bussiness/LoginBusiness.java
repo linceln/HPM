@@ -53,17 +53,17 @@ public class LoginBusiness {
         HttpResultObserver respObserver = new HttpResultObserver<LoginResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 login(phone, pwd, callback);
             }
 
             @Override
-            public void handleSuccessResp(LoginResultEntity data) {
+            public void onSuccess(LoginResultEntity data) {
                 String uid = data.getUid();
                 String token = data.getToken();
                 String avatar = data.getAvatar();
@@ -84,7 +84,7 @@ public class LoginBusiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("login", "onLoginFailed");
                 callback.onLoginFailed(msg);
             }
@@ -106,17 +106,17 @@ public class LoginBusiness {
         HttpResultObserver respObserver = new HttpResultObserver<RegisterResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 register(phone, name, pwd, callback);
             }
 
             @Override
-            public void handleSuccessResp(RegisterResultEntity data) {
+            public void onSuccess(RegisterResultEntity data) {
                 String uid = data.getUid();
                 String token = data.getToken();
                 int points = data.getPoints();
@@ -127,7 +127,7 @@ public class LoginBusiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("login", "onLoginFailed");
                 callback.onRegisterFailed(msg);
             }
@@ -153,22 +153,22 @@ public class LoginBusiness {
         HttpResultObserver respObserver = new HttpResultObserver<BaseResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 sendSms(phone, callback);
             }
 
             @Override
-            public void handleSuccessResp(BaseResultEntity data) {
+            public void onSuccess(BaseResultEntity data) {
                 callback.onSendSuccess();
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan.w", "sendSms");
                 callback.onSendFailed(msg);
             }
@@ -195,22 +195,22 @@ public class LoginBusiness {
         HttpResultObserver respObserver = new HttpResultObserver<BaseResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 sendForgetPwdSms(phone, callback);
             }
 
             @Override
-            public void handleSuccessResp(BaseResultEntity data) {
+            public void onSuccess(BaseResultEntity data) {
                 callback.onSendSuccess();
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan.w", "sendPwdSms");
                 callback.onSendFailed(msg);
             }
@@ -238,22 +238,22 @@ public class LoginBusiness {
         HttpResultObserver respObserver = new HttpResultObserver<BaseResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 forgetPwd(phone, pwd, callback);
             }
 
             @Override
-            public void handleSuccessResp(BaseResultEntity data) {
+            public void onSuccess(BaseResultEntity data) {
                 callback.onShowForgetPwdSuccess();
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan.w", "forgetPwd");
                 callback.onShowForgetPwdFailed(msg);
             }
@@ -277,22 +277,22 @@ public class LoginBusiness {
         HttpResultObserver respObserver = new HttpResultObserver<BaseResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 loginOut(callback);
             }
 
             @Override
-            public void handleSuccessResp(BaseResultEntity data) {
+            public void onSuccess(BaseResultEntity data) {
                 callback.onLoginOutSuccess();
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("login", "loginOut");
                 callback.onLoginOutFailed(msg);
             }

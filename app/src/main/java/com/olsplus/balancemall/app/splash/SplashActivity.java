@@ -30,7 +30,7 @@ public class SplashActivity extends BaseCompatActivity {
                 .requestEach(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
                 .flatMap(new Func1<Permission, Observable<Long>>() {
                     @Override
-                    public Observable<Long> call(Permission granted) {
+                    public Observable<Long> call(Permission permission) {
                         // 延时启动
                         return Observable.timer(1, TimeUnit.SECONDS);
                     }
@@ -38,6 +38,7 @@ public class SplashActivity extends BaseCompatActivity {
                 .subscribe(new Subscriber<Long>() {
                     @Override
                     public void onCompleted() {
+                        // 跳转
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                         finish();
                     }

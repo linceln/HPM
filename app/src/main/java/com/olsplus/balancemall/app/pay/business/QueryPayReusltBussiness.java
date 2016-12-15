@@ -45,17 +45,17 @@ public class QueryPayReusltBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<ShoppingSuccessResult>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 queryPayment(json, callback);
             }
 
             @Override
-            public void handleSuccessResp(ShoppingSuccessResult data) {
+            public void onSuccess(ShoppingSuccessResult data) {
                 if (data == null) {
                     callback.onQueryPayReusltFailed("数据出错了");
                     return;
@@ -64,7 +64,7 @@ public class QueryPayReusltBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan.w", "payResultQuery cart failed");
                 callback.onQueryPayReusltFailed(msg);
             }

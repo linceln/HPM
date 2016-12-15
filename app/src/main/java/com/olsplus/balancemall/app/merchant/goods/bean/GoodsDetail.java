@@ -4,7 +4,7 @@ package com.olsplus.balancemall.app.merchant.goods.bean;
 import java.io.Serializable;
 import java.util.List;
 
-public class GoodsDetail {
+public class GoodsDetail implements Serializable{
 
     private String local_service_id;
     private long product_id;

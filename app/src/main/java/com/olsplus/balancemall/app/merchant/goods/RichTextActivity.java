@@ -34,8 +34,8 @@ import java.util.List;
 
 import rx.Subscriber;
 
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
 import static com.olsplus.balancemall.core.util.UploadManager.uploadGoodsImage;
 
 public class RichTextActivity extends BaseCompatActivity implements IPicker.OnSelectedListener {

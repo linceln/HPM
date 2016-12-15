@@ -3,43 +3,33 @@ package com.olsplus.balancemall.core.http;
 
 import android.text.TextUtils;
 
-import com.olsplus.balancemall.core.app.MyApplication;
+import com.olsplus.balancemall.app.token.TokenManager;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.bean.TokenResult;
-import com.olsplus.balancemall.core.event.TokenEvent;
-import com.olsplus.balancemall.core.util.ApiConst;
-import com.olsplus.balancemall.core.util.DateUtil;
-import com.olsplus.balancemall.core.util.LogUtil;
-import com.olsplus.balancemall.core.util.SPUtil;
-import com.olsplus.balancemall.core.util.ToastUtil;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
-import java.util.HashMap;
-import java.util.Map;
 
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public abstract class HttpResultObserver<T extends BaseResultEntity> extends Subscriber<T> {
 
 
-    public abstract void handleSuccessResp(T data);
+    public abstract void onSuccess(T data);
 
-    public abstract void handleFailedResp(String msg);
+    public abstract void onFail(String msg);
 
-    public abstract void prepare();
+    public void onPrepare() {
+    }
 
-    public abstract void reConnect();
+
+    public void onReconnect() {
+    }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        prepare();
+        onPrepare();
     }
 
     @Override
@@ -50,12 +40,12 @@ public abstract class HttpResultObserver<T extends BaseResultEntity> extends Sub
     @Override
     public void onError(Throwable e) {
         if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
-            handleFailedResp("网络中断，请检查您的网络状态");
+            onFail("网络中断，请检查您的网络状态");
         } else {
             if (e.getCause() != null) {
-                handleFailedResp(e.getCause().getMessage());
-            }else{
-                handleFailedResp(e.getMessage());
+                onFail(e.getCause().getMessage());
+            } else {
+                onFail(e.getMessage());
             }
         }
     }
@@ -64,17 +54,17 @@ public abstract class HttpResultObserver<T extends BaseResultEntity> extends Sub
     @Override
     public void onNext(T t) {
         if (t.getRet() == 0) {
-            handleSuccessResp(t);
+            onSuccess(t);
         } else {
             if (t.getRet() == 3101 || t.getRet() == 3100) {
-//                updateToken();
-                requestUpdateToken();
+                // token过期，刷新token
+                TokenManager.requestUpdateToken(this);
             } else {
                 String msg = getErrorMsg(t.getRet());
                 if (TextUtils.isEmpty(msg)) {
                     msg = t.getMsg();
                 }
-                handleFailedResp(msg);
+                onFail(msg);
             }
         }
     }
@@ -147,80 +137,5 @@ public abstract class HttpResultObserver<T extends BaseResultEntity> extends Sub
                 break;
         }
         return msg;
-    }
-
-    private void requestUpdateToken() {
-        final UpdateTokenManager updateTokenManager = UpdateTokenManager.getInstance();
-        if (updateTokenManager != null) {
-            if (updateTokenManager.isHasTask()) {
-                UpdateTokenTask updateTokenTask = new UpdateTokenTask();
-                updateTokenManager.addTask(updateTokenTask);
-                updateTokenTask.updateToken(new UpdateCallBack() {
-                    @Override
-                    public void updateSuccess() {
-                        updateTokenManager.removeTask();
-                        reConnect();
-                    }
-
-                    @Override
-                    public void updateFailed() {
-                        updateTokenManager.removeTask();
-                        ToastUtil.showShort(MyApplication.getApp(), "刷新token失败");
-                        EventBus.getDefault().post(new TokenEvent());
-                    }
-                });
-            }
-        }
-    }
-
-
-    public void updateToken() {
-        String url = ApiConst.BASE_URL + "v1/token";
-        String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
-        String uid = (String) SPUtil.get(MyApplication.getApp(), SPUtil.UID, "");
-        String token = (String) SPUtil.get(MyApplication.getApp(), SPUtil.TOKEN, "");
-        LogUtil.d("yongyuan.w", "token2=" + token);
-        String sign = parseUpdateTokenSign(url, uid, token, timestamp);
-        HttpManager.getRetrofit()
-                .create(TokenService.class)
-                .getToken(uid, token, timestamp, sign)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<TokenResult>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(TokenResult tokenResult) {
-                        if (tokenResult == null) {
-                            return;
-                        }
-                        if (tokenResult.getRet() == 0) {
-                            String token = tokenResult.getToken();
-                            SPUtil.put(MyApplication.getApp(), SPUtil.TOKEN, token);
-                            reConnect();
-                        } else {
-                            ToastUtil.showShort(MyApplication.getApp(), "刷新token失败");
-                            EventBus.getDefault().post(new TokenEvent());
-                        }
-
-                    }
-                });
-    }
-
-    private String parseUpdateTokenSign(String url, String uid, String token, String timestamp) {
-        Map<String, String> paramMap = new HashMap<String, String>();
-        paramMap.put("uid", uid);
-        paramMap.put("token", token);
-        paramMap.put("timestamp", timestamp);
-        String sign = HttpUtil.sign(HttpUtil.POST, url, paramMap);
-        return sign;
     }
 }

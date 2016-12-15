@@ -7,16 +7,14 @@ import com.olsplus.balancemall.BuildConfig;
 /**
  * Log统一管理类
  */
-public class LogUtil {
+public final class LogUtil {
 
-    private LogUtil() { 
-        /* cannot be instantiated */
+    private LogUtil() {
         throw new UnsupportedOperationException("cannot be instantiated");
     }
 
-    // 是否需要打印log，可以在application的onCreate函数里面初始化
     public static boolean isDebug = BuildConfig.DEBUG;
-    private static final String TAG = "LogUtil";
+    private static final String TAG = "Log";
 
     // 下面四个是默认tag的函数 
     public static void i(String msg) {

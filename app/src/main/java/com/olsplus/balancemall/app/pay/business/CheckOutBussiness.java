@@ -51,17 +51,17 @@ public class CheckOutBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<ShopingOrderSubmitResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 sumitOrder(order, callback);
             }
 
             @Override
-            public void handleSuccessResp(ShopingOrderSubmitResultEntity data) {
+            public void onSuccess(ShopingOrderSubmitResultEntity data) {
                 if (data == null) {
                     callback.onSumitOrderFailed("数据出错了");
                     return;
@@ -73,7 +73,7 @@ public class CheckOutBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "sumitOrder failed");
                 callback.onSumitOrderFailed(msg);
             }
@@ -92,27 +92,27 @@ public class CheckOutBussiness {
      * @param callback
      */
     public void startAliBuyStep(final String payRequest,final ICheckOutRequest.PayCallback callback){
-        String url = ApiConst.BASE_URL + "v1/payment/prepare";
+        String url = ApiConst.BASE_URL + "v1/payment/onPrepare";
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
         String uid = (String) SPUtil.get(context, SPUtil.UID, "");
         String token = (String) SPUtil.get(context, SPUtil.TOKEN, "");
         String sign = parseSumitOrderSign(url, uid, token,payRequest,timestamp);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),payRequest);
-        String requestUrl = "v1/payment/prepare?uid="+uid+"&token="+token+"&timestamp="+timestamp+"&sign="+sign;
+        String requestUrl = "v1/payment/onPrepare?uid="+uid+"&token="+token+"&timestamp="+timestamp+"&sign="+sign;
         HttpResultObserver respObserver = new HttpResultObserver<ShoppingPayResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 startAliBuyStep(payRequest, callback);
             }
 
             @Override
-            public void handleSuccessResp(ShoppingPayResultEntity data) {
+            public void onSuccess(ShoppingPayResultEntity data) {
                 if (data == null) {
                     callback.onPayFailed("数据出错了");
                     return;
@@ -121,7 +121,7 @@ public class CheckOutBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "startBuyStep failed");
                 callback.onPayFailed(msg);
             }
@@ -140,27 +140,27 @@ public class CheckOutBussiness {
      * @param callback
      */
     public void startWxBuyStep(final String payRequest,final ICheckOutRequest.WxPayCallback callback){
-        String url = ApiConst.BASE_URL + "v1/payment/prepare";
+        String url = ApiConst.BASE_URL + "v1/payment/onPrepare";
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
         String uid = (String) SPUtil.get(context, SPUtil.UID, "");
         String token = (String) SPUtil.get(context, SPUtil.TOKEN, "");
         String sign = parseSumitOrderSign(url, uid, token,payRequest,timestamp);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),payRequest);
-        String requestUrl = "v1/payment/prepare?uid="+uid+"&token="+token+"&timestamp="+timestamp+"&sign="+sign;
+        String requestUrl = "v1/payment/onPrepare?uid="+uid+"&token="+token+"&timestamp="+timestamp+"&sign="+sign;
         HttpResultObserver respObserver = new HttpResultObserver<ShoppingWxPayResult>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 startWxBuyStep(payRequest, callback);
             }
 
             @Override
-            public void handleSuccessResp(ShoppingWxPayResult data) {
+            public void onSuccess(ShoppingWxPayResult data) {
                 if (data == null) {
                     callback.onPayFailed("数据出错了");
                     return;
@@ -169,7 +169,7 @@ public class CheckOutBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "startBuyStep failed");
                 callback.onPayFailed(msg);
             }
@@ -183,27 +183,27 @@ public class CheckOutBussiness {
     }
 
     public void startBuyStep(final String payRequest,final ICheckOutRequest.SpecialPayCallback callback){
-        String url = ApiConst.BASE_URL + "v1/payment/prepare";
+        String url = ApiConst.BASE_URL + "v1/payment/onPrepare";
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
         String uid = (String) SPUtil.get(context, SPUtil.UID, "");
         String token = (String) SPUtil.get(context, SPUtil.TOKEN, "");
         String sign = parseSumitOrderSign(url, uid, token,payRequest,timestamp);
         RequestBody body=RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),payRequest);
-        String requestUrl = "v1/payment/prepare?uid="+uid+"&token="+token+"&timestamp="+timestamp+"&sign="+sign;
+        String requestUrl = "v1/payment/onPrepare?uid="+uid+"&token="+token+"&timestamp="+timestamp+"&sign="+sign;
         HttpResultObserver respObserver = new HttpResultObserver<ShoppingResultByZero>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 startBuyStep(payRequest, callback);
             }
 
             @Override
-            public void handleSuccessResp(ShoppingResultByZero data) {
+            public void onSuccess(ShoppingResultByZero data) {
                 if (data == null) {
                     callback.onPayFailed("数据出错了");
                     return;
@@ -212,7 +212,7 @@ public class CheckOutBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "preparePay failed");
                 callback.onPayFailed(msg);
             }
@@ -238,17 +238,17 @@ public class CheckOutBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<ShoppingVoucherResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 getVouchers(callback);
             }
 
             @Override
-            public void handleSuccessResp(ShoppingVoucherResultEntity data) {
+            public void onSuccess(ShoppingVoucherResultEntity data) {
                 if (data == null ) {
                     callback.onVoucherFailed("数据出错了");
                     return;
@@ -262,7 +262,7 @@ public class CheckOutBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan.w", "getVouchers failed");
                 callback.onVoucherFailed(msg);
             }

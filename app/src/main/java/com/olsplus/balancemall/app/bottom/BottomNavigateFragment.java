@@ -16,7 +16,7 @@ import com.olsplus.balancemall.app.bottom.request.BottomImpl;
 import com.olsplus.balancemall.app.bottom.view.IBottomView;
 import com.olsplus.balancemall.app.cart.CartActivity;
 import com.olsplus.balancemall.app.home.HomeActivity;
-import com.olsplus.balancemall.app.mystore.MyStoreActivity;
+import com.olsplus.balancemall.app.mine.MyStoreActivity;
 import com.olsplus.balancemall.core.app.BaseFragment;
 
 public class BottomNavigateFragment extends BaseFragment implements IBottomView, View.OnClickListener{

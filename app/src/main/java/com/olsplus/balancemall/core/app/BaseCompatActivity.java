@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.home.HomeActivity;
+import com.olsplus.balancemall.core.util.ActivityManager;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
@@ -39,14 +40,25 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     protected final void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        ActivityManager.getInstance().addActivity(this);
         setContentView(getLayoutResId());
+        onCreate();
+        getExtras();
+        initUI();
+        initData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityManager.getInstance().finishActivity(this);
+    }
+
+    protected void onCreate() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setupWindowAnimations();
         }
         initToolbar();
-        getExtras();
-        initUI();
-        initData();
     }
 
     protected void getExtras() {

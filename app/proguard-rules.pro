@@ -23,6 +23,10 @@
   **[] $VALUES;
   public *;
 }
+#七牛
+-keep class com.qiniu.**{*;}
+-keep class com.qiniu.**{public <init>();}
+-ignorewarnings
 #友盟统计
 -keepclassmembers class * {
    public <init> (org.json.JSONObject);

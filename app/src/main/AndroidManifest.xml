@@ -59,41 +59,41 @@
             android:name=".app.login.ForgetPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.MyStoreActivity"
+            android:name=".app.mine.MyStoreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeDarkStatusBar" />
         <activity
-            android:name=".app.mystore.UserInfoActivity"
+            android:name=".app.mine.UserInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.MyOrderListActivity"
+            android:name=".app.mine.MyOrderListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.OrderDetailActivity"
+            android:name=".app.mine.OrderDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.CommentUploadActivity"
+            android:name=".app.mine.CommentUploadActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.ReturnOrderActivity"
+            android:name=".app.mine.ReturnOrderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.message.MyMessageActivity"
+            android:name=".app.mine.message.MyMessageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.config.AboutNewActivity"
+            android:name=".app.mine.config.AboutNewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.config.PasswordActivity"
+            android:name=".app.mine.config.PasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.config.FeedBackActivity"
+            android:name=".app.mine.config.FeedBackActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.config.SettingActivity"
+            android:name=".app.mine.config.SettingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".app.mystore.config.BindPhoneActivity"
+            android:name=".app.mine.config.BindPhoneActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".app.home.HomeActivity"
@@ -147,13 +147,6 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/AppThemeDarkStatusBar" />
-
-        <!--<receiver android:name=".core.update.receiver.InstallReceiver">-->
-        <!--<intent-filter>-->
-        <!--<action android:name="android.intent.action.DOWNLOAD_COMPLETE" />-->
-        <!--</intent-filter>-->
-        <!--</receiver>-->
-
         <activity
             android:name="com.olsplus.balancemall.component.imagepicker.IPickerActivity"
             android:screenOrientation="portrait" />

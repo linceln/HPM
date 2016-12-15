@@ -24,8 +24,8 @@ import com.olsplus.balancemall.core.util.StrConst;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.dismissLoading;
 
 
 import static com.olsplus.balancemall.core.util.StrConst.checkSms.REGISTER;

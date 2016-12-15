@@ -24,8 +24,8 @@ import com.olsplus.balancemall.core.util.ToastUtil;
 import com.olsplus.balancemall.core.util.UIUtil;
 import com.umeng.analytics.MobclickAgent;
 
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
 
 
 public class LoginActivity extends MainActivity implements ILoginView, TextWatcher {

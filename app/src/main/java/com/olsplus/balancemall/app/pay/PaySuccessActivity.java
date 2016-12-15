@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.olsplus.balancemall.R;
-import com.olsplus.balancemall.app.mystore.OrderDetailActivity;
+import com.olsplus.balancemall.app.mine.OrderDetailActivity;
 import com.olsplus.balancemall.app.pay.bean.ShopingOrderChildItem;
 import com.olsplus.balancemall.app.pay.bean.ShopingPayQueryEntity;
 import com.olsplus.balancemall.app.pay.bean.ShoppingOrderItem;

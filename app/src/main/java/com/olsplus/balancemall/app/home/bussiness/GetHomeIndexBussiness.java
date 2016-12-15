@@ -43,17 +43,17 @@ public class GetHomeIndexBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<Container>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 getHomeIndex(callback);
             }
 
             @Override
-            public void handleSuccessResp(Container data) {
+            public void onSuccess(Container data) {
                 if (data == null) {
                     callback.onGetHomeFailed("数据出错了");
                     return;
@@ -62,7 +62,7 @@ public class GetHomeIndexBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "getHomeIndex failed");
                 callback.onGetHomeFailed(msg);
             }

@@ -5,8 +5,8 @@ import android.content.Context;
 
 import com.olsplus.balancemall.app.merchant.goods.bean.ImageUploadEntity;
 import com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness;
-import com.olsplus.balancemall.app.mystore.bussiness.MyOrderBussiness;
-import com.olsplus.balancemall.app.mystore.bussiness.UserBusiness;
+import com.olsplus.balancemall.app.mine.bussiness.MyOrderBussiness;
+import com.olsplus.balancemall.app.mine.bussiness.UserBusiness;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 

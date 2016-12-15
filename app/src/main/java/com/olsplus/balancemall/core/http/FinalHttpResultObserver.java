@@ -12,26 +12,26 @@ public class FinalHttpResultObserver<T extends BaseResultEntity> extends HttpRes
     }
 
     @Override
-    public void handleSuccessResp(T data) {
+    public void onSuccess(T data) {
         if(callback != null){
             callback.onSuccess(data);
         }
     }
 
     @Override
-    public void handleFailedResp(String msg) {
+    public void onFail(String msg) {
         if(callback != null){
             callback.onError(msg);
         }
     }
 
     @Override
-    public void prepare() {
+    public void onPrepare() {
 
     }
 
     @Override
-    public void reConnect() {
+    public void onReconnect() {
 
     }
 }

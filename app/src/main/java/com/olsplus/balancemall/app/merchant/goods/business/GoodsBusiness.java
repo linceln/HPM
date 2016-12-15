@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.olsplus.balancemall.R;
+import com.olsplus.balancemall.app.merchant.goods.bean.AddResultEntity;
 import com.olsplus.balancemall.app.merchant.goods.bean.GoodsDetail;
 import com.olsplus.balancemall.app.merchant.goods.bean.ImageUploadEntity;
 import com.olsplus.balancemall.app.merchant.goods.request.GoodsService;
@@ -235,7 +236,7 @@ public class GoodsBusiness {
      * @param goodsDetail
      * @param callback
      */
-    public static void updateGoods(Context context, GoodsDetail goodsDetail, final RequestCallback<BaseResultEntity> callback) {
+    public static void updateGoods(Context context, GoodsDetail goodsDetail, final RequestCallback<AddResultEntity> callback) {
         String uid = (String) SPUtil.get(context, SPUtil.UID, "");
         String token = (String) SPUtil.get(context, SPUtil.TOKEN, "");
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());

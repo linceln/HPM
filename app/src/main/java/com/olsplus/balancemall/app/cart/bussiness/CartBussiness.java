@@ -40,17 +40,17 @@ public class CartBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<CartResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 addCart(local_service_id, product_id, count, price, sku_id, sku_value, schedule_time, callback);
             }
 
             @Override
-            public void handleSuccessResp(CartResultEntity data) {
+            public void onSuccess(CartResultEntity data) {
                 if (data == null) {
                     callback.addCartFailed("数据出错了");
                     return;
@@ -59,7 +59,7 @@ public class CartBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan.w", "addcart failed");
                 callback.addCartFailed(msg);
             }
@@ -83,17 +83,17 @@ public class CartBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<DeleteCartReusltEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 deleteCart(json, callback);
             }
 
             @Override
-            public void handleSuccessResp(DeleteCartReusltEntity data) {
+            public void onSuccess(DeleteCartReusltEntity data) {
                 if (data == null) {
                     callback.deleteCartFailed("数据出错了");
                     return;
@@ -102,7 +102,7 @@ public class CartBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan.w", "delete cart failed");
                 callback.deleteCartFailed(msg);
             }
@@ -130,17 +130,17 @@ public class CartBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<ShoppingBag>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 getCartListData(page, count, callback);
             }
 
             @Override
-            public void handleSuccessResp(ShoppingBag data) {
+            public void onSuccess(ShoppingBag data) {
                 if (data == null) {
                     callback.getCartFailed("数据出错了");
                     return;
@@ -153,7 +153,7 @@ public class CartBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "getCartListData failed");
                 callback.getCartFailed(msg);
             }

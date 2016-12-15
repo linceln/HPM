@@ -16,6 +16,7 @@ import com.jakewharton.rxbinding.view.RxView;
 import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.goods.adapter.AddGoodsAdapter;
+import com.olsplus.balancemall.app.merchant.goods.bean.AddResultEntity;
 import com.olsplus.balancemall.app.merchant.goods.bean.EditGoodsEntity;
 import com.olsplus.balancemall.app.merchant.goods.bean.GoodsDetail;
 import com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness;
@@ -44,8 +45,8 @@ import java.util.concurrent.TimeUnit;
 import rx.Subscriber;
 import rx.functions.Action1;
 
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.dismissLoading;
-import static com.olsplus.balancemall.component.dialog.LoadingDialogManager.showLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
 import static com.olsplus.balancemall.core.util.StrConst.extra.goods_edit_type;
 import static com.olsplus.balancemall.core.util.StrConst.input.adding;
 import static com.olsplus.balancemall.core.util.StrConst.input.editing;
@@ -386,16 +387,17 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
             public void onError(String msg) {
                 dismissLoading();
                 Toast.makeText(AddGoodsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                LogUtil.e(msg);
             }
         });
     }
 
     private void updateGoods(String url) {
-        GoodsBusiness.updateGoods(this, generateGoodsDetail(url), new RequestCallback<BaseResultEntity>() {
+        GoodsBusiness.updateGoods(this, generateGoodsDetail(url), new RequestCallback<AddResultEntity>() {
             @Override
-            public void onSuccess(BaseResultEntity baseResultEntity) {
+            public void onSuccess(AddResultEntity addResultEntity) {
                 dismissLoading();
-                Toast.makeText(AddGoodsActivity.this, baseResultEntity.getMsg(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddGoodsActivity.this, addResultEntity.getMsg(), Toast.LENGTH_SHORT).show();
                 EventBus.getDefault().post("添加成功");
                 finish();
             }

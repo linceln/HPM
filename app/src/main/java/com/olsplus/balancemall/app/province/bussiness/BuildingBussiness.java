@@ -47,17 +47,17 @@ public class BuildingBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<CityResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 getCity(callback);
             }
 
             @Override
-            public void handleSuccessResp(CityResultEntity data) {
+            public void onSuccess(CityResultEntity data) {
                 if (data == null) {
                     callback.onGetCityFailed("数据出错了");
                     return;
@@ -69,7 +69,7 @@ public class BuildingBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("getcity", "getcity failed");
                 callback.onGetCityFailed(msg);
             }
@@ -97,17 +97,17 @@ public class BuildingBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<BuildingResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 buildingCity(city_id, callback);
             }
 
             @Override
-            public void handleSuccessResp(BuildingResultEntity data) {
+            public void onSuccess(BuildingResultEntity data) {
                 if (data == null) {
                     callback.onBuildCityFailed("数据出错了");
                     return;
@@ -119,7 +119,7 @@ public class BuildingBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "buildcity failed");
                 callback.onBuildCityFailed(msg);
             }
@@ -148,17 +148,17 @@ public class BuildingBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<UpdateBuildResultEntity>() {
 
             @Override
-            public void prepare() {
+            public void onPrepare() {
 
             }
 
             @Override
-            public void reConnect() {
+            public void onReconnect() {
                 updateBuilding(building_id, callback);
             }
 
             @Override
-            public void handleSuccessResp(UpdateBuildResultEntity data) {
+            public void onSuccess(UpdateBuildResultEntity data) {
                 if (data == null) {
                     callback.onUpdateBuildingFailed("数据出错了");
                     return;
@@ -169,7 +169,7 @@ public class BuildingBussiness {
             }
 
             @Override
-            public void handleFailedResp(String msg) {
+            public void onFail(String msg) {
                 LogUtil.d("yongyuan,w", "updateBuilding failed");
                 callback.onUpdateBuildingFailed(msg);
             }

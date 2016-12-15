@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderDetailEntity;
-import com.olsplus.balancemall.app.mystore.util.OrderHelper;
+import com.olsplus.balancemall.app.mine.util.OrderHelper;
 import com.olsplus.balancemall.component.recycler.BaseAdapter;
 import com.olsplus.balancemall.component.recycler.CustomViewHolder;
 

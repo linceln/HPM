@@ -11,11 +11,11 @@ import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.bottom.BottomNavigateFragment;
 import com.olsplus.balancemall.app.login.LoginActivity;
 import com.olsplus.balancemall.app.province.BuildCityActivity;
-import com.olsplus.balancemall.component.dialog.DownloadDialog;
+import com.olsplus.balancemall.app.upgrade.business.CheckUpgradeBusiness;
+import com.olsplus.balancemall.app.upgrade.dialog.DownloadDialog;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
 import com.olsplus.balancemall.core.event.TokenEvent;
-import com.olsplus.balancemall.core.update.UpgradeUtil;
 import com.olsplus.balancemall.core.util.ActivityManager;
 import com.olsplus.balancemall.core.util.SPUtil;
 
@@ -94,11 +94,12 @@ public class HomeActivity extends MainActivity {
         long currentTime = System.currentTimeMillis();
 
         if (BuildConfig.DEBUG) {
-            UpgradeUtil.checkUpdate(this, downloadDialog);
+            // 测试
+            CheckUpgradeBusiness.checkUpgrade(this, downloadDialog);
         } else {
-            // 一天检查更新一次
+            // 正式 一天检查更新一次
             if (currentTime - time >= 24 * 3600 * 1000) {
-                UpgradeUtil.checkUpdate(this, downloadDialog);
+                CheckUpgradeBusiness.checkUpgrade(this, downloadDialog);
             }
         }
     }
@@ -132,7 +133,7 @@ public class HomeActivity extends MainActivity {
     }
 
     @Subscribe
-    public void onWxPayEvent(TokenEvent tokenEvent) {
+    public void onUpdateTokenFailed(TokenEvent tokenEvent) {
         ActivityManager.getInstance().finishAllActivity();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
