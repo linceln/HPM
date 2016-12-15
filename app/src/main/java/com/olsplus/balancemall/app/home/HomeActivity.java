@@ -11,8 +11,8 @@ import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.bottom.BottomNavigateFragment;
 import com.olsplus.balancemall.app.login.LoginActivity;
 import com.olsplus.balancemall.app.province.BuildCityActivity;
-import com.olsplus.balancemall.app.upgrade.business.CheckUpgradeBusiness;
-import com.olsplus.balancemall.app.upgrade.dialog.DownloadDialog;
+import com.olsplus.balancemall.app.upgrade.business.UpgradeBusiness;
+import com.olsplus.balancemall.app.upgrade.dialog.UpgradeDownloadDialog;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
 import com.olsplus.balancemall.core.event.TokenEvent;
@@ -26,7 +26,7 @@ public class HomeActivity extends MainActivity {
 
     private TextView titleTv;
     private CmsHomeFragment cmsHomeFragment;
-    private DownloadDialog downloadDialog;
+    private UpgradeDownloadDialog upgradeDownloadDialog;
     private boolean isCompleted;
 
     @Override
@@ -71,35 +71,36 @@ public class HomeActivity extends MainActivity {
      * @param isCompleted
      */
     @Subscribe
-    public void isDownloadCompleted(Boolean isCompleted) {
+    public void onDownloadCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 
     @Override
     protected void onRestart() {
-        // 按Home键之后下载完成，返回界面Dialog消失
-        if (downloadDialog != null && isCompleted) {
-            downloadDialog.dismiss();
-            downloadDialog = null;
+        // 按Home键之后下载完成，返回界面让Dialog消失
+        if (upgradeDownloadDialog != null && isCompleted) {
+            upgradeDownloadDialog.dismiss();
+            upgradeDownloadDialog = null;
+            isCompleted = false;
         }
         super.onRestart();
     }
 
     private void checkUpgrade() {
 
-        downloadDialog = new DownloadDialog();
-        downloadDialog.setCancelable(false);
+        upgradeDownloadDialog = new UpgradeDownloadDialog();
+        upgradeDownloadDialog.setCancelable(false);
 
         long time = (long) SPUtil.get(this, SPUtil.UPDATE_TIME, 0L);
         long currentTime = System.currentTimeMillis();
 
         if (BuildConfig.DEBUG) {
             // 测试
-            CheckUpgradeBusiness.checkUpgrade(this, downloadDialog);
+            UpgradeBusiness.checkUpgrade(this, upgradeDownloadDialog);
         } else {
             // 正式 一天检查更新一次
             if (currentTime - time >= 24 * 3600 * 1000) {
-                CheckUpgradeBusiness.checkUpgrade(this, downloadDialog);
+                UpgradeBusiness.checkUpgrade(this, upgradeDownloadDialog);
             }
         }
     }

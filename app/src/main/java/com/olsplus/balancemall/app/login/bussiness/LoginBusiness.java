@@ -9,11 +9,9 @@ import com.olsplus.balancemall.app.login.bean.RegisterResultEntity;
 import com.olsplus.balancemall.app.login.request.ILoginRequest;
 import com.olsplus.balancemall.app.login.request.LoginService;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.http.FinalHttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpUtil;
 import com.olsplus.balancemall.core.http.HttpManager;
-import com.olsplus.balancemall.core.http.RequestCallback;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.AppUtil;
 import com.olsplus.balancemall.core.util.DateUtil;
@@ -25,7 +23,6 @@ import com.olsplus.balancemall.core.util.UrlConst;
 import java.util.HashMap;
 import java.util.Map;
 
-import retrofit2.http.HTTP;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -311,9 +308,9 @@ public class LoginBusiness {
      * @param phone
      * @param sms
      * @param type
-     * @param callback
+     * @param observer
      */
-    public void checkSms(String phone, String sms, String type, final RequestCallback<BaseResultEntity> callback) {
+    public void checkSms(String phone, String sms, String type, HttpResultObserver<BaseResultEntity> observer) {
 
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
         Map<String, String> paramMap = new HashMap<>();
@@ -328,7 +325,7 @@ public class LoginBusiness {
                 .checkSms(phone, sms, type, timestamp, sign)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new FinalHttpResultObserver<>(callback));
+                .subscribe(observer);
     }
 
 

@@ -42,7 +42,10 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityManager.getInstance().addActivity(this);
         setContentView(getLayoutResId());
-        onCreate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setupWindowAnimations();
+        }
+        initToolbar();
         getExtras();
         initUI();
         initData();
@@ -52,13 +55,6 @@ public abstract class BaseCompatActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ActivityManager.getInstance().finishActivity(this);
-    }
-
-    protected void onCreate() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            setupWindowAnimations();
-        }
-        initToolbar();
     }
 
     protected void getExtras() {

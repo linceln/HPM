@@ -3,8 +3,6 @@ package com.olsplus.balancemall.component.recycler;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.RawRes;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.olsplus.balancemall.core.image.ImageHelper;
+import com.olsplus.balancemall.component.image.ImageHelper;
 
 
 public class CustomViewHolder extends RecyclerView.ViewHolder {

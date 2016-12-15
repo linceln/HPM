@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
 
     <application
         android:name=".core.app.MyApplication"
@@ -148,10 +148,10 @@
             android:launchMode="singleTop"
             android:theme="@style/AppThemeDarkStatusBar" />
         <activity
-            android:name="com.olsplus.balancemall.component.imagepicker.IPickerActivity"
+            android:name="com.olsplus.balancemall.component.ipicker.IPickerActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.olsplus.balancemall.component.imagepicker.CropImageActivity"
+            android:name="com.olsplus.balancemall.component.ipicker.CropImageActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".app.merchant.MerchantActivity" />
         <activity android:name=".app.merchant.order.MerchantOrderActivity" />

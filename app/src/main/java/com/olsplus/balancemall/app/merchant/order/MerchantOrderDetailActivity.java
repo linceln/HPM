@@ -29,8 +29,8 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
 import static com.olsplus.balancemall.component.dialog.LoadingDialog.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
 
 public class MerchantOrderDetailActivity extends BaseCompatActivity implements MerchantOrderDetailAdapter.OnOrderOperationListener, View.OnClickListener {
 
@@ -86,6 +86,7 @@ public class MerchantOrderDetailActivity extends BaseCompatActivity implements M
         adapter.setOnOrderOperationListener(this);
         recyclerView.setAdapter(adapter);
 
+        // 异常页面
         manager = ExceptionManager.initialize(container, new DefaultExceptionListener(this));
     }
 

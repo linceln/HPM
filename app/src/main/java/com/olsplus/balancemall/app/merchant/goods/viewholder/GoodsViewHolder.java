@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.goods.bean.GoodsListEntity;
-import com.olsplus.balancemall.core.image.ImageHelper;
+import com.olsplus.balancemall.component.image.ImageHelper;
 import com.olsplus.balancemall.core.util.UIUtil;
 
 public class GoodsViewHolder extends BaseViewHolder<GoodsListEntity.ProductListBean> {

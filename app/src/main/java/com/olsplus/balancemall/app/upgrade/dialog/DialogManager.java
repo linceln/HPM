@@ -21,9 +21,9 @@ public class DialogManager {
      *
      * @param context
      * @param version
-     * @param downloadDialog
+     * @param upgradeDownloadDialog
      */
-    public static void upgradeNormal(final Context context, final UpdateInfo version, final DownloadDialog downloadDialog) {
+    public static void upgradeNormal(final Context context, final UpdateInfo version, final UpgradeDownloadDialog upgradeDownloadDialog) {
         final UpgradeNormalDialog upgradeNormalDialog = new UpgradeNormalDialog();
         upgradeNormalDialog.setMessage(version.getInfo());
         upgradeNormalDialog.setOnPositiveClickListener(new UpgradeNormalDialog.OnPositiveClickListener() {
@@ -31,7 +31,7 @@ public class DialogManager {
             public void onClick() {
                 // 判断网络
                 upgradeNormalDialog.dismiss();
-                checkNetwork(context, version.getUrl(), downloadDialog);
+                checkNetwork(context, version.getUrl(), upgradeDownloadDialog);
             }
         });
         if (context instanceof AppCompatActivity) {
@@ -44,9 +44,9 @@ public class DialogManager {
      *
      * @param context
      * @param version
-     * @param downloadDialog
+     * @param upgradeDownloadDialog
      */
-    public static void upgradeForce(final Context context, final UpdateInfo version, final DownloadDialog downloadDialog) {
+    public static void upgradeForce(final Context context, final UpdateInfo version, final UpgradeDownloadDialog upgradeDownloadDialog) {
         final UpgradeForceDialog generalDialogFragment = new UpgradeForceDialog();
         generalDialogFragment.setMessage(version.getInfo());
         generalDialogFragment.setCancelable(false);
@@ -54,7 +54,7 @@ public class DialogManager {
             @Override
             public void onClick() {
                 // 判断网络
-                checkNetwork(context, version.getUrl(), downloadDialog);
+                checkNetwork(context, version.getUrl(), upgradeDownloadDialog);
             }
         });
         if (context instanceof AppCompatActivity) {
@@ -66,17 +66,17 @@ public class DialogManager {
      * 判断网络是否wifi连接
      *
      * @param url
-     * @param downloadDialog
+     * @param upgradeDownloadDialog
      */
-    private static void checkNetwork(final Context context, final String url, final DownloadDialog downloadDialog) {
+    private static void checkNetwork(final Context context, final String url, final UpgradeDownloadDialog upgradeDownloadDialog) {
 
         //  判断网络连接
         if (NetworkUtil.isWifiConnected(context)) {// wifi连接
 
             // 下载进度Dialog
-            downloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "下载进度");
+            upgradeDownloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "下载进度");
 
-            downloadApk(context, url, downloadDialog);
+            downloadApk(context, url, upgradeDownloadDialog);
         } else {
             GeneralDialogFragment generalDialogFragment = new GeneralDialogFragment();
             generalDialogFragment.setMessage("当前使用手机流量联网，是否继续更新？");
@@ -84,9 +84,9 @@ public class DialogManager {
                 @Override
                 public void onClick() {
                     // 下载进度Dialog
-                    downloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "下载进度");
+                    upgradeDownloadDialog.show(((AppCompatActivity) context).getSupportFragmentManager(), "下载进度");
 
-                    downloadApk(context, url, downloadDialog);
+                    downloadApk(context, url, upgradeDownloadDialog);
                 }
             });
             generalDialogFragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "");

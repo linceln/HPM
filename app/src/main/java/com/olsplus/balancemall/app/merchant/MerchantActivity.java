@@ -3,6 +3,7 @@ package com.olsplus.balancemall.app.merchant;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.earning.EarningActivity;
@@ -11,11 +12,9 @@ import com.olsplus.balancemall.app.merchant.order.Business.MerchantBusiness;
 import com.olsplus.balancemall.app.merchant.order.MerchantOrderActivity;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantEntity;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
-import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.http.RequestCallback;
+import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.util.SPUtil;
 import com.olsplus.balancemall.core.util.StrConst;
-import com.olsplus.balancemall.core.util.ToastUtil;
 
 public class MerchantActivity extends BaseCompatActivity implements View.OnClickListener {
 
@@ -54,10 +53,9 @@ public class MerchantActivity extends BaseCompatActivity implements View.OnClick
     @Override
     protected void initData() {
 
-        MerchantBusiness.getMerchant(this, new RequestCallback<BaseResultEntity>() {
+        MerchantBusiness.getMerchant(this, new HttpResultObserver<MerchantEntity>() {
             @Override
-            public void onSuccess(BaseResultEntity baseResultEntity) {
-                MerchantEntity entity = (MerchantEntity) baseResultEntity;
+            public void onSuccess(MerchantEntity entity) {
                 SPUtil.put(MerchantActivity.this, SPUtil.RES_PATH, entity.getRes_path());
                 SPUtil.put(MerchantActivity.this, SPUtil.PROVIDER_NAME, entity.getProvider_name());
                 tvOrderNum.setText(entity.getOrder_count());
@@ -66,15 +64,15 @@ public class MerchantActivity extends BaseCompatActivity implements View.OnClick
             }
 
             @Override
-            public void onError(String msg) {
-                ToastUtil.showShort(MerchantActivity.this, msg);
+            public void onFail(String msg) {
+                Toast.makeText(MerchantActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public void onClick(View view) {
-        Intent intent = null;
+        Intent intent;
         switch (view.getId()) {
             case R.id.linearOrderToday://今日订单
                 intent = new Intent(this, EarningActivity.class);

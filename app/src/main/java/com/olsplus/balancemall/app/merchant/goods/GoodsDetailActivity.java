@@ -23,8 +23,8 @@ import com.olsplus.balancemall.core.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
-import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
 import static com.olsplus.balancemall.component.dialog.LoadingDialog.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
 
 public class GoodsDetailActivity extends BaseCompatActivity implements View.OnClickListener {
 

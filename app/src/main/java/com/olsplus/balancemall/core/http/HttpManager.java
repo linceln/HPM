@@ -14,6 +14,9 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
+/**
+ * Retrofit
+ */
 public class HttpManager {
     private static retrofit2.Retrofit retrofit;
     private static retrofit2.Retrofit downLoadRetrofit;

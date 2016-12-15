@@ -17,6 +17,10 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okio.Buffer;
 
+/**
+ * 自定义OkHttp3的拦截器
+ * 打印网络请求日志
+ */
 public class LogInterceptor implements Interceptor {
 
     private static final String TAG = "HTTP";

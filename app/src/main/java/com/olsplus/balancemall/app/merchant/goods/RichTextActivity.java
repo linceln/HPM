@@ -18,7 +18,7 @@ import com.github.mr5.icarus.button.Button;
 import com.github.mr5.icarus.button.TextViewButton;
 import com.github.mr5.icarus.entity.Options;
 import com.olsplus.balancemall.R;
-import com.olsplus.balancemall.component.imagepicker.IPicker;
+import com.olsplus.balancemall.component.ipicker.IPicker;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.Base64Util;

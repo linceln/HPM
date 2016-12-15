@@ -17,7 +17,7 @@ import com.olsplus.balancemall.app.login.bussiness.LoginBusiness;
 import com.olsplus.balancemall.app.login.request.ILoginRequest;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.http.RequestCallback;
+import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.util.CountDown;
 import com.olsplus.balancemall.core.util.StrConst;
 
@@ -121,9 +121,9 @@ public class RegisterVerifActivity extends BaseCompatActivity implements View.On
         if (loginBusiness == null) {
             loginBusiness = new LoginBusiness(this);
         }
-        loginBusiness.checkSms(bean.getMobile(), verificationCode, REGISTER, new RequestCallback<BaseResultEntity>() {
+        loginBusiness.checkSms(bean.getMobile(), verificationCode, REGISTER, new HttpResultObserver<BaseResultEntity>() {
             @Override
-            public void onSuccess(BaseResultEntity baseResultEntity) {
+            public void onSuccess(BaseResultEntity entity) {
                 dismissLoading();
                 Intent intent = new Intent(RegisterVerifActivity.this, RegisterPwdActivity.class);
                 intent.putExtra(StrConst.extra.register, bean);
@@ -131,7 +131,7 @@ public class RegisterVerifActivity extends BaseCompatActivity implements View.On
             }
 
             @Override
-            public void onError(String msg) {
+            public void onFail(String msg) {
                 dismissLoading();
                 Toast.makeText(RegisterVerifActivity.this, msg, Toast.LENGTH_SHORT).show();
             }

@@ -1,19 +1,15 @@
 package com.olsplus.balancemall.app.splash;
 
-import android.Manifest;
 import android.content.Intent;
 
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.login.LoginActivity;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
-import com.tbruyelle.rxpermissions.Permission;
-import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Func1;
+import rx.functions.Action1;
 
 public class SplashActivity extends BaseCompatActivity {
 
@@ -25,32 +21,42 @@ public class SplashActivity extends BaseCompatActivity {
     @Override
     protected void initUI() {
 
-        // 申请权限
-        new RxPermissions(this)
-                .requestEach(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
-                .flatMap(new Func1<Permission, Observable<Long>>() {
+        Observable.timer(1, TimeUnit.SECONDS)//延时
+                .subscribe(new Action1<Long>() {
                     @Override
-                    public Observable<Long> call(Permission permission) {
-                        // 延时启动
-                        return Observable.timer(1, TimeUnit.SECONDS);
-                    }
-                })
-                .subscribe(new Subscriber<Long>() {
-                    @Override
-                    public void onCompleted() {
+                    public void call(Long aLong) {
                         // 跳转
                         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                         finish();
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onNext(Long aLong) {
-                    }
                 });
+
+        // 申请权限
+//        new RxPermissions(this)
+//                .requestEach(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE)
+//                .flatMap(new Func1<Permission, Observable<Long>>() {
+//                    @Override
+//                    public Observable<Long> call(Permission permission) {
+//                        // 延时启动
+//                        return Observable.timer(1, TimeUnit.SECONDS);
+//                    }
+//                })
+//                .subscribe(new Subscriber<Long>() {
+//                    @Override
+//                    public void onCompleted() {
+//                        // 跳转
+//                        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+//                        finish();
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                    }
+//
+//                    @Override
+//                    public void onNext(Long aLong) {
+//                    }
+//                });
     }
 
     @Override

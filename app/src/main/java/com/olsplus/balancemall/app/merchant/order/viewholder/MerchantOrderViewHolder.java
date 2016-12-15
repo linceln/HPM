@@ -12,7 +12,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderEntity;
 import com.olsplus.balancemall.app.mine.util.OrderHelper;
-import com.olsplus.balancemall.core.image.ImageHelper;
+import com.olsplus.balancemall.component.image.ImageHelper;
 import com.olsplus.balancemall.core.util.UIUtil;
 
 

@@ -8,12 +8,14 @@ import android.os.Build;
 import android.support.v4.content.FileProvider;
 
 import com.olsplus.balancemall.BuildConfig;
-import com.olsplus.balancemall.app.upgrade.dialog.DownloadDialog;
-import com.olsplus.balancemall.app.upgrade.service.CheckUpgradeService;
+import com.olsplus.balancemall.app.upgrade.dialog.UpgradeDownloadDialog;
+import com.olsplus.balancemall.app.upgrade.service.UpgradeService;
 import com.olsplus.balancemall.core.http.HttpManager;
 import com.olsplus.balancemall.core.util.AppUtil;
 import com.olsplus.balancemall.core.util.FileUtil;
 import com.olsplus.balancemall.core.util.LogUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,9 +34,9 @@ public class DownloadManager {
     /**
      * 下载APK
      */
-    public static void downloadApk(final Context context, String url, final DownloadDialog downloadDialog) {
+    public static void downloadApk(final Context context, String url, final UpgradeDownloadDialog upgradeDownloadDialog) {
         HttpManager.getDownloadRetrofit()
-                .create(CheckUpgradeService.class)
+                .create(UpgradeService.class)
                 .downloadApk(url)
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<ResponseBody, Boolean>() {
@@ -49,8 +51,9 @@ public class DownloadManager {
                     @Override
                     public void onCompleted() {
                         if (!AppUtil.isBackground(context)) {
-                            if (downloadDialog != null) {
-                                downloadDialog.dismiss();
+                            // 进程在前台
+                            if (upgradeDownloadDialog != null) {
+                                upgradeDownloadDialog.dismiss();
                             }
                         }
                     }
@@ -58,8 +61,9 @@ public class DownloadManager {
                     @Override
                     public void onError(Throwable e) {
                         if (!AppUtil.isBackground(context)) {
-                            if (downloadDialog != null) {
-                                downloadDialog.dismiss();
+                            // 进程在前台
+                            if (upgradeDownloadDialog != null) {
+                                upgradeDownloadDialog.dismiss();
                             }
                         }
                         LogUtil.e("DownloadAPK", e.getMessage());
@@ -104,6 +108,9 @@ public class DownloadManager {
             }
             outputStream.flush();
 
+            // 下载完成给主界面发消息
+            EventBus.getDefault().post(true);
+            // 打开安装程序页面
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 // SDK24以上
                 Intent intent = new Intent(Intent.ACTION_VIEW);

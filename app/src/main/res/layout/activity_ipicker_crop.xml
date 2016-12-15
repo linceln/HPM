@@ -20,7 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.olsplus.balancemall.component.imagepicker.crop.CropImageView
+    <com.olsplus.balancemall.component.ipicker.crop.CropImageView
         android:id="@+id/ipicker_crop_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

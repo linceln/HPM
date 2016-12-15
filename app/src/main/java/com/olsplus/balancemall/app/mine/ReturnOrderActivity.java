@@ -22,7 +22,7 @@ import com.olsplus.balancemall.app.mine.bean.RefundReason;
 import com.olsplus.balancemall.app.mine.request.MyOrderImpl;
 import com.olsplus.balancemall.app.mine.view.CommentImageView;
 import com.olsplus.balancemall.app.mine.view.IReturnOrderView;
-import com.olsplus.balancemall.component.imagepicker.IPicker;
+import com.olsplus.balancemall.component.ipicker.IPicker;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
 import com.olsplus.balancemall.core.util.SnackbarUtil;
