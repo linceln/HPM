@@ -8,10 +8,10 @@ import java.util.Stack;
 
 public class ActivityManager {
     private static Stack<Activity> activityStack;
-    private static ActivityManager instance;
-    static {
-        instance = new ActivityManager();
-    }
+    private static ActivityManager instance = new ActivityManager();
+//    static {
+//        instance = new ActivityManager();
+//    }
 
     public static ActivityManager getInstance() {
         return instance;
