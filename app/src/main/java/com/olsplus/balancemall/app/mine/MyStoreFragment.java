@@ -4,18 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.MerchantActivity;
-import com.olsplus.balancemall.app.mine.bean.MyStoreOrderResult;
 import com.olsplus.balancemall.app.mine.bean.MySeesionEntity;
+import com.olsplus.balancemall.app.mine.bean.MyStoreOrderResult;
 import com.olsplus.balancemall.app.mine.bean.UserInfo;
 import com.olsplus.balancemall.app.mine.config.AboutNewActivity;
 import com.olsplus.balancemall.app.mine.config.SettingActivity;
@@ -24,8 +21,8 @@ import com.olsplus.balancemall.app.mine.request.UserImpl;
 import com.olsplus.balancemall.app.mine.view.IShowMytoreView;
 import com.olsplus.balancemall.app.pay.voucher.MyCouponActivity;
 import com.olsplus.balancemall.app.province.BuildCityActivity;
-import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.component.view.CircleImageView;
+import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.SPUtil;
 import com.olsplus.balancemall.core.util.ToastUtil;
@@ -33,17 +30,9 @@ import com.olsplus.balancemall.core.util.ToastUtil;
 
 public class MyStoreFragment extends BaseFragment implements View.OnClickListener, IShowMytoreView {
 
-    private LinearLayout noLoginLinear;
-    private RelativeLayout rightLayout;
-    private TextView messageCountTv;
-    private ScrollView scrollView;
     private CircleImageView userPhoto;
     private TextView nickNameTv;
     private TextView pointTv;
-    private RelativeLayout orderLinear1;
-    private RelativeLayout orderLinear2;
-    private RelativeLayout orderLinear3;
-    private RelativeLayout orderLinear4;
     private TextView orderNumTv1;
     private TextView orderNumTv2;
     private TextView orderNumTv3;
@@ -64,28 +53,17 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
-        noLoginLinear = (LinearLayout) view.findViewById(R.id.mystore_layout__nologgin);
-        Button logginBtn = (Button) view.findViewById(R.id.mystore_btn_loggin);
-        Button registerBtn = (Button) view.findViewById(R.id.mystore_btn_register);
-        logginBtn.setOnClickListener(this);
-        registerBtn.setOnClickListener(this);
 
-        scrollView = (ScrollView) view.findViewById(R.id.mystore_layout__loggin);
-        rightLayout = (RelativeLayout) view.findViewById(R.id.right_operation_rl);
-        rightLayout.setOnClickListener(this);
-        messageCountTv = (TextView) view.findViewById(R.id.mystore_message_count_tv);
+        // TODO 消息数量
+//        messageCountTv = (TextView) view.findViewById(R.id.mystore_message_count_tv);
         userPhoto = (CircleImageView) view.findViewById(R.id.cover_user_photo);
 //        userPhoto.setOnClickListener(this);
         nickNameTv = (TextView) view.findViewById(R.id.mystore_userinfo__nickname_txt);
         pointTv = (TextView) view.findViewById(R.id.mystore_userinfo_point_descr);
-        orderLinear1 = (RelativeLayout) view.findViewById(R.id.mystore_order_status1);
-        orderLinear1.setOnClickListener(this);
-        orderLinear2 = (RelativeLayout) view.findViewById(R.id.mystore_order_status2);
-        orderLinear2.setOnClickListener(this);
-        orderLinear3 = (RelativeLayout) view.findViewById(R.id.mystore_order_status3);
-        orderLinear3.setOnClickListener(this);
-        orderLinear4 = (RelativeLayout) view.findViewById(R.id.mystore_order_status4);
-        orderLinear4.setOnClickListener(this);
+        view.findViewById(R.id.mystore_order_status1).setOnClickListener(this);
+        view.findViewById(R.id.mystore_order_status2).setOnClickListener(this);
+        view.findViewById(R.id.mystore_order_status3).setOnClickListener(this);
+        view.findViewById(R.id.mystore_order_status4).setOnClickListener(this);
         orderNumTv1 = (TextView) view.findViewById(R.id.mystore_oder_numtv1);
         orderNumTv2 = (TextView) view.findViewById(R.id.mystore_oder_numtv2);
         orderNumTv3 = (TextView) view.findViewById(R.id.mystore_oder_numtv3);
@@ -129,7 +107,7 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
         Intent intent = null;
         switch (v.getId()) {
 //            case R.id.cover_user_photo:
-                // TODO 查看图片
+            // TODO 查看图片
 //                break;
             case R.id.mystore_order_status1:
                 intent = new Intent(mActivity, MyOrderListActivity.class);
@@ -189,7 +167,7 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
             String photo = userInfo.getAvatar();
             String points = userInfo.getPoints();
             nickNameTv.setText(name);
-            pointTv.setText("积分:" + points);
+            pointTv.setText("积分：" + points);
             Glide.with(mActivity)
                     .load(ApiConst.BASE_IMAGE_URL + photo)
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -233,10 +211,10 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
                 locationTv.setText(userInfo.getBuilding_name());
                 int messageCount = data.getMsgs();
                 if (messageCount > 0) {
-                    messageCountTv.setVisibility(View.VISIBLE);
-                    messageCountTv.setText("" + messageCount);
+//                    messageCountTv.setVisibility(View.VISIBLE);
+//                    messageCountTv.setText("" + messageCount);
                 } else {
-                    messageCountTv.setVisibility(View.GONE);
+//                    messageCountTv.setVisibility(View.GONE);
                 }
             }
 

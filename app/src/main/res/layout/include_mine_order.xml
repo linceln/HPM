@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff"
+    android:orientation="vertical"
+    tools:showIn="@layout/mystore_fragment">
+
+    <LinearLayout
+        android:id="@+id/mystore_order_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="我的订单"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2.0px"
+        android:background="#ffeeeeee" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="80.0dip"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:id="@+id/mystore_order_status1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/mystore_oder_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="6dp"
+                android:drawableTop="@drawable/mystore_icon1"
+                android:gravity="center_horizontal"
+                android:text="全部订单"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:id="@+id/mystore_oder_numtv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/ic_red_dot"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:paddingTop="0dp"
+                android:text=""
+                android:textColor="#ffffffff"
+                android:textSize="12.0sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <View
+            style="@style/DividerVertical"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp" />
+
+        <FrameLayout
+            android:id="@+id/mystore_order_status2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/mystore_oder_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="6dp"
+                android:drawableTop="@drawable/mystore_order_waitpay_icon"
+                android:gravity="center_horizontal"
+                android:text="待付款"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:id="@+id/mystore_oder_numtv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="20.0dip"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/ic_red_dot"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:paddingTop="0dp"
+                android:text=""
+                android:textColor="#ffffffff"
+                android:textSize="12.0sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <View
+            style="@style/DividerVertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+        <FrameLayout
+            android:id="@+id/mystore_order_status3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/mystore_oder_tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="6dp"
+                android:drawableTop="@drawable/mystore_order_waitcomment_icon"
+                android:gravity="center_horizontal"
+                android:text="待评价"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:id="@+id/mystore_oder_numtv3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/ic_red_dot"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:paddingTop="0dp"
+                android:text=""
+                android:textColor="#ffffffff"
+                android:textSize="12.0sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <View
+            style="@style/DividerVertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+        <FrameLayout
+            android:id="@+id/mystore_order_status4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="?attr/selectableItemBackground">
+
+            <TextView
+                android:id="@+id/mystore_oder_tv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="6dp"
+                android:drawableTop="@drawable/mystore_order_waitreturn_icon"
+                android:gravity="center_horizontal"
+                android:text="退款单"
+                android:textSize="14.0sp" />
+
+            <TextView
+                android:id="@+id/mystore_oder_numtv4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="26dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/ic_red_dot"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingBottom="0dp"
+                android:paddingTop="0dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="gone" />
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -414,8 +414,8 @@
     <dimen name="search_ghost_num_text_size">8.0sp</dimen>
     <dimen name="mystore_linear_paddingTop">20.0dip</dimen>
     <dimen name="mystore_linear_paddingBottom">20.0dip</dimen>
-    <dimen name="mystore_linear_paddingLeft">10.0dip</dimen>
-    <dimen name="mystore_linear_paddingRight">10.0dip</dimen>
+    <dimen name="mystore_linear_paddingLeft">16.0dip</dimen>
+    <dimen name="mystore_linear_paddingRight">16.0dip</dimen>
     <dimen name="mystore_tv2_textSize">15.0sp</dimen>
     <dimen name="mystore_linear6_height">50.0dip</dimen>
     <dimen name="mystore_mystore_order_linear_marginTop">12.0dip</dimen>

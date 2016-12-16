@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:showIn="@layout/mystore_fragment">
+
+    <LinearLayout
+        android:id="@+id/mystore_layout_userinfo_coupon"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/mystore_linear_paddingLeft"
+        android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+        android:paddingRight="@dimen/mystore_linear_paddingRight"
+        android:paddingTop="@dimen/mystore_linear_paddingLeft">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4.0dip"
+            android:background="@drawable/mystore_icon4" />
+
+
+        <TextView
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dip"
+            android:layout_weight="1.0"
+            android:text="我的票劵"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="8.0dip"
+            android:layout_height="12.0dip"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="4.0dip"
+            android:background="@drawable/mystore_right_arrow" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2.0px"
+        android:layout_marginLeft="50.0dip"
+        android:background="#ffeeeeee" />
+
+    <LinearLayout
+        android:id="@+id/mystore_layout_userinfo_location"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/mystore_linear_paddingLeft"
+        android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+        android:paddingRight="@dimen/mystore_linear_paddingRight"
+        android:paddingTop="@dimen/mystore_linear_paddingLeft">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4.0dip"
+            android:background="@drawable/mystore_icon3" />
+
+        <TextView
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12.0dip"
+            android:layout_weight="1.0"
+            android:text="我的写字楼"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/my_location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10.0dip"
+            android:text="中厦国际大厦"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="8.0dip"
+            android:layout_height="12.0dip"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="4.0dip"
+            android:background="@drawable/mystore_right_arrow" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2.0px"
+        android:layout_marginLeft="50.0dip"
+        android:background="#ffeeeeee" />
+
+
+    <LinearLayout
+        android:id="@+id/mystore_layout_userinfo_setting"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/mystore_linear_paddingLeft"
+        android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+        android:paddingRight="@dimen/mystore_linear_paddingRight"
+        android:paddingTop="@dimen/mystore_linear_paddingLeft">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4.0dip"
+            android:background="@drawable/mystore_icon5" />
+
+        <TextView
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12.0dip"
+            android:layout_weight="1.0"
+            android:text="设置"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:layout_width="8.0dip"
+            android:layout_height="12.0dip"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="4.0dip"
+            android:background="@drawable/mystore_right_arrow" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2.0px"
+        android:layout_marginLeft="50.0dip"
+        android:background="#ffeeeeee" />
+
+    <LinearLayout
+        android:id="@+id/mystore_layout_userinfo_about"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/mystore_linear_paddingLeft"
+        android:paddingLeft="@dimen/mystore_linear_paddingLeft"
+        android:paddingRight="@dimen/mystore_linear_paddingRight"
+        android:paddingTop="@dimen/mystore_linear_paddingLeft">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4.0dip"
+            android:background="@drawable/mystore_icon6" />
+
+        <TextView
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12.0dip"
+            android:layout_weight="1.0"
+            android:text="@string/about"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:layout_width="8.0dip"
+            android:layout_height="12.0dip"
+            android:layout_gravity="center|right"
+            android:layout_marginRight="4.0dip"
+            android:background="@drawable/mystore_right_arrow" />
+    </LinearLayout>
+</LinearLayout>
