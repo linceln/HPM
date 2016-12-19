@@ -25,6 +25,7 @@ import com.olsplus.balancemall.app.mine.view.IReturnOrderView;
 import com.olsplus.balancemall.component.ipicker.IPicker;
 import com.olsplus.balancemall.core.app.BaseFragment;
 import com.olsplus.balancemall.core.app.MainActivity;
+import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.SnackbarUtil;
 import com.olsplus.balancemall.core.util.ToastUtil;
 
@@ -48,6 +49,7 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
     private String amount;
     private String reasonId;
     private MyOrderReturn myOrderReturn;
+    private View container;
 
 
     @Override
@@ -84,6 +86,7 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
         super.onCreate(savedInstanceState);
         setActionBar();
         mTitleName.setText("退款");
+        container = findViewById(R.id.container);
         reasonSp = (Spinner) findViewById(R.id.return_product_detail_reason_sp);
         amountEt = (EditText) findViewById(R.id.return_order_amount_tv);
         amountEt.addTextChangedListener(new TextWatcher() {
@@ -249,7 +252,9 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
      */
     @Override
     public void updateReturnImgFail(String msg, int position) {
-        SnackbarUtil.showShort(mTitleName, msg);
+        myOrderReturn.getImgs().clear();
+        fillPhotoContainer(myOrderReturn.getImgs());
+        SnackbarUtil.showShort(container, msg);
     }
 
     /**
@@ -260,6 +265,7 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
     @Override
     public void updateReturnImgNext(String img) {
         myOrderReturn.getImgs().add(img);
+        fillPhotoContainer(myOrderReturn.getImgs());
     }
 
     /**
@@ -267,6 +273,7 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
      */
     @Override
     public void updateReturnImgCompleted() {
+        SnackbarUtil.showShort(container, "上传成功");
     }
 
     /**
@@ -276,8 +283,6 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
      */
     @Override
     public void onSelected(List<String> paths) {
-
-        fillPhotoContainer(paths);
         if (myOrderImpl != null) {
             myOrderImpl.uploadReturnImg(paths);
         }
@@ -308,7 +313,7 @@ public class ReturnOrderActivity extends MainActivity implements IReturnOrderVie
                     }
                 }
             });
-            imageView.showImage(pic);
+            imageView.showImage(ApiConst.BASE_IMAGE_URL + pic);
             picLinear.addView(imageView);
         }
     }

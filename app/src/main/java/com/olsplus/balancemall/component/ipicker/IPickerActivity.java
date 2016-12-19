@@ -90,7 +90,7 @@ public class IPickerActivity extends BaseCompatActivity implements BaseAdapter.O
 
             if (bundle.containsKey(ARG_SELECTED)) {
                 adapter.addSelected(bundle.getStringArrayList(ARG_SELECTED));
-                updateTitle();
+//                updateTitle();
             }
 
             if (bundle.containsKey(ARG_CROP_ENABLE)) {
@@ -166,14 +166,14 @@ public class IPickerActivity extends BaseCompatActivity implements BaseAdapter.O
     private void removeSelected(int position) {
         adapter.removeSelected(photoList.get(position));
         adapter.notifyItemChanged(position);
-        updateTitle();
+//        updateTitle();
     }
 
     private void addSelected(int position) {
         if ((adapter.getSelectedTotal() < limit)) {
             adapter.addSelected(photoList.get(position));
             adapter.notifyItemChanged(position);
-            updateTitle();
+//            updateTitle();
         } else {
             Snackbar.make(layoutContainer, getString(R.string.format_max_size, limit), Snackbar.LENGTH_LONG).show();
         }
@@ -182,7 +182,7 @@ public class IPickerActivity extends BaseCompatActivity implements BaseAdapter.O
     private void updateTitle() {
         if (limit > 1) {
             if (adapter.getSelectedTotal() == 0) {
-                setTitle(R.string.title_act_picker);
+                setTitle(getString(R.string.title_act_picker));
             } else {
                 setTitle("" + adapter.getSelectedTotal());
             }
@@ -269,7 +269,7 @@ public class IPickerActivity extends BaseCompatActivity implements BaseAdapter.O
                             adapter.addSelected(photo);
                         }
                         adapter.notifyDataSetChanged();
-                        updateTitle();
+//                        updateTitle();
                     }
                     break;
                 case Crop.REQUEST_CROP:

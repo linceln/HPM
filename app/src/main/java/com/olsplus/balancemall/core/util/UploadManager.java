@@ -20,7 +20,6 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.functions.Cancellable;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -30,10 +29,8 @@ public final class UploadManager {
 
     private static final String TAG = "UploadManager ==> ";
 
-    private static int size = 0;
-    private static int count = 0;
-
     private UploadManager() {
+        throw new UnsupportedOperationException("can not be instantiated");
     }
 
     /**
@@ -44,8 +41,7 @@ public final class UploadManager {
      * @param subscriber
      */
     public static void uploadAvatar(final Context context, String originalPath, final Subscriber<String> subscriber) {
-        count = 0;
-        size = 1;
+
         Observable.just(originalPath) // 发送原图地址
                 .subscribeOn(Schedulers.io()) // 压缩过程在子线程执行
                 .map(new Func1<String, String>() {
@@ -87,7 +83,7 @@ public final class UploadManager {
                     }
                 })
                 // TODO RxLifecycle
-//                .compose(((RxAppCompatActivity)context).bindUntilEvent(ActivityEvent.DESTROY))
+//                .compose(RxLifecycle.bindUntilEvent(((RxAppCompatActivity) context).lifecycle(), ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
@@ -100,8 +96,7 @@ public final class UploadManager {
      * @param subscriber
      */
     public static void uploadGoodsImage(final Context context, final List<String> originalPaths, final Subscriber<String> subscriber) {
-        count = 0;
-        size = originalPaths.size();
+
         Observable.from(originalPaths) // 发送原图地址
                 .subscribeOn(Schedulers.io()) // 压缩过程在子线程执行
                 .map(new Func1<String, String>() {
@@ -156,8 +151,7 @@ public final class UploadManager {
      * @param subscriber
      */
     public static void uploadProof(final Context context, final List<String> originalPaths, final Subscriber<String> subscriber) {
-        count = 0;
-        size = originalPaths.size();
+
         Observable.from(originalPaths) // 发送原图地址
                 .subscribeOn(Schedulers.io()) // 压缩过程在子线程执行
                 .map(new Func1<String, String>() {
@@ -206,7 +200,7 @@ public final class UploadManager {
 
 
     /**
-     * 最终上传到七牛服务器
+     * 上传到七牛服务器
      *
      * @param entity
      * @return
@@ -219,28 +213,23 @@ public final class UploadManager {
                 QiNiuUtil.getInstance().put(entity.getCompressedPath(), entity.getFilepath(), entity.getToken(), new UpCompletionHandler() {
                     @Override
                     public void complete(String s, final ResponseInfo responseInfo, JSONObject jsonObject) {
-                        LogUtil.e(TAG + "responseInfo name", s);
-                        LogUtil.e(TAG + "responseInfo error", "" + responseInfo.error);
-                        LogUtil.e(TAG + "responseInfo isOK", "" + responseInfo.isOK());
-                        LogUtil.e(TAG + "responseInfo duration", "" + responseInfo.duration);
                         if (responseInfo.isOK()) {
-                            count++;
+                            LogUtil.e(TAG, "上传成功 耗时:" + responseInfo.duration);
                             // 上传成功，返回图片url
                             stringEmitter.onNext(s);
-                            if (count == size) {
-                                stringEmitter.onCompleted();
-                            }
-
+                            // 上传完成
+                            stringEmitter.onCompleted();
                         } else {
+                            LogUtil.e(TAG, "上传失败 " + responseInfo.error);
                             stringEmitter.onError(new Throwable(responseInfo.error));
                         }
 
-                        stringEmitter.setCancellation(new Cancellable() {
-                            @Override
-                            public void cancel() throws Exception {
-                                // 取消请求
-                            }
-                        });
+//                        stringEmitter.setCancellation(new Cancellable() {
+//                            @Override
+//                            public void cancel() throws Exception {
+//                                // 取消请求
+//                            }
+//                        });
                     }
                 }, null);
             }

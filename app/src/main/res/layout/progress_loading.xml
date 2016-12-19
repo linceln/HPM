@@ -29,7 +29,8 @@
         android:layout_height="wrap_content"
         android:text="@string/loading_default"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textStyle="bold"
+        android:textSize="16sp" />
 
     <!--<Space-->
     <!--android:layout_width="wrap_content"-->

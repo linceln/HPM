@@ -11,7 +11,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -26,13 +25,14 @@ import android.widget.TextView;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.home.HomeActivity;
 import com.olsplus.balancemall.core.util.ActivityManager;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class BaseCompatActivity extends AppCompatActivity {
+public abstract class BaseCompatActivity extends RxAppCompatActivity {
 
     private Toolbar toolbar;
 
