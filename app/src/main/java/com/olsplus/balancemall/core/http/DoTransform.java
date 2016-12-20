@@ -5,7 +5,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
-public class ApplyScheduler {
+public class DoTransform {
 
     public static <T> Observable.Transformer<T, T> applyScheduler() {
         return new Observable.Transformer<T, T>() {
