@@ -11,6 +11,16 @@ public class DoTransform {
         return new Observable.Transformer<T, T>() {
             @Override
             public Observable<T> call(Observable<T> tObservable) {
+                return tObservable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+
+    public static <T> Observable.Transformer<T, T> applyLoading() {
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> tObservable) {
                 return tObservable
                         .doOnSubscribe(new Action0() {
                             @Override

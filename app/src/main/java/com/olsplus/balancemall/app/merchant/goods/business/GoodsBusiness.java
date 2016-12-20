@@ -12,7 +12,7 @@ import com.olsplus.balancemall.app.merchant.goods.bean.GoodsListEntity;
 import com.olsplus.balancemall.app.merchant.goods.bean.ImageUploadEntity;
 import com.olsplus.balancemall.app.merchant.goods.request.GoodsService;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.http.ApplyScheduler;
+import com.olsplus.balancemall.core.http.DoTransform;
 import com.olsplus.balancemall.core.http.HttpManager;
 import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpUtil;
@@ -56,7 +56,7 @@ public class GoodsBusiness {
 
 
         service.getGoodsList(uid, token, sign, timestamp, local_service_id, type, page, count)
-                .compose(ApplyScheduler.<GoodsListEntity>applyScheduler())
+                .compose(DoTransform.<GoodsListEntity>applyScheduler())
                 .subscribe(observer);
     }
 
@@ -83,7 +83,7 @@ public class GoodsBusiness {
         String sign = HttpUtil.sign(HttpUtil.POST, UrlConst.merchant.goods_on_sale, paramMap);
 
         service.onSale(uid, token, sign, timestamp, local_service_id, product_id)
-                .compose(ApplyScheduler.<BaseResultEntity>applyScheduler())
+                .compose(DoTransform.<BaseResultEntity>applyScheduler())
                 .subscribe(observer);
     }
 
@@ -109,7 +109,7 @@ public class GoodsBusiness {
         String sign = HttpUtil.sign(HttpUtil.POST, UrlConst.merchant.goods_off_sale, paramMap);
 
         service.offSale(uid, token, sign, timestamp, local_service_id, product_id)
-                .compose(ApplyScheduler.<BaseResultEntity>applyScheduler())
+                .compose(DoTransform.<BaseResultEntity>applyScheduler())
                 .subscribe(observer);
     }
 
@@ -135,7 +135,7 @@ public class GoodsBusiness {
         String sign = HttpUtil.sign(HttpUtil.POST, UrlConst.merchant.goods_delete, paramMap);
 
         service.delete(uid, token, sign, timestamp, local_service_id, product_id)
-                .compose(ApplyScheduler.<BaseResultEntity>applyScheduler())
+                .compose(DoTransform.<BaseResultEntity>applyScheduler())
                 .subscribe(observer);
     }
 
@@ -192,7 +192,7 @@ public class GoodsBusiness {
         String sign = HttpUtil.signWithJson(HttpUtil.POST, ApiConst.BASE_URL + context.getString(R.string.url_add_goods, local_service_id), paramMap, new Gson().toJson(goodsDetail));
 
         service.addGoods(local_service_id, uid, token, sign, timestamp, goodsDetail)
-                .compose(ApplyScheduler.<AddResultEntity>applyScheduler())
+                .compose(DoTransform.<AddResultEntity>applyScheduler())
                 .subscribe(observer);
     }
 
@@ -218,7 +218,7 @@ public class GoodsBusiness {
         String sign = HttpUtil.sign(HttpUtil.GET, UrlConst.merchant.goods_edit, paramMap);
 
         service.editGoods(uid, token, sign, timestamp, local_service_id, product_id)
-                .compose(ApplyScheduler.<EditGoodsEntity>applyScheduler())
+                .compose(DoTransform.<EditGoodsEntity>applyScheduler())
                 .subscribe(observer);
     }
 
@@ -241,7 +241,7 @@ public class GoodsBusiness {
         String sign = HttpUtil.signWithJson(HttpUtil.POST, UrlConst.merchant.goods_update, paramMap, new Gson().toJson(goodsDetail));
 
         service.updateGoods(uid, token, sign, timestamp, goodsDetail)
-                .compose(ApplyScheduler.<AddResultEntity>applyScheduler())
+                .compose(DoTransform.<AddResultEntity>applyScheduler())
                 .subscribe(observer);
     }
 }

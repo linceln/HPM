@@ -18,17 +18,17 @@ import okhttp3.RequestBody;
 import okio.Buffer;
 
 /**
- * 自定义OkHttp3的拦截器
- * 打印网络请求日志
+ * 打印http请求日志
  */
 public class LogInterceptor implements Interceptor {
 
-    private static final String TAG = "HTTP";
+    private static String TAG = "HTTP:";
 
     @Override
     public okhttp3.Response intercept(Chain chain) throws IOException {
 
         Request request = chain.request();
+        TAG += request.hashCode();
         LogUtil.e(TAG, "---------------------------------Start-------------------------------------");
         LogUtil.e(TAG, request.method());
         if ("GET".equals(request.method())) {
@@ -38,20 +38,15 @@ public class LogInterceptor implements Interceptor {
             LogUtil.e(TAG, request.url().toString() + "\n" + paramsStr);
         }
 
-        okhttp3.Response response = chain.proceed(chain.request());
-        String content = response.body().string();
+        okhttp3.Response response = chain.proceed(request);
         try {
-            LogUtil.e(TAG, new JSONObject(content).toString(4));
+            LogUtil.e(TAG, new JSONObject(response.body().string()).toString(4));
         } catch (JSONException e) {
             e.printStackTrace();
-            LogUtil.e(TAG, content);
         }
-        LogUtil.e(TAG, "-----------------------------------End------------------------------------");
-
-        okhttp3.MediaType mediaType = response.body().contentType();
-        return response.newBuilder()
-                .body(okhttp3.ResponseBody.create(mediaType, content))
-                .build();
+        LogUtil.e(TAG, "-----------------------------------End-------------------------------------");
+        // 不能return response，一个response只能用一次
+        return chain.proceed(request);
     }
 
     @NonNull
@@ -69,7 +64,6 @@ public class LogInterceptor implements Interceptor {
             charset = contentType.charset(Charset.forName("UTF-8"));
         }
         String paramsStr = buffer.readString(charset);
-
         String[] split = paramsStr.split("&");
         String str = "";
         for (String s : split) {

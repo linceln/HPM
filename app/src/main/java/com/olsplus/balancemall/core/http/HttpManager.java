@@ -30,17 +30,17 @@ public class HttpManager {
                             .connectTimeout(20, TimeUnit.SECONDS)
                             .writeTimeout(6, TimeUnit.SECONDS)
                             .readTimeout(6, TimeUnit.SECONDS);
+//                            .addInterceptor(new SignInterceptor());// 自动签名
 
                     if (BuildConfig.DEBUG) {
                         builder.addInterceptor(new LogInterceptor());
                     }
 
-                    OkHttpClient client = builder.build();
                     retrofit = new retrofit2.Retrofit.Builder()
                             .baseUrl(ApiConst.BASE_URL)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                            .client(client)
+                            .client(builder.build())
                             .build();
                 }
             }
@@ -64,12 +64,11 @@ public class HttpManager {
                             .readTimeout(6, TimeUnit.SECONDS)
                             .addInterceptor(new ProgressInterceptor());
 
-                    OkHttpClient client = builder.build();
                     downLoadRetrofit = new retrofit2.Retrofit.Builder()
                             .baseUrl(ApiConst.BASE_URL)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                            .client(client)
+                            .client(builder.build())
                             .build();
                 }
             }

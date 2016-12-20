@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.olsplus.balancemall.app.merchant.earning.bean.EarningListEntity;
 import com.olsplus.balancemall.app.merchant.earning.service.EarningService;
-import com.olsplus.balancemall.core.http.ApplyScheduler;
+import com.olsplus.balancemall.core.http.DoTransform;
 import com.olsplus.balancemall.core.http.HttpManager;
 import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpUtil;
@@ -47,7 +47,7 @@ public class EarningBusiness {
         String sign = HttpUtil.sign(HttpUtil.GET, UrlConst.merchant.merchant_earning, paramMap);
 
         service.getEarning(uid, token, local_service_id, type, timestamp, page, count, sign)
-                .compose(ApplyScheduler.<EarningListEntity>applyScheduler())
+                .compose(DoTransform.<EarningListEntity>applyScheduler())
                 .subscribe(observer);
     }
 }

@@ -6,7 +6,7 @@ import android.content.Context;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantEntity;
 import com.olsplus.balancemall.app.merchant.order.request.MerchantService;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.http.ApplyScheduler;
+import com.olsplus.balancemall.core.http.DoTransform;
 import com.olsplus.balancemall.core.http.FinalHttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpManager;
 import com.olsplus.balancemall.core.http.HttpUtil;
@@ -46,7 +46,7 @@ public class MerchantBusiness {
         String sign = HttpUtil.sign(HttpUtil.GET, UrlConst.merchant.merchant_home, paramMap);
 
         return service.getMerchant(uid, token, local_service_id, timestamp, sign)
-                .compose(ApplyScheduler.<MerchantEntity>applyScheduler());
+                .compose(DoTransform.<MerchantEntity>applyScheduler());
     }
 
     public static Observable<MerchantEntity> getdadfdsfa(final Context context) {
@@ -63,7 +63,7 @@ public class MerchantBusiness {
         String sign = HttpUtil.sign(HttpUtil.GET, UrlConst.merchant.merchant_home, paramMap);
 
         return service.getMerchant(uid, token, local_service_id, timestamp, sign)
-                .compose(ApplyScheduler.<MerchantEntity>applyScheduler());
+                .compose(DoTransform.<MerchantEntity>applyScheduler());
     }
 
 

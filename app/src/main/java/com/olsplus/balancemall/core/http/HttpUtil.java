@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.olsplus.balancemall.core.app.MyApplication;
 import com.olsplus.balancemall.core.util.EncrypUtil;
+import com.olsplus.balancemall.core.util.LogUtil;
 import com.olsplus.balancemall.core.util.SPUtil;
 
 import java.util.ArrayList;
@@ -71,7 +72,7 @@ public class HttpUtil {
         String secret = SECRET.substring(0, SECRET.length() - 2) + "+/";
         stringBuffer.append(secret);
         String signStr = stringBuffer.toString();
-//        LogUtil.applyScheduler("Sign String", signStr);
+        LogUtil.e("Sign String", signStr);
         if (!TextUtils.isEmpty(signStr)) {
 
             String signData = EncrypUtil.eccryptSHA1(signStr);

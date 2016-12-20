@@ -7,7 +7,7 @@ import com.olsplus.balancemall.app.home.bean.AdvertisementOut;
 import com.olsplus.balancemall.app.home.bean.Container;
 import com.olsplus.balancemall.app.home.bean.HomeProductResult;
 import com.olsplus.balancemall.app.home.bean.PromoteTopic;
-import com.olsplus.balancemall.app.home.bussiness.GetHomeIndexBussiness;
+import com.olsplus.balancemall.app.home.bussiness.HomeBusiness;
 import com.olsplus.balancemall.app.home.view.IHomeView;
 import com.olsplus.balancemall.core.util.ListUtil;
 
@@ -20,11 +20,11 @@ public class HomeRequestImpl implements IHomeDataRequest{
 
     private Context context;
 
-    private GetHomeIndexBussiness getHomeIndexBussiness;
+    private HomeBusiness homeBusiness;
     private IHomeView view;
 
     public HomeRequestImpl(Context context) {
-        getHomeIndexBussiness = new GetHomeIndexBussiness(context);
+        homeBusiness = new HomeBusiness(context);
     }
 
     public void setView(IHomeView view){
@@ -35,8 +35,8 @@ public class HomeRequestImpl implements IHomeDataRequest{
 
     @Override
     public void getIndex() {
-        if(getHomeIndexBussiness!=null){
-            getHomeIndexBussiness.getHomeIndex(new HomeIndexCallback() {
+        if(homeBusiness !=null){
+            homeBusiness.getHomeIndex(new HomeIndexCallback() {
 
                 @Override
                 public void onGetHomeSuccess(Container container) {

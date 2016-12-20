@@ -17,6 +17,4 @@ public interface HomeIndexService {
             @Query("timestamp") String timestamp,
             @Query("sign") String sign
     );
-
-
 }
