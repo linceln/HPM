@@ -15,11 +15,11 @@ import com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness;
 import com.olsplus.balancemall.component.dialog.GeneralDialogFragment;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.http.RequestCallback;
+import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.util.ApiConst;
 import com.olsplus.balancemall.core.util.SPUtil;
+import com.olsplus.balancemall.core.util.SnackbarUtil;
 import com.olsplus.balancemall.core.util.StrConst;
-import com.olsplus.balancemall.core.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -28,11 +28,11 @@ import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading
 
 public class GoodsDetailActivity extends BaseCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "GoodsDetailActivity";
     private static final int REQUEST_EDIT = 0;
     private long goods_id;
     private WebView webViewGoodsDetail;
     private String goodsType;
+    private View container;
 
 
     @Override
@@ -50,6 +50,7 @@ public class GoodsDetailActivity extends BaseCompatActivity implements View.OnCl
         // 标题栏
         setTitle("商品详情");
 
+        container = findViewById(R.id.activity_goods_detail);
         TextView tvGoodsDetailEdit = (TextView) findViewById(R.id.tvGoodsDetailEdit);
         tvGoodsDetailEdit.setOnClickListener(this);
         TextView tvGoodsDetailOffSale = (TextView) findViewById(R.id.tvGoodsDetailOffSale);
@@ -117,7 +118,7 @@ public class GoodsDetailActivity extends BaseCompatActivity implements View.OnCl
                         @Override
                         public void onClick() {
                             //上架
-                            GoodsBusiness.onSale(GoodsDetailActivity.this, goods_id, new GoodsCallback());
+                            GoodsBusiness.onSale(GoodsDetailActivity.this, goods_id, new GoodsObserver());
 
                         }
                     });
@@ -126,7 +127,7 @@ public class GoodsDetailActivity extends BaseCompatActivity implements View.OnCl
                         @Override
                         public void onClick() {
                             //下架
-                            GoodsBusiness.offSale(GoodsDetailActivity.this, goods_id, new GoodsCallback());
+                            GoodsBusiness.offSale(GoodsDetailActivity.this, goods_id, new GoodsObserver());
 
                         }
                     });
@@ -137,7 +138,7 @@ public class GoodsDetailActivity extends BaseCompatActivity implements View.OnCl
                     @Override
                     public void onClick() {
                         // 删除
-                        GoodsBusiness.delete(GoodsDetailActivity.this, goods_id, new GoodsCallback());
+                        GoodsBusiness.delete(GoodsDetailActivity.this, goods_id, new GoodsObserver());
                     }
                 });
                 break;
@@ -151,18 +152,20 @@ public class GoodsDetailActivity extends BaseCompatActivity implements View.OnCl
         dialogFragment.show(getSupportFragmentManager(), tag);
     }
 
-    private class GoodsCallback implements RequestCallback<BaseResultEntity> {
+    private class GoodsObserver extends HttpResultObserver<BaseResultEntity> {
 
         @Override
-        public void onSuccess(BaseResultEntity baseResultEntity) {
-            ToastUtil.showShort(GoodsDetailActivity.this, baseResultEntity.getMsg());
+        public void onSuccess(BaseResultEntity entity) {
+            SnackbarUtil.showShort(container, entity.getMsg());
+//            ToastUtil.showShort(GoodsDetailActivity.this, entity.getMsg());
             EventBus.getDefault().post("From GoodsDetailActivity");
             finish();
         }
 
         @Override
-        public void onError(String msg) {
-            ToastUtil.showShort(GoodsDetailActivity.this, msg);
+        public void onFail(String msg) {
+//            ToastUtil.showShort(GoodsDetailActivity.this, msg);
+            SnackbarUtil.showShort(container, msg);
         }
     }
 

@@ -6,9 +6,9 @@ import android.content.Context;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantEntity;
 import com.olsplus.balancemall.app.merchant.order.request.MerchantService;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
+import com.olsplus.balancemall.core.http.ApplyScheduler;
 import com.olsplus.balancemall.core.http.FinalHttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpManager;
-import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.http.HttpUtil;
 import com.olsplus.balancemall.core.http.RequestCallback;
 import com.olsplus.balancemall.core.util.DateUtil;
@@ -18,6 +18,7 @@ import com.olsplus.balancemall.core.util.UrlConst;
 import java.util.HashMap;
 import java.util.Map;
 
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -28,11 +29,27 @@ public class MerchantBusiness {
     /**
      * 获取商家首页
      *
-     * @param context
-     * @param observer
+     * @return
      */
-    public static void getMerchant(final Context context, final HttpResultObserver<MerchantEntity> observer) {
+    public static Observable<MerchantEntity> getMerchant() {
 
+        String uid = HttpUtil.getUid();
+        String token = HttpUtil.getToken();
+        String timestamp = HttpUtil.getTimestamp();
+        String local_service_id = HttpUtil.getLocalServiceId();
+
+        Map<String, String> paramMap = new HashMap<>();
+        paramMap.put("uid", uid);
+        paramMap.put("token", token);
+        paramMap.put("local_service_id", local_service_id);
+        paramMap.put("timestamp", timestamp);
+        String sign = HttpUtil.sign(HttpUtil.GET, UrlConst.merchant.merchant_home, paramMap);
+
+        return service.getMerchant(uid, token, local_service_id, timestamp, sign)
+                .compose(ApplyScheduler.<MerchantEntity>applyScheduler());
+    }
+
+    public static Observable<MerchantEntity> getdadfdsfa(final Context context) {
         String uid = (String) SPUtil.get(context, SPUtil.UID, "");
         String token = (String) SPUtil.get(context, SPUtil.TOKEN, "");
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
@@ -45,42 +62,8 @@ public class MerchantBusiness {
         paramMap.put("timestamp", timestamp);
         String sign = HttpUtil.sign(HttpUtil.GET, UrlConst.merchant.merchant_home, paramMap);
 
-        service.getMerchant(uid, token, local_service_id, timestamp, sign)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-    }
-
-    /**
-     * 收入列表
-     *
-     * @param context
-     * @param page
-     * @param count
-     * @param type
-     * @param callback
-     */
-    public static void getEarning(Context context, int page, int count, String type, final RequestCallback<BaseResultEntity> callback) {
-
-        String uid = (String) SPUtil.get(context, SPUtil.UID, "");
-        String token = (String) SPUtil.get(context, SPUtil.TOKEN, "");
-        String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
-        String local_service_id = (String) SPUtil.get(context, SPUtil.LOCAL_SERVICE_ID, "");
-
-        Map<String, String> paramMap = new HashMap<>();
-        paramMap.put("uid", uid);
-        paramMap.put("token", token);
-        paramMap.put("page", String.valueOf(page));
-        paramMap.put("count", String.valueOf(count));
-        paramMap.put("type", type);
-        paramMap.put("local_service_id", local_service_id);
-        paramMap.put("timestamp", timestamp);
-        String sign = HttpUtil.sign(HttpUtil.GET, UrlConst.merchant.merchant_earning, paramMap);
-
-        service.getEarning(uid, token, local_service_id, type, timestamp, page, count, sign)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new FinalHttpResultObserver<>(callback));
+        return service.getMerchant(uid, token, local_service_id, timestamp, sign)
+                .compose(ApplyScheduler.<MerchantEntity>applyScheduler());
     }
 
 

@@ -140,7 +140,7 @@ public class RichTextActivity extends BaseCompatActivity implements IPicker.OnSe
                 public void onError(Throwable e) {
                     dismissLoading();
                     Snackbar.make(editor, e.getMessage(), Snackbar.LENGTH_SHORT).show();
-//                    Toast.makeText(RichTextActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(RichTextActivity.this, applyScheduler.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

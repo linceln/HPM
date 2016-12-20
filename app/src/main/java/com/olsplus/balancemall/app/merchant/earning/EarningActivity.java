@@ -11,12 +11,11 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.earning.adapter.EarningAdapter;
 import com.olsplus.balancemall.app.merchant.earning.bean.EarningListEntity;
-import com.olsplus.balancemall.app.merchant.order.Business.MerchantBusiness;
+import com.olsplus.balancemall.app.merchant.earning.business.EarningBusiness;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
-import com.olsplus.balancemall.core.bean.BaseResultEntity;
 import com.olsplus.balancemall.core.exception.layout.DefaultExceptionListener;
 import com.olsplus.balancemall.core.exception.layout.ExceptionManager;
-import com.olsplus.balancemall.core.http.RequestCallback;
+import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.util.DensityUtil;
 import com.olsplus.balancemall.core.util.StrConst;
 import com.olsplus.balancemall.core.util.ToastUtil;
@@ -75,12 +74,11 @@ public class EarningActivity extends BaseCompatActivity implements SwipeRefreshL
 
     @Override
     protected void initData() {
-        MerchantBusiness.getEarning(this, page, count, earningType, new RequestCallback<BaseResultEntity>() {
+        EarningBusiness.getEarning(this, page, count, earningType, new HttpResultObserver<EarningListEntity>() {
             @Override
-            public void onSuccess(BaseResultEntity baseResultEntity) {
-                EarningListEntity entity = (EarningListEntity) baseResultEntity;
-                if (entity.getData() != null && !entity.getData().isEmpty()) {
+            public void onSuccess(EarningListEntity entity) {
 
+                if (entity.getData() != null && !entity.getData().isEmpty()) {
                     // 去重逻辑
                     int position = -1;
                     List<EarningListEntity.DataBean> allData = earningAdapter.getAllData();
@@ -126,7 +124,7 @@ public class EarningActivity extends BaseCompatActivity implements SwipeRefreshL
             }
 
             @Override
-            public void onError(String msg) {
+            public void onFail(String msg) {
                 manager.showRetry();
                 ToastUtil.showShort(EarningActivity.this, msg);
             }

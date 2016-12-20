@@ -3,7 +3,6 @@ package com.olsplus.balancemall.app.merchant;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.merchant.earning.EarningActivity;
@@ -14,13 +13,16 @@ import com.olsplus.balancemall.app.merchant.order.bean.MerchantEntity;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.util.SPUtil;
+import com.olsplus.balancemall.core.util.SnackbarUtil;
 import com.olsplus.balancemall.core.util.StrConst;
+import com.trello.rxlifecycle.android.ActivityEvent;
 
 public class MerchantActivity extends BaseCompatActivity implements View.OnClickListener {
 
     private TextView tvOrderNum;
     private TextView tvEarningToday;
     private TextView tvEarningMonth;
+    private View container;
 
     @Override
     protected int getLayoutResId() {
@@ -36,6 +38,7 @@ public class MerchantActivity extends BaseCompatActivity implements View.OnClick
         // 标题栏
         setTitle("商家管理");
 
+        container = findViewById(R.id.activity_business);
         tvOrderNum = (TextView) findViewById(R.id.tvOrderNum);
         tvEarningToday = (TextView) findViewById(R.id.tvEarningToday);
         tvEarningMonth = (TextView) findViewById(R.id.tvEarningMonth);
@@ -52,22 +55,24 @@ public class MerchantActivity extends BaseCompatActivity implements View.OnClick
 
     @Override
     protected void initData() {
+        MerchantBusiness.getMerchant()
+                .compose(this.<MerchantEntity>bindUntilEvent(ActivityEvent.STOP))// 离开页面之后不再发送
+                .subscribe(new HttpResultObserver<MerchantEntity>() {
 
-        MerchantBusiness.getMerchant(this, new HttpResultObserver<MerchantEntity>() {
-            @Override
-            public void onSuccess(MerchantEntity entity) {
-                SPUtil.put(MerchantActivity.this, SPUtil.RES_PATH, entity.getRes_path());
-                SPUtil.put(MerchantActivity.this, SPUtil.PROVIDER_NAME, entity.getProvider_name());
-                tvOrderNum.setText(entity.getOrder_count());
-                tvEarningToday.setText(entity.getDay_revenue());
-                tvEarningMonth.setText(entity.getMonth_revenue());
-            }
+                    @Override
+                    public void onSuccess(MerchantEntity entity) {
+                        SPUtil.put(MerchantActivity.this, SPUtil.RES_PATH, entity.getRes_path());
+                        SPUtil.put(MerchantActivity.this, SPUtil.PROVIDER_NAME, entity.getProvider_name());
+                        tvOrderNum.setText(entity.getOrder_count());
+                        tvEarningToday.setText(entity.getDay_revenue());
+                        tvEarningMonth.setText(entity.getMonth_revenue());
+                    }
 
-            @Override
-            public void onFail(String msg) {
-                Toast.makeText(MerchantActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onFail(String msg) {
+                        SnackbarUtil.showShort(container, msg);
+                    }
+                });
     }
 
     @Override

@@ -129,15 +129,16 @@ public class BitmapUtil {
         int w = newOpts.outWidth;
         int h = newOpts.outHeight;
         float height = 800f;
-        float weight = 480f;
+        float width = 480f;
         int be = 1;
-        if (w > h && w > weight) {
-            be = (int) (newOpts.outWidth / weight);
+        if (w > h && w > width) {
+            be = (int) (newOpts.outWidth / width);
         } else if (w < h && h > height) {
             be = (int) (newOpts.outHeight / height);
         }
-        if (be <= 0)
+        if (be <= 0) {
             be = 1;
+        }
         newOpts.inSampleSize = be;//设置采样率
 
         newOpts.inPreferredConfig = Bitmap.Config.ARGB_8888;//该模式是默认的,可不设
@@ -174,7 +175,7 @@ public class BitmapUtil {
      */
     public static String compressQuality(Bitmap bmp, File file) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        int quality = 100;//压缩质量从90开始,
+        int quality = 100;
         bmp.compress(Bitmap.CompressFormat.JPEG, quality, baos);
         while (baos.toByteArray().length / 1024 > 100) {
             baos.reset();
@@ -190,7 +191,7 @@ public class BitmapUtil {
             fos = new FileOutputStream(file);
             fos.write(baos.toByteArray());
             fos.flush();
-            fos.close();
+//            fos.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

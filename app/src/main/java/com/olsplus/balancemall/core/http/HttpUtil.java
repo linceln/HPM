@@ -3,10 +3,10 @@ package com.olsplus.balancemall.core.http;
 
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 
+import com.olsplus.balancemall.core.app.MyApplication;
 import com.olsplus.balancemall.core.util.EncrypUtil;
-import com.olsplus.balancemall.core.util.LogUtil;
+import com.olsplus.balancemall.core.util.SPUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +28,22 @@ public class HttpUtil {
      */
     public static String CHANNEL = "360";
     private static String SECRET = "HePingMao*&@-_";
+
+    public static String getUid() {
+        return (String) SPUtil.get(MyApplication.getApp(), SPUtil.UID, "");
+    }
+
+    public static String getToken() {
+        return (String) SPUtil.get(MyApplication.getApp(), SPUtil.TOKEN, "");
+    }
+
+    public static String getTimestamp() {
+        return String.valueOf(System.currentTimeMillis());
+    }
+
+    public static String getLocalServiceId() {
+        return (String) SPUtil.get(MyApplication.getApp(), SPUtil.LOCAL_SERVICE_ID, "");
+    }
 
     public static String sign(String method, String url, Map<String, String> map) {
         StringBuffer stringBuffer = new StringBuffer();
@@ -55,7 +71,7 @@ public class HttpUtil {
         String secret = SECRET.substring(0, SECRET.length() - 2) + "+/";
         stringBuffer.append(secret);
         String signStr = stringBuffer.toString();
-//        LogUtil.e("Sign String", signStr);
+//        LogUtil.applyScheduler("Sign String", signStr);
         if (!TextUtils.isEmpty(signStr)) {
 
             String signData = EncrypUtil.eccryptSHA1(signStr);
@@ -91,7 +107,7 @@ public class HttpUtil {
         String secret = SECRET.substring(0, SECRET.length() - 2) + "+/";
         stringBuffer.append(secret);
         String signStr = stringBuffer.toString();
-//        LogUtil.e("Sign String with Json", signStr);
+//        LogUtil.applyScheduler("Sign String with Json", signStr);
         if (!TextUtils.isEmpty(signStr)) {
             String signData = EncrypUtil.eccryptSHA1(signStr);
             return signData;

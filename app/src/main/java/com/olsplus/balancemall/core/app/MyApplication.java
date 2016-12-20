@@ -18,11 +18,11 @@ public class MyApplication extends Application {
 
     public static MyApplication getApp() {
         if (mApplication != null && mApplication instanceof MyApplication) {
-            return (MyApplication) mApplication;
+            return mApplication;
         } else {
             mApplication = new MyApplication();
             mApplication.onCreate();
-            return (MyApplication) mApplication;
+            return mApplication;
         }
     }
 

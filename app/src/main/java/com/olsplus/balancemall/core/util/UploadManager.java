@@ -9,6 +9,8 @@ import com.olsplus.balancemall.app.mine.bussiness.MyOrderBussiness;
 import com.olsplus.balancemall.app.mine.bussiness.UserBusiness;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
+import com.trello.rxlifecycle.android.ActivityEvent;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import org.json.JSONObject;
 
@@ -36,8 +38,8 @@ public final class UploadManager {
     /**
      * 上传头像
      *
-     * @param context
-     * @param originalPath
+     * @param context      RxAppCompatActivity
+     * @param originalPath 原始图片
      * @param subscriber
      */
     public static void uploadAvatar(final Context context, String originalPath, final Subscriber<String> subscriber) {
@@ -82,8 +84,8 @@ public final class UploadManager {
                         return upload2QiNiu(imageUploadEntity);
                     }
                 })
-                // TODO RxLifecycle
-//                .compose(RxLifecycle.bindUntilEvent(((RxAppCompatActivity) context).lifecycle(), ActivityEvent.DESTROY))
+                // RxLifecycle
+                .compose(((RxAppCompatActivity) context).<String>bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
@@ -137,8 +139,8 @@ public final class UploadManager {
                         return upload2QiNiu(imageUploadEntity);
                     }
                 })
-                // TODO RxLifecycle
-//                .compose(((RxAppCompatActivity)context).bindUntilEvent(ActivityEvent.DESTROY))
+                //  RxLifecycle
+                .compose(((RxAppCompatActivity) context).<String>bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
@@ -147,7 +149,7 @@ public final class UploadManager {
      * 上传退款凭据
      *
      * @param context
-     * @param originalPaths
+     * @param originalPaths 原始图片集合
      * @param subscriber
      */
     public static void uploadProof(final Context context, final List<String> originalPaths, final Subscriber<String> subscriber) {
@@ -192,8 +194,8 @@ public final class UploadManager {
                         return upload2QiNiu(imageUploadEntity);
                     }
                 })
-                // TODO RxLifecycle
-//                .compose(((RxAppCompatActivity)context).bindUntilEvent(ActivityEvent.DESTROY))
+                //  RxLifecycle
+                .compose(((RxAppCompatActivity) context).<String>bindUntilEvent(ActivityEvent.DESTROY))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
@@ -223,13 +225,6 @@ public final class UploadManager {
                             LogUtil.e(TAG, "上传失败 " + responseInfo.error);
                             stringEmitter.onError(new Throwable(responseInfo.error));
                         }
-
-//                        stringEmitter.setCancellation(new Cancellable() {
-//                            @Override
-//                            public void cancel() throws Exception {
-//                                // 取消请求
-//                            }
-//                        });
                     }
                 }, null);
             }

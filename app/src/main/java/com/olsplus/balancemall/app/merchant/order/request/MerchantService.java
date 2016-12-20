@@ -1,7 +1,6 @@
 package com.olsplus.balancemall.app.merchant.order.request;
 
 
-import com.olsplus.balancemall.app.merchant.earning.bean.EarningListEntity;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantEntity;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderDetailEntity;
 import com.olsplus.balancemall.app.merchant.order.bean.MerchantOrderEntity;
@@ -26,17 +25,6 @@ public interface MerchantService {
             @Query("sign") String sign
     );
 
-    @GET("v1/merchant/revenue")
-    Observable<EarningListEntity> getEarning(
-            @Query("uid") String uid,
-            @Query("token") String token,
-            @Query("local_service_id") String local_service_id,
-            @Query("type") String type,
-            @Query("timestamp") String timestamp,
-            @Query("page") int page,
-            @Query("count") int count,
-            @Query("sign") String sign
-    );
 
     //订单列表
     @GET("v1/merchant/order/list")

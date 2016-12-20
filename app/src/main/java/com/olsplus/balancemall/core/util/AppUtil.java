@@ -82,10 +82,10 @@ public class AppUtil {
         for (android.app.ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             if (appProcess.processName.equals(context.getPackageName())) {
                 if (appProcess.importance == android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_BACKGROUND) {
-//                    LogUtil.e(String.format("Background App:", appProcess.processName));
+//                    LogUtil.applyScheduler(String.format("Background App:", appProcess.processName));
                     return true;
                 } else {
-//                    LogUtil.e(String.format("Foreground App:", appProcess.processName));
+//                    LogUtil.applyScheduler(String.format("Foreground App:", appProcess.processName));
                     return false;
                 }
             }

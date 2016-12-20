@@ -3,6 +3,7 @@ package com.olsplus.balancemall.core.http;
 
 import android.text.TextUtils;
 
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
 import com.olsplus.balancemall.core.http.token.TokenManager;
 import com.olsplus.balancemall.core.util.LogUtil;
@@ -40,7 +41,7 @@ public abstract class HttpResultObserver<T extends BaseResultEntity> extends Sub
 
     @Override
     public void onError(Throwable e) {
-        e.printStackTrace();
+        if (BuildConfig.DEBUG) e.printStackTrace();
         if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
             onFail("网络中断，请检查您的网络状态");
         } else {

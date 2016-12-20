@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
@@ -20,11 +20,11 @@ import com.olsplus.balancemall.app.merchant.goods.adapter.GoodsAdapter;
 import com.olsplus.balancemall.app.merchant.goods.bean.GoodsListEntity;
 import com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness;
 import com.olsplus.balancemall.core.app.BaseCompatFragment;
-import com.olsplus.balancemall.core.bean.BaseResultEntity;
 import com.olsplus.balancemall.core.exception.layout.DefaultExceptionListener;
 import com.olsplus.balancemall.core.exception.layout.ExceptionManager;
-import com.olsplus.balancemall.core.http.RequestCallback;
+import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.util.DensityUtil;
+import com.olsplus.balancemall.core.util.SnackbarUtil;
 import com.olsplus.balancemall.core.util.StrConst;
 
 import org.greenrobot.eventbus.EventBus;
@@ -98,20 +98,18 @@ public class GoodsFragment extends BaseCompatFragment implements SwipeRefreshLay
         goodsAdapter.setMore(R.layout.load_more_layout, this);
         recyclerGoods.setAdapter(goodsAdapter);
         recyclerGoods.addItemDecoration(new DividerDecoration(context.getResources().getColor(android.R.color.transparent), DensityUtil.dp2px(context, 20)));
-//        recyclerGoods.setItemAnimator(new DefaultItemAnimator());
+        recyclerGoods.setItemAnimator(new DefaultItemAnimator());
         // 空页面
         manager = ExceptionManager.initialize(recyclerGoods, new DefaultExceptionListener(this));
     }
 
     private void initData() {
-        GoodsBusiness.getGoodsList(context, page, count, type, new RequestCallback<BaseResultEntity>() {
+        GoodsBusiness.getGoodsList(context, page, count, type, new HttpResultObserver<GoodsListEntity>() {
             @Override
-            public void onSuccess(BaseResultEntity baseResultEntity) {
-                GoodsListEntity entity = (GoodsListEntity) baseResultEntity;
+            public void onSuccess(GoodsListEntity entity) {
                 if (entity.getProduct_list() != null) {
                     goodsAdapter.addAll(entity.getProduct_list());
                 }
-
                 // 空页面
                 if (goodsAdapter.getCount() == 0) {
                     manager.showEmpty();
@@ -121,8 +119,9 @@ public class GoodsFragment extends BaseCompatFragment implements SwipeRefreshLay
             }
 
             @Override
-            public void onError(String msg) {
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+            public void onFail(String msg) {
+//                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                SnackbarUtil.showShort(view, msg);
                 manager.showRetry();
             }
         });

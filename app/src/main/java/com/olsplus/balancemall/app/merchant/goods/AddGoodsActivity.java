@@ -24,12 +24,13 @@ import com.olsplus.balancemall.component.image.ImageHelper;
 import com.olsplus.balancemall.component.ipicker.IPicker;
 import com.olsplus.balancemall.core.app.BaseCompatActivity;
 import com.olsplus.balancemall.core.bean.BaseResultEntity;
-import com.olsplus.balancemall.core.http.RequestCallback;
+import com.olsplus.balancemall.core.http.HttpResultObserver;
 import com.olsplus.balancemall.core.util.Base64Util;
 import com.olsplus.balancemall.core.util.DateUtil;
 import com.olsplus.balancemall.core.util.DensityUtil;
 import com.olsplus.balancemall.core.util.LogUtil;
 import com.olsplus.balancemall.core.util.SPUtil;
+import com.olsplus.balancemall.core.util.SnackbarUtil;
 import com.olsplus.balancemall.core.util.StrConst;
 import com.olsplus.balancemall.core.util.ToastUtil;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
@@ -70,6 +71,7 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
     private int type;
     private long goods_id;
     private String goodsName;
+    private View container;
 
 
     @Override
@@ -97,6 +99,7 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
         } else if (type == editing) {
             setTitle("编辑商品");
         }
+        container = findViewById(R.id.activity_add_goods);
         etGoodsName = (EditText) findViewById(R.id.etGoodsName);
         ivGoodsImage = (ImageView) findViewById(R.id.ivGoodsImage);
         ivGoodsImage.setOnClickListener(this);
@@ -142,11 +145,10 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
             // 编辑商品
             adapter.setInput(editing);
             list.clear();
-            GoodsBusiness.editGoods(this, goods_id, new RequestCallback<BaseResultEntity>() {
+            GoodsBusiness.editGoods(this, goods_id, new HttpResultObserver<EditGoodsEntity>() {
                 @Override
-                public void onSuccess(BaseResultEntity baseResultEntity) {
+                public void onSuccess(EditGoodsEntity entity) {
                     dismissLoading();
-                    EditGoodsEntity entity = (EditGoodsEntity) baseResultEntity;
                     EditGoodsEntity.ProductBean product = entity.getProduct();
 
                     etGoodsName.setText(product.getTitle());
@@ -192,7 +194,7 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
                 }
 
                 @Override
-                public void onError(String msg) {
+                public void onFail(String msg) {
                     dismissLoading();
                     Toast.makeText(AddGoodsActivity.this, msg, Toast.LENGTH_SHORT).show();
                 }
@@ -374,40 +376,46 @@ public class AddGoodsActivity extends BaseCompatActivity implements DatePickerDi
     }
 
     private void addGoods(String url) {
-        GoodsBusiness.addGoods(this, generateGoodsDetail(url), new RequestCallback<BaseResultEntity>() {
+        GoodsBusiness.addGoods(this, generateGoodsDetail(url), new HttpResultObserver<BaseResultEntity>() {
             @Override
-            public void onSuccess(BaseResultEntity baseResultEntity) {
+            public void onSuccess(BaseResultEntity entity) {
                 dismissLoading();
-                Toast.makeText(AddGoodsActivity.this, baseResultEntity.getMsg(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddGoodsActivity.this, entity.getMsg(), Toast.LENGTH_SHORT).show();
+                SnackbarUtil.showShort(container, entity.getMsg());
                 EventBus.getDefault().post("添加成功");
                 finish();
             }
 
             @Override
-            public void onError(String msg) {
+            public void onFail(String msg) {
                 dismissLoading();
-                Toast.makeText(AddGoodsActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddGoodsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                SnackbarUtil.showShort(container, msg);
                 LogUtil.e(msg);
             }
         });
     }
 
     private void updateGoods(String url) {
-        GoodsBusiness.updateGoods(this, generateGoodsDetail(url), new RequestCallback<AddResultEntity>() {
-            @Override
-            public void onSuccess(AddResultEntity addResultEntity) {
-                dismissLoading();
-                Toast.makeText(AddGoodsActivity.this, addResultEntity.getMsg(), Toast.LENGTH_SHORT).show();
-                EventBus.getDefault().post("添加成功");
-                finish();
-            }
+        GoodsBusiness.updateGoods(this, generateGoodsDetail(url), new HttpResultObserver<AddResultEntity>() {
+                    @Override
+                    public void onSuccess(AddResultEntity entity) {
 
-            @Override
-            public void onError(String msg) {
-                dismissLoading();
-                Toast.makeText(AddGoodsActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
+                        dismissLoading();
+                        Toast.makeText(AddGoodsActivity.this, entity.getMsg(), Toast.LENGTH_SHORT).show();
+                        EventBus.getDefault().post("添加成功");
+                        finish();
+
+                    }
+
+                    @Override
+                    public void onFail(String msg) {
+                        dismissLoading();
+                        Toast.makeText(AddGoodsActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+        );
     }
 
     @NonNull
