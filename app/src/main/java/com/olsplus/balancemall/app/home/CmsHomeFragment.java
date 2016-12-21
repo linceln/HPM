@@ -46,8 +46,7 @@ public class CmsHomeFragment extends BaseFragment implements IHomeView,HomeFunct
     };
 
     public static CmsHomeFragment getInstance() {
-        CmsHomeFragment cmsHomeFragment = new CmsHomeFragment();
-        return cmsHomeFragment;
+        return new CmsHomeFragment();
     }
 
 

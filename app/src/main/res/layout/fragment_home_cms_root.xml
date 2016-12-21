@@ -9,9 +9,10 @@
 
     <ScrollView
         android:id="@+id/pull_refresh_scrollview"
-        android:scrollbars="none"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
         <LinearLayout
             android:id="@+id/cards"
