@@ -14,8 +14,8 @@ import com.jude.easyrecyclerview.decoration.DividerDecoration;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.mine.adapter.MessageAdapter;
 import com.olsplus.balancemall.app.mine.bean.MessageCenterInfo;
-import com.olsplus.balancemall.app.mine.message.request.MessageRequest;
 import com.olsplus.balancemall.app.mine.message.request.IShowMessageListView;
+import com.olsplus.balancemall.app.mine.message.request.MessageRequest;
 import com.olsplus.balancemall.app.pay.voucher.MyCouponActivity;
 import com.olsplus.balancemall.app.web.WebActivity;
 import com.olsplus.balancemall.core.app.BaseFragment;
@@ -26,8 +26,6 @@ import com.olsplus.balancemall.core.util.DensityUtil;
 import com.olsplus.balancemall.core.util.ToastUtil;
 
 import java.util.List;
-
-import io.realm.Realm;
 
 
 public class MyMessageActivity extends MainActivity implements SwipeRefreshLayout.OnRefreshListener,
@@ -41,7 +39,7 @@ public class MyMessageActivity extends MainActivity implements SwipeRefreshLayou
     private int pageNo = 1;// 第几页
     private int pageSize = 10;// 每页多少条数据
     private ExceptionManager manager;
-    private Realm realm;
+//    private Realm realm;
 
     @Override
     protected BaseFragment getFirstFragment() {
@@ -66,8 +64,8 @@ public class MyMessageActivity extends MainActivity implements SwipeRefreshLayou
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Realm.init(this);
-        realm = Realm.getDefaultInstance();
+//        Realm.init(this);
+//        realm = Realm.getDefaultInstance();
         setActionBar();
         mTitleName.setText("消息");
         nullLinearLayout = (LinearLayout) findViewById(R.id.my_message_null_linear);
@@ -76,7 +74,8 @@ public class MyMessageActivity extends MainActivity implements SwipeRefreshLayou
         DividerDecoration itemDecoration = new DividerDecoration(getResources().getColor(R.color.divider_line_color), DensityUtil.dp2px(this, 1f), DensityUtil.dp2px(this, 60f), 0);
         messageListView.addItemDecoration(itemDecoration);
         messageListView.setErrorView(R.layout.error_layout);
-        messageAdapter = new MessageAdapter(this, realm);
+        messageAdapter = new MessageAdapter(this);
+//        messageAdapter = new MessageAdapter(this, realm);
         messageAdapter.setMore(R.layout.load_more_layout, this);
         messageAdapter.setOnMessageItemClickListener(this);
         messageListView.setAdapterWithProgress(messageAdapter);
@@ -88,7 +87,7 @@ public class MyMessageActivity extends MainActivity implements SwipeRefreshLayou
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        realm.close();
+//        realm.close();
     }
 
     private void initData() {

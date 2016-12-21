@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
+//apply plugin: 'realm-android'
 
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -35,10 +35,10 @@ android {
     buildTypes {
         debug {
             // 混淆开启
-            minifyEnabled true
+            minifyEnabled false
             // 让安装包中的资源按4字节对齐，减少内存消耗
             zipAlignEnabled true
-            shrinkResources true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debugConfig
         }

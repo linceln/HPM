@@ -3,9 +3,8 @@ package com.olsplus.balancemall.app.mine.bean;
 
 import java.io.Serializable;
 
-import io.realm.RealmObject;
 
-public class MessageCenterInfo extends RealmObject implements Serializable {
+public class MessageCenterInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
     private String type;
