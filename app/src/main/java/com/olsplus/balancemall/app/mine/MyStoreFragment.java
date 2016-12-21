@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -37,25 +38,22 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
     private TextView orderNumTv2;
     private TextView orderNumTv3;
     private TextView orderNumTv4;
-    private LinearLayout couponLinear;
-    private LinearLayout locationLinear;
     private TextView locationTv;
-    private LinearLayout setttingLinear;
-    private LinearLayout aboutLinear;
+    private ImageView messageCountTv;
 
     private UserImpl userImpl;
     private TextView tvBusinessManage;
 
     public static MyStoreFragment getInstance() {
-        MyStoreFragment myStoreFragment = new MyStoreFragment();
-        return myStoreFragment;
+        return new MyStoreFragment();
     }
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
 
-        // TODO 消息数量
-//        messageCountTv = (TextView) view.findViewById(R.id.mystore_message_count_tv);
+        // 消息
+        view.findViewById(R.id.frameMessage).setOnClickListener(this);
+        messageCountTv = (ImageView) view.findViewById(R.id.mystore_message_count_tv);
         userPhoto = (CircleImageView) view.findViewById(R.id.cover_user_photo);
 //        userPhoto.setOnClickListener(this);
         nickNameTv = (TextView) view.findViewById(R.id.mystore_userinfo__nickname_txt);
@@ -68,14 +66,14 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
         orderNumTv2 = (TextView) view.findViewById(R.id.mystore_oder_numtv2);
         orderNumTv3 = (TextView) view.findViewById(R.id.mystore_oder_numtv3);
         orderNumTv4 = (TextView) view.findViewById(R.id.mystore_oder_numtv4);
-        couponLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_coupon);
+        LinearLayout couponLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_coupon);
         couponLinear.setOnClickListener(this);
-        locationLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_location);
+        LinearLayout locationLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_location);
         locationTv = (TextView) view.findViewById(R.id.my_location_name);
         locationLinear.setOnClickListener(this);
-        setttingLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_setting);
+        LinearLayout setttingLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_setting);
         setttingLinear.setOnClickListener(this);
-        aboutLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_about);
+        LinearLayout aboutLinear = (LinearLayout) view.findViewById(R.id.mystore_layout_userinfo_about);
         aboutLinear.setOnClickListener(this);
         // 商家管理
         tvBusinessManage = (TextView) view.findViewById(R.id.tvBusinessManage);
@@ -140,7 +138,7 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
             case R.id.mystore_layout_userinfo_coupon:
                 intent = new Intent(mActivity, MyCouponActivity.class);
                 break;
-            case R.id.right_operation_rl:
+            case R.id.frameMessage:// 消息
                 intent = new Intent(mActivity, MyMessageActivity.class);
                 break;
             case R.id.tvBusinessManage://商家管理
@@ -211,13 +209,11 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
                 locationTv.setText(userInfo.getBuilding_name());
                 int messageCount = data.getMsgs();
                 if (messageCount > 0) {
-//                    messageCountTv.setVisibility(View.VISIBLE);
-//                    messageCountTv.setText("" + messageCount);
+                    messageCountTv.setVisibility(View.VISIBLE);
                 } else {
-//                    messageCountTv.setVisibility(View.GONE);
+                    messageCountTv.setVisibility(View.GONE);
                 }
             }
-
         }
     }
 }

@@ -42,6 +42,7 @@ import java.util.List;
 
 public class CheckoutMainActivity extends MainActivity implements ICheckOutView, CheckoutProductView.OnOrderViewChangeListener, IShowVoucherView {
 
+    private static final int REQUEST_CODE_COUPON = 104;
     private LinearLayout productLinear;
     private LinearLayout paymentLinear;
     private LinearLayout orderInfoLinear;
@@ -278,14 +279,14 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 104) {
+        if (requestCode == REQUEST_CODE_COUPON) {
             if (resultCode == RESULT_OK) {
                 if (data != null) {
-                    ShoppingVoucherEntity shopingVoucherVo = (ShoppingVoucherEntity) data.getSerializableExtra("voucher_select");
-                    double needPrice = shopingVoucherVo.getMin_spend();
+                    ShoppingVoucherEntity shoppingVoucherVo = (ShoppingVoucherEntity) data.getSerializableExtra("voucher_select");
+                    double needPrice = shoppingVoucherVo.getMin_spend();
                     if (currentCheckOutResult.getTotal_fee() >= needPrice) {
 
-                        String voucherSelected = shopingVoucherVo.getId();
+                        String voucherSelected = shoppingVoucherVo.getId();
                         if (!TextUtils.isEmpty(voucher)) {
                             if (voucher.equals(voucherSelected)) {
                                 voucher = null;
@@ -302,7 +303,7 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
                             checkoutOrderInfoView.refreshAmount(currentCheckOutResult.getTotal_fee() - pointsAmount);
                             return;
                         }
-                        vouchePrice = shopingVoucherVo.getVoucher_value();
+                        vouchePrice = shoppingVoucherVo.getVoucher_value();
                         double totalFee = currentCheckOutResult.getTotal_fee();
                         if (vouchePrice > totalFee) {
                             pointsAmount = 0;
@@ -315,7 +316,7 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
                             }
                         }
                         checkoutProductView.refreshCouponContent(vouchePrice);
-//                        voucher = shopingVoucherVo.getId();
+//                        voucher = shoppingVoucherVo.getId();
 
                         //重新刷新支付价格
                         currentPayAmount = currentCheckOutResult.getTotal_fee() - vouchePrice - pointsAmount;
@@ -411,7 +412,7 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
     @Override
     public void onVoucherClickListener() {
         Intent intent = new Intent(this, MyCouponActivity.class);
-        startActivityForResult(intent, 104);
+        startActivityForResult(intent, REQUEST_CODE_COUPON);
     }
 
 

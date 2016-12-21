@@ -45,7 +45,7 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
     private ShopingOrderSubmitResultEntity current;
 
     public interface OnOrderViewChangeListener {
-        public void OnOrderPriceChange(boolean isCheck,double price);
+        public void OnOrderPriceChange(boolean isCheck, double price);
 
         public void onVoucherClickListener();
     }
@@ -92,19 +92,19 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
         orderAmountTv.setText(UIUtil.formatLablePrice(orderAmount));
         points = (Integer) SPUtil.get(getContext(), SPUtil.POINTS, 0);
         double rule = shopingOrderSubmitResultEntity.getPoint_rule();
-        integral = UIUtil.formatPrice(points *rule);
+        integral = UIUtil.formatPrice(points * rule);
 
         pointTv.setText("可用" + points + "积分,抵用现金" + integral + "元");
-        if(integral>orderAmount){
-            integral =  orderAmount;
+        if (integral > orderAmount) {
+            integral = orderAmount;
             try {
-                int availablePoints = (int)(integral/rule);
+                int availablePoints = (int) (integral / rule);
                 pointsUsed = availablePoints;
                 pointTv.setText("可用" + availablePoints + "积分,抵用现金" + integral + "元");
             } catch (Throwable e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             pointsUsed = points;
         }
 
@@ -116,15 +116,15 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
     }
 
 
-    public void refreshPointUsed(double pointsAmount){
+    public void refreshPointUsed(double pointsAmount) {
         integral = pointsAmount;
         double rule = current.getPoint_rule();
-        pointsUsed = (int)(pointsAmount/rule);
+        pointsUsed = (int) (pointsAmount / rule);
         pointTv.setText("可用" + pointsUsed + "积分,抵用现金" + integral + "元");
     }
 
-    public void initCouponContent(double couponValue){
-        if(couponValue == 0){
+    public void initCouponContent(double couponValue) {
+        if (couponValue == 0) {
             voucherTv.setText("没有抵用券");
         }
 //        else{
@@ -133,16 +133,17 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
         totalVoucher = couponValue;
     }
 
-    public void refreshCouponContent(double couponValue){
-        if(couponValue == 0){
+    public void refreshCouponContent(double couponValue) {
+        if (couponValue == 0) {
 //            voucherTv.setTextOnCounting("可抵扣"+totalVoucher+"元");
-        }else{
-            voucherTv.setText("抵扣"+couponValue+"元");
+        } else {
+            voucherTv.setText("抵扣" + couponValue + "元");
         }
     }
 
     /**
      * 获取当前被消费的积分
+     *
      * @return
      */
     public int getPointsUsed() {
@@ -151,7 +152,6 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
         }
         return 0;
     }
-
 
 
     @Override
@@ -167,7 +167,7 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
                     availableAmount = 0;
                 }
                 if (onOrderViewChangeListener != null) {
-                    onOrderViewChangeListener.OnOrderPriceChange(pointCb.isChecked(),availableAmount);
+                    onOrderViewChangeListener.OnOrderPriceChange(pointCb.isChecked(), availableAmount);
                 }
                 break;
             case R.id.pay_checkout_voucher_layout:

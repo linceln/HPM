@@ -9,6 +9,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.olsplus.balancemall.app.pay.bean.ShoppingVoucherEntity;
 import com.olsplus.balancemall.app.pay.view.PayVoucherViewHolder;
+import com.olsplus.balancemall.core.util.SPUtil;
 
 public class PayCouponAdapter extends RecyclerArrayAdapter<ShoppingVoucherEntity> {
 
@@ -38,8 +39,16 @@ public class PayCouponAdapter extends RecyclerArrayAdapter<ShoppingVoucherEntity
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mOnVoucherItemClickListener!=null){
-                    mOnVoucherItemClickListener.onItemClick(position,holder);
+
+                for (ShoppingVoucherEntity entity : mObjects) {
+                    entity.setSelected(false);
+                }
+                mObjects.get(position).setSelected(true);
+                SPUtil.put(getContext(),"couponId", mObjects.get(position).getId());
+                notifyDataSetChanged();
+
+                if (mOnVoucherItemClickListener != null) {
+                    mOnVoucherItemClickListener.onItemClick(position, holder);
                 }
             }
         });

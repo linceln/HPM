@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
@@ -12,7 +13,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 24
         versionCode 2
-        versionName "1.0.1"
+        versionName "1.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -34,7 +35,7 @@ android {
     buildTypes {
         debug {
             // 混淆开启
-            minifyEnabled false
+            minifyEnabled true
             // 让安装包中的资源按4字节对齐，减少内存消耗
             zipAlignEnabled true
             shrinkResources true

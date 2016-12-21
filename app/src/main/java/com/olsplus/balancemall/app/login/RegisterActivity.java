@@ -170,7 +170,7 @@ public class RegisterActivity extends MainActivity implements IRegisterView {
 
             case R.id.register_private:
                 Intent intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url", "http://www.olsplus.com/agreement.html");
+                intent.putExtra("url", "https://www.olsplus.com/agreement.html");
                 intent.putExtra("title", "使用条款和隐私政策");
                 startActivity(intent);
                 break;

@@ -7,13 +7,29 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/mystore_relayout_msg_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:scaleType="fitXY"
-        android:src="@drawable/mystore_msg_icon" />
+    <FrameLayout
+        android:id="@+id/frameMessage"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_gravity="end">
+
+        <ImageView
+            android:id="@+id/mystore_relayout_msg_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/mystore_msg_icon" />
+
+        <ImageView
+            android:id="@+id/mystore_message_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:src="@drawable/ic_white_dot"
+            android:visibility="gone" />
+    </FrameLayout>
+
 
     <TextView
         android:id="@+id/tvBusinessManage"

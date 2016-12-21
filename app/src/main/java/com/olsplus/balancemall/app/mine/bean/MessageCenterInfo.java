@@ -3,7 +3,9 @@ package com.olsplus.balancemall.app.mine.bean;
 
 import java.io.Serializable;
 
-public class MessageCenterInfo implements Serializable {
+import io.realm.RealmObject;
+
+public class MessageCenterInfo extends RealmObject implements Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
     private String type;
@@ -11,6 +13,15 @@ public class MessageCenterInfo implements Serializable {
     private String info;
     private String link;
     private String time;
+    private boolean isRead;
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
 
     public String getId() {
         return id;

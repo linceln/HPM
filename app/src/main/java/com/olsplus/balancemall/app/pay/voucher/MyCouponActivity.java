@@ -21,7 +21,7 @@ import com.olsplus.balancemall.core.app.MainActivity;
 
 import java.util.List;
 
-public class MyCouponActivity extends MainActivity implements IShowVoucherView,PayCouponAdapter.OnVoucherItemClickListener{
+public class MyCouponActivity extends MainActivity implements IShowVoucherView, PayCouponAdapter.OnVoucherItemClickListener {
 
     private TextView emptyTv;
     private LinearLayout emptyLinear;
@@ -65,7 +65,7 @@ public class MyCouponActivity extends MainActivity implements IShowVoucherView,P
         initData();
     }
 
-    private void initData(){
+    private void initData() {
         outRequest = new CheckOutRequestImpl(this);
         outRequest.setShowVoucherView(this);
         outRequest.getVouchers();
@@ -90,12 +90,12 @@ public class MyCouponActivity extends MainActivity implements IShowVoucherView,P
     @Override
     public void onItemClick(int position, BaseViewHolder holder) {
         List<ShoppingVoucherEntity> datas = payCouponAdapter.getAllData();
-        if(datas!=null && !datas.isEmpty()){
+        if (datas != null && !datas.isEmpty()) {
             ShoppingVoucherEntity data = datas.get(position);
-            if(data!=null){
-                Intent intent = new Intent(MyCouponActivity.this,CheckoutMainActivity.class);
-                intent.putExtra("voucher_select",data);
-                setResult(RESULT_OK,intent);
+            if (data != null) {
+                Intent intent = new Intent(MyCouponActivity.this, CheckoutMainActivity.class);
+                intent.putExtra("voucher_select", data);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         }

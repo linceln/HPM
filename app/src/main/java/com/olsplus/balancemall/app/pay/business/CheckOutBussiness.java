@@ -265,7 +265,6 @@ public class CheckOutBussiness {
 
             @Override
             public void onFail(String msg) {
-                LogUtil.d("yongyuan.w", "getVouchers failed");
                 callback.onVoucherFailed(msg);
             }
         };

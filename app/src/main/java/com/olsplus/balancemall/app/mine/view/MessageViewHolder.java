@@ -1,6 +1,7 @@
 package com.olsplus.balancemall.app.mine.view;
 
 
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ public class MessageViewHolder extends BaseViewHolder<MessageCenterInfo> {
     private TextView messageTv;
     private TextView reamrkMessageTv;
     private TextView timeTv;
+    private ImageView message_dot;
 
     public MessageViewHolder(ViewGroup parent) {
         super(parent, R.layout.mystore_mymessage_list_item);
@@ -26,12 +28,20 @@ public class MessageViewHolder extends BaseViewHolder<MessageCenterInfo> {
         messageTv = $(R.id.message_tv);
         reamrkMessageTv = $(R.id.message_sub_tv);
         timeTv = $(R.id.message_time_tv);
+        message_dot = $(R.id.message_dot);
     }
 
     @Override
     public void setData(MessageCenterInfo data) {
         super.setData(data);
         if (data != null) {
+
+            if (data.isRead()) {
+                message_dot.setVisibility(View.GONE);
+            } else {
+                message_dot.setVisibility(View.VISIBLE);
+            }
+
             Glide.with(getContext()).load(getMessageRes(data.getType())).into(messageIv);
             messageTv.setText(data.getTitle());
             reamrkMessageTv.setText(data.getInfo());

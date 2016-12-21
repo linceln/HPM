@@ -23,12 +23,14 @@ import okio.Buffer;
 public class LogInterceptor implements Interceptor {
 
     private static String TAG = "HTTP:";
+    private static int count;
 
     @Override
     public okhttp3.Response intercept(Chain chain) throws IOException {
 
         Request request = chain.request();
-        TAG += request.hashCode();
+        TAG = "HTTP:";
+        TAG += ++count;
         LogUtil.e(TAG, "---------------------------------Start-------------------------------------");
         LogUtil.e(TAG, request.method());
         if ("GET".equals(request.method())) {

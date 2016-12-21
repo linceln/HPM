@@ -97,7 +97,7 @@ public class RegisterMobileActivity extends BaseCompatActivity implements View.O
         switch (v.getId()) {
             case R.id.tvClause:// 条款
                 Intent intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url", "http://www.olsplus.com/agreement.html");
+                intent.putExtra("url", "https://www.olsplus.com/agreement.html");
                 intent.putExtra("title", "使用条款和隐私政策");
                 startActivity(intent);
                 break;

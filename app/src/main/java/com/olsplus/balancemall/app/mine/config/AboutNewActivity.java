@@ -74,7 +74,7 @@ public class AboutNewActivity extends MainActivity {
                 break;
             case R.id.aboutnew_private:
                 intent = new Intent(this, WebActivity.class);
-                intent.putExtra("url", "http://www.olsplus.com/agreement.html");
+                intent.putExtra("url", "https://www.olsplus.com/agreement.html");
                 intent.putExtra("title", "使用条款和隐私政策");
                 startActivity(intent);
                 break;

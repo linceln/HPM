@@ -13,6 +13,15 @@ public class ShoppingVoucherEntity implements Serializable {
     private String apply_service_name;
     private long start_time;
     private long end_time;
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
 
     public String getId() {
         return id;
