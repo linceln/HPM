@@ -32,14 +32,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4120e7c-566b-41b4-a3f4-7e70e12ee59f" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/bean/MySeesionEntity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/bean/MySeesionEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/CheckoutMainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/CheckoutMainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/bean/ShopingOrderSubmitResultEntity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/bean/ShopingOrderSubmitResultEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/business/CheckOutBussiness.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/business/CheckOutBussiness.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/core/util/ApiConst.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/core/util/ApiConst.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/core/util/SPUtil.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/core/util/SPUtil.java" />
     </list>
     <ignored path="HePingMao.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,101 +67,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MyOrderFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/MyOrderFragment.java">
+      <file leaf-file-name="Request.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.1/e4e61f9159325a04a7c66ce7c4340ee2e683879a/okhttp-3.3.1-sources.jar!/okhttp3/Request.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="138" column="60" selection-start-line="138" selection-start-column="60" selection-end-line="138" selection-end-column="60" />
+            <state relative-caret-position="-2475">
+              <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CheckoutMainActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/CheckoutMainActivity.java">
+      <file leaf-file-name="ViewGroup.java" pinned="false" current-in-tab="false">
+        <entry file="file://F:/sdk/sdk/sources/android-24/android/view/ViewGroup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="150" column="80" selection-start-line="150" selection-start-column="80" selection-end-line="150" selection-end-column="80" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SPUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/core/util/SPUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="111" column="25" selection-start-line="111" selection-start-column="25" selection-end-line="111" selection-end-column="25" />
+            <state relative-caret-position="375">
+              <caret line="112" column="43" selection-start-line="112" selection-start-column="43" selection-end-line="112" selection-end-column="43" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#165767#165768#0" expanded="true" />
+                <element signature="e#165801#165802#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CheckOutBussiness.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/business/CheckOutBussiness.java">
+      <file leaf-file-name="View.java" pinned="false" current-in-tab="true">
+        <entry file="file://F:/sdk/sdk/sources/android-24/android/view/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="64" column="78" selection-start-line="64" selection-start-column="78" selection-end-line="64" selection-end-column="78" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShopingOrderSubmitResultEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/bean/ShopingOrderSubmitResultEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="669">
-              <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
-              <folding>
-                <element signature="e#829#830#0" expanded="true" />
-                <element signature="e#862#863#0" expanded="true" />
-                <element signature="e#913#914#0" expanded="true" />
-                <element signature="e#957#958#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyStoreFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/MyStoreFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="177" column="65" selection-start-line="177" selection-start-column="65" selection-end-line="177" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MySeesionEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/bean/MySeesionEntity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-              <folding>
-                <element signature="e#805#806#0" expanded="true" />
-                <element signature="e#838#839#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyCouponActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/voucher/MyCouponActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="95" column="66" selection-start-line="95" selection-start-column="66" selection-end-line="95" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/web/WebActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="341">
-              <caret line="173" column="28" selection-start-line="173" selection-start-column="28" selection-end-line="173" selection-end-column="28" />
+            <state relative-caret-position="364">
+              <caret line="20960" column="46" selection-start-line="20960" selection-start-column="46" selection-end-line="20960" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -6095,86 +6021,6 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HePingMao" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HePingMao" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="balancemall" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HePingMao" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="balancemall" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HePingMao" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="balancemall" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="ProjectPane">
@@ -6204,7 +6050,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1058" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="SearchEverywhereHistoryKey" value="Httpma&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpManager.java&#10;Apic&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/ApiConst.java&#10;Cmshome&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/home/CmsHomeFragment.java&#10;web&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/web/WebActivity.java&#10;Api&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.util.ApiConst&#10;Httpu&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.HttpUtil&#10;checkoutvi&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/pay/view/CheckoutProductView.java&#10;chec&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/pay/CheckoutMainActivity.java&#10;Loginac&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.login.LoginActivity&#10;Mystorefra&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.mine.MyStoreFragment&#10;Httpmanager&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpManager.java&#10;httpma&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.HttpManager&#10;Web&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.web.WebActivity&#10;http&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.HttpResultObserver&#10;MyMess&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/mine/message/MyMessageActivity.java&#10;cms&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.home.CmsHomeFragment&#10;goodsfra&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/GoodsFragment.java&#10;lOGIN&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.LogInterceptor&#10;Weba&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.web.WebActivity&#10;Signin&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/SignInterceptor.java&#10;Uploadma&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/UploadManager.java&#10;Splasha&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.splash.SplashActivity&#10;Dotrans&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/DoTransform.java&#10;Httpm&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpManager.java&#10;Goods&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/request/GoodsService.java&#10;Httpresult&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpResultObserver.java&#10;goodsser&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/request/GoodsService.java&#10;LoadingDial&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/component/dialog/LoadingDialog.java&#10;GoodsFr&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.merchant.goods.GoodsFragment&#10;LoadingDialog&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/component/dialog/LoadingDialog.java&#10;Loadingda&#9;null&#9;null&#10;Homeac&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.home.HomeActivity&#10;Addgoods&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/AddGoodsActivity.java&#10;GoodsSer&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/request/GoodsService.java&#10;addgoo&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/AddGoodsActivity.java&#10;Dialog&#9;PSI&#9;JAVA://com.olsplus.balancemall.component.dialog.LoadingDialog&#10;Splashac&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/splash/SplashActivity.java&#10;UploadManager&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/UploadManager.java&#10;GoodsBu&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness&#10;Spla&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/splash/SplashActivity.java&#10;Upload&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/UploadManager.java&#10;Uploadmane&#9;null&#9;null&#10;RxAppcom&#9;FILE&#9;jar://C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.trello/rxlifecycle-components/1.0/ece3ef7adcc69f26def230266e0dc1641b8aeeb7/rxlifecycle-components-1.0-sources.jar!/com/trello/rxlifecycle/components/support/RxAppCompatActivity.java&#10;Splash&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/splash/SplashActivity.java&#10;Ipick&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/component/ipicker/IPickerActivity.java&#10;IPick&#9;PSI&#9;JAVA://com.olsplus.balancemall.component.ipicker.IPickerActivity&#10;Loading&#9;PSI&#9;JAVA://com.olsplus.balancemall.component.dialog.LoadingDialog&#10;HttpObse&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpResultObserver.java&#10;Apicon&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.util.ApiConst&#10;BaseCompatac&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/app/BaseCompatActivity.java" />
+    <property name="SearchEverywhereHistoryKey" value="View&#9;FILE&#9;file://F:/sdk/sdk/sources/android-24/android/view/ViewGroup.java&#10;Request&#9;FILE&#9;jar://C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.1/e4e61f9159325a04a7c66ce7c4340ee2e683879a/okhttp-3.3.1-sources.jar!/okhttp3/Request.java&#10;Httpma&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpManager.java&#10;Apic&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/ApiConst.java&#10;Cmshome&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/home/CmsHomeFragment.java&#10;web&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/web/WebActivity.java&#10;Api&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.util.ApiConst&#10;Httpu&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.HttpUtil&#10;checkoutvi&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/pay/view/CheckoutProductView.java&#10;chec&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/pay/CheckoutMainActivity.java&#10;Loginac&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.login.LoginActivity&#10;Mystorefra&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.mine.MyStoreFragment&#10;Httpmanager&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpManager.java&#10;httpma&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.HttpManager&#10;Web&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.web.WebActivity&#10;http&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.HttpResultObserver&#10;MyMess&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/mine/message/MyMessageActivity.java&#10;cms&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.home.CmsHomeFragment&#10;goodsfra&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/GoodsFragment.java&#10;lOGIN&#9;PSI&#9;JAVA://com.olsplus.balancemall.core.http.LogInterceptor&#10;Weba&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.web.WebActivity&#10;Signin&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/SignInterceptor.java&#10;Uploadma&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/UploadManager.java&#10;Splasha&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.splash.SplashActivity&#10;Dotrans&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/DoTransform.java&#10;Httpm&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpManager.java&#10;Goods&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/request/GoodsService.java&#10;Httpresult&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpResultObserver.java&#10;goodsser&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/request/GoodsService.java&#10;LoadingDial&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/component/dialog/LoadingDialog.java&#10;GoodsFr&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.merchant.goods.GoodsFragment&#10;LoadingDialog&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/component/dialog/LoadingDialog.java&#10;Loadingda&#9;null&#9;null&#10;Homeac&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.home.HomeActivity&#10;Addgoods&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/AddGoodsActivity.java&#10;GoodsSer&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/request/GoodsService.java&#10;addgoo&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/merchant/goods/AddGoodsActivity.java&#10;Dialog&#9;PSI&#9;JAVA://com.olsplus.balancemall.component.dialog.LoadingDialog&#10;Splashac&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/splash/SplashActivity.java&#10;UploadManager&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/UploadManager.java&#10;GoodsBu&#9;PSI&#9;JAVA://com.olsplus.balancemall.app.merchant.goods.business.GoodsBusiness&#10;Spla&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/splash/SplashActivity.java&#10;Upload&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/util/UploadManager.java&#10;Uploadmane&#9;null&#9;null&#10;RxAppcom&#9;FILE&#9;jar://C:/Users/Administrator/.gradle/caches/modules-2/files-2.1/com.trello/rxlifecycle-components/1.0/ece3ef7adcc69f26def230266e0dc1641b8aeeb7/rxlifecycle-components-1.0-sources.jar!/com/trello/rxlifecycle/components/support/RxAppCompatActivity.java&#10;Splash&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/app/splash/SplashActivity.java&#10;Ipick&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/component/ipicker/IPickerActivity.java&#10;IPick&#9;PSI&#9;JAVA://com.olsplus.balancemall.component.ipicker.IPickerActivity&#10;Loading&#9;PSI&#9;JAVA://com.olsplus.balancemall.component.dialog.LoadingDialog&#10;HttpObse&#9;FILE&#9;file://E:/HePingMao/app/src/main/java/com/olsplus/balancemall/core/http/HttpResultObserver.java" />
     <property name="device.picker.selection" value="01a99969b59b12b0" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="ExportApk.ApkPath" value="E:\HePingMao\app" />
@@ -6571,8 +6417,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -6680,7 +6526,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/core/db/MessageDao.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/message_icon4.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -6936,14 +6781,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.1/e4e61f9159325a04a7c66ce7c4340ee2e683879a/okhttp-3.3.1-sources.jar!/okhttp3/Request.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/core/http/SignInterceptor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -7000,30 +6837,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/MyOrderFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="138" column="60" selection-start-line="138" selection-start-column="60" selection-end-line="138" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/view/CheckoutProductView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="939">
           <caret line="87" column="71" selection-start-line="87" selection-start-column="71" selection-end-line="87" selection-end-column="71" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://F:/sdk/sdk/sources/android-24/android/view/ViewGroup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="4206" column="16" selection-start-line="4206" selection-start-column="16" selection-end-line="4206" selection-end-column="16" />
-          <folding>
-            <element signature="e#165767#165768#0" expanded="false" />
-            <element signature="e#165801#165802#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -7064,9 +6882,25 @@
         <state relative-caret-position="569">
           <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
           <folding>
-            <element signature="e#805#806#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
+            <element signature="e#805#806#0" expanded="false" />
+            <element signature="e#838#839#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/CheckoutMainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="154" column="55" selection-start-line="154" selection-start-column="55" selection-end-line="154" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/MyOrderFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="138" column="60" selection-start-line="138" selection-start-column="60" selection-end-line="138" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -7075,28 +6909,7 @@
         <state relative-caret-position="370">
           <caret line="111" column="25" selection-start-line="111" selection-start-column="25" selection-end-line="111" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/MyStoreFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="177" column="65" selection-start-line="177" selection-start-column="65" selection-end-line="177" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/bean/ShopingOrderSubmitResultEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="669">
-          <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
-          <folding>
-            <element signature="e#829#830#0" expanded="true" />
-            <element signature="e#862#863#0" expanded="true" />
-            <element signature="e#913#914#0" expanded="true" />
-            <element signature="e#957#958#0" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -7109,10 +6922,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/CheckoutMainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/pay/bean/ShopingOrderSubmitResultEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="150" column="80" selection-start-line="150" selection-start-column="80" selection-end-line="150" selection-end-column="80" />
+        <state relative-caret-position="669">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+          <folding>
+            <element signature="e#829#830#0" expanded="false" />
+            <element signature="e#862#863#0" expanded="false" />
+            <element signature="e#913#914#0" expanded="false" />
+            <element signature="e#957#958#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/olsplus/balancemall/app/mine/MyStoreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="177" column="65" selection-start-line="177" selection-start-column="65" selection-end-line="177" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.3.1/e4e61f9159325a04a7c66ce7c4340ee2e683879a/okhttp-3.3.1-sources.jar!/okhttp3/Request.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2475">
+          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/sdk/sdk/sources/android-24/android/view/ViewGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="112" column="43" selection-start-line="112" selection-start-column="43" selection-end-line="112" selection-end-column="43" />
+          <folding>
+            <element signature="e#165767#165768#0" expanded="true" />
+            <element signature="e#165801#165802#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://F:/sdk/sdk/sources/android-24/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="20960" column="46" selection-start-line="20960" selection-start-column="46" selection-end-line="20960" selection-end-column="46" />
           <folding />
         </state>
       </provider>
