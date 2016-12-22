@@ -58,7 +58,7 @@ public class MessageAdapter extends RecyclerArrayAdapter<MessageCenterInfo> {
                 mObjects.get(position).setRead(true);
                 notifyDataSetChanged();
 
-
+                // 没有保存过，保存到数据库
                 if (!isSaved(mObjects.get(position).getId())) {
                     insertData(mObjects.get(position).getId());
                 }

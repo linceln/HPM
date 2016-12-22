@@ -56,7 +56,6 @@ public class MessageViewHolder extends BaseViewHolder<MessageCenterInfo> {
             } else {
                 timeTv.setText(DateUtil.date2Str(date, DateUtil.FORMAT_YMD));
             }
-
         }
     }
 
