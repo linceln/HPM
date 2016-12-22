@@ -90,7 +90,7 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
         current = shopingOrderSubmitResultEntity;
         orderAmount = shopingOrderSubmitResultEntity.getTotal_fee();
         orderAmountTv.setText(UIUtil.formatLablePrice(orderAmount));
-        points = (Integer) SPUtil.get(getContext(), SPUtil.POINTS, 0);
+        points = (int) SPUtil.get(getContext(), SPUtil.POINTS, 0);
         double rule = shopingOrderSubmitResultEntity.getPoint_rule();
         integral = UIUtil.formatPrice(points * rule);
 

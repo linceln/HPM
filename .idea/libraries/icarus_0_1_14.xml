@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="icarus-0.1.14">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.mr5/icarus/0.1.14/res" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.mr5/icarus/0.1.14/jars/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.github.mr5/icarus/0.1.14/jars/libs/tbs_sdk_v1.5.1.1057_25436_obfs_20160331_144900.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.mr5/icarus/0.1.14/7d8d26aa4f576e924946569fb8a983d6dfe2f626/icarus-0.1.14-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

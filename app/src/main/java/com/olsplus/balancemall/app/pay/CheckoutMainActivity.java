@@ -145,10 +145,10 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
             outRequest.getVouchers();
             currentCheckOutResult = new ShopingOrderSubmitResultEntity();
             currentCheckOutResult.setTotal_fee(total_fee);
-            String pointsRule = (String) SPUtil.get(this,SPUtil.POINTS_RULE,"");
-            if(TextUtils.isEmpty(pointsRule)){
+            String pointsRule = (String) SPUtil.get(this, SPUtil.POINTS_RULE, "");
+            if (TextUtils.isEmpty(pointsRule)) {
                 currentCheckOutResult.setPoint_rule(0);
-            }else{
+            } else {
                 double pointsRuleDouble = Double.parseDouble(pointsRule);
                 currentCheckOutResult.setPoint_rule(pointsRuleDouble);
             }
@@ -180,7 +180,6 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
         aliCheck.setOnClickListener(this);
         wxCheck.setOnClickListener(this);
         paymentLinear.addView(paymentView);
-
     }
 
     /**
@@ -381,11 +380,12 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
 
     /**
      * 当支付金额为0的情况下
+     *
      * @param shoppingResultByZero
      */
     @Override
     public void showSpecialPaySuccess(ShoppingResultByZero shoppingResultByZero) {
-        if(shoppingResultByZero != null){
+        if (shoppingResultByZero != null) {
             trade_id = shoppingResultByZero.getTrade_id();
             goToSuccessActivity();
         }

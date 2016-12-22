@@ -18,7 +18,7 @@ public class MessageViewHolder extends BaseViewHolder<MessageCenterInfo> {
 
     private ImageView messageIv;
     private TextView messageTv;
-    private TextView reamrkMessageTv;
+    private TextView remarkMessageTv;
     private TextView timeTv;
     private ImageView message_dot;
 
@@ -26,7 +26,7 @@ public class MessageViewHolder extends BaseViewHolder<MessageCenterInfo> {
         super(parent, R.layout.mystore_mymessage_list_item);
         messageIv = $(R.id.message_icon);
         messageTv = $(R.id.message_tv);
-        reamrkMessageTv = $(R.id.message_sub_tv);
+        remarkMessageTv = $(R.id.message_sub_tv);
         timeTv = $(R.id.message_time_tv);
         message_dot = $(R.id.message_dot);
     }
@@ -44,7 +44,7 @@ public class MessageViewHolder extends BaseViewHolder<MessageCenterInfo> {
 
             Glide.with(getContext()).load(getMessageRes(data.getType())).into(messageIv);
             messageTv.setText(data.getTitle());
-            reamrkMessageTv.setText(data.getInfo());
+            remarkMessageTv.setText(data.getInfo());
             String dateStr = data.getTime();
             boolean isSameDay = DateUtil.isSameDay(dateStr);
             boolean isSameYear = DateUtil.isSameYear(dateStr);

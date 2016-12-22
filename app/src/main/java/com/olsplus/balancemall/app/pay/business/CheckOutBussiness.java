@@ -52,11 +52,6 @@ public class CheckOutBussiness {
         HttpResultObserver respObserver = new HttpResultObserver<ShopingOrderSubmitResultEntity>() {
 
             @Override
-            public void onPrepare() {
-
-            }
-
-            @Override
             public void onReconnect() {
                 sumitOrder(order, callback);
             }
@@ -75,7 +70,6 @@ public class CheckOutBussiness {
 
             @Override
             public void onFail(String msg) {
-                LogUtil.d("yongyuan,w", "sumitOrder failed");
                 callback.onSumitOrderFailed(msg);
             }
         };
@@ -184,19 +178,14 @@ public class CheckOutBussiness {
     }
 
     public void startBuyStep(final String payRequest, final ICheckOutRequest.SpecialPayCallback callback) {
-        String url = ApiConst.BASE_URL + "v1/payment/onPrepare";
+        String url = ApiConst.BASE_URL + "v1/payment/prepare";
         String timestamp = String.valueOf(DateUtil.getCurrentTimeInLong());
         String uid = (String) SPUtil.get(context, SPUtil.UID, "");
         String token = (String) SPUtil.get(context, SPUtil.TOKEN, "");
         String sign = parseSumitOrderSign(url, uid, token, payRequest, timestamp);
         RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"), payRequest);
-        String requestUrl = "v1/payment/onPrepare?uid=" + uid + "&token=" + token + "&timestamp=" + timestamp + "&sign=" + sign;
+        String requestUrl = "v1/payment/prepare?uid=" + uid + "&token=" + token + "&timestamp=" + timestamp + "&sign=" + sign;
         HttpResultObserver respObserver = new HttpResultObserver<ShoppingResultByZero>() {
-
-            @Override
-            public void onPrepare() {
-
-            }
 
             @Override
             public void onReconnect() {
@@ -214,7 +203,6 @@ public class CheckOutBussiness {
 
             @Override
             public void onFail(String msg) {
-                LogUtil.d("yongyuan,w", "preparePay failed");
                 callback.onPayFailed(msg);
             }
         };

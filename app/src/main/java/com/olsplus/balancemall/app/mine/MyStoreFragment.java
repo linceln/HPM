@@ -163,7 +163,8 @@ public class MyStoreFragment extends BaseFragment implements View.OnClickListene
             }
             String name = userInfo.getName();
             String photo = userInfo.getAvatar();
-            String points = userInfo.getPoints();
+            int points = userInfo.getPoints();
+            SPUtil.put(getContext(), SPUtil.POINTS, points);
             nickNameTv.setText(name);
             pointTv.setText("积分：" + points);
             Glide.with(mActivity)

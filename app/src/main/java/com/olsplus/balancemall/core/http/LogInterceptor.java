@@ -41,14 +41,19 @@ public class LogInterceptor implements Interceptor {
         }
 
         okhttp3.Response response = chain.proceed(request);
+        String content = response.body().string();
         try {
-            LogUtil.e(TAG, new JSONObject(response.body().string()).toString(4));
+            LogUtil.e(TAG, new JSONObject(content).toString(4));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         LogUtil.e(TAG, "-----------------------------------End-------------------------------------");
-        // 不能return response，一个response只能用一次
-        return chain.proceed(request);
+//        // 不能return response，一个response只能用一次
+//        return chain.proceed(request);
+        okhttp3.MediaType mediaType = response.body().contentType();
+        return response.newBuilder()
+                .body(okhttp3.ResponseBody.create(mediaType, content))
+                .build();
     }
 
     @NonNull

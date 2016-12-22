@@ -9,7 +9,7 @@ public class UserInfo implements Serializable {
 
     private String name;
     private String phone;
-    private String points;
+    private int points;
     private String avatar;
     private String gender;
     private String building_id;
@@ -49,11 +49,11 @@ public class UserInfo implements Serializable {
         this.phone = phone;
     }
 
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
