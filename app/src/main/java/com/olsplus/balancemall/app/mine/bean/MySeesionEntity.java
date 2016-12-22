@@ -8,7 +8,7 @@ public class MySeesionEntity extends BaseResultEntity {
     private UserInfo userinfo;
     private MyStoreOrderResult order_count;
     private int msgs;
-    private String point_rule;
+    private float point_rule;
 
     public UserInfo getUserinfo() {
         return userinfo;
@@ -34,11 +34,11 @@ public class MySeesionEntity extends BaseResultEntity {
         this.msgs = msgs;
     }
 
-    public String getPoint_rule() {
+    public float getPoint_rule() {
         return point_rule;
     }
 
-    public void setPoint_rule(String point_rule) {
+    public void setPoint_rule(float point_rule) {
         this.point_rule = point_rule;
     }
 }

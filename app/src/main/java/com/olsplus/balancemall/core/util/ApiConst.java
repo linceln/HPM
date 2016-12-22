@@ -10,6 +10,6 @@ public class ApiConst {
     public static final String homeIndex = "v1/index";
     public static final String PAY_ALI = "ZHIFUBAO";
     public static final String PAY_WX = "WEIXIN";
-    public static double POINT_RULE = 0;
+//    public static double POINT_RULE = 0;
     public static final String path = "/HePingMao";
 }

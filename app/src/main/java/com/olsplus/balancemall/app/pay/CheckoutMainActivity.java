@@ -80,6 +80,7 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
     private double currentPayAmount;
 
     private double vouchePrice = 0;
+    private String pointsRule;
 
 
     @Override
@@ -145,14 +146,10 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
             outRequest.getVouchers();
             currentCheckOutResult = new ShopingOrderSubmitResultEntity();
             currentCheckOutResult.setTotal_fee(total_fee);
-            String pointsRule = (String) SPUtil.get(this, SPUtil.POINTS_RULE, "");
-            if (TextUtils.isEmpty(pointsRule)) {
-                currentCheckOutResult.setPoint_rule(0);
-            } else {
-                double pointsRuleDouble = Double.parseDouble(pointsRule);
-                currentCheckOutResult.setPoint_rule(pointsRuleDouble);
-            }
-            currentCheckOutResult.setPoint_rule(ApiConst.POINT_RULE);
+            int points = (int) SPUtil.get(this, SPUtil.POINTS, 0);
+            currentCheckOutResult.setPoints(points);
+            float pointsRule = (float) SPUtil.get(this, SPUtil.POINTS_RULE, 0F);
+            currentCheckOutResult.setPoint_rule(pointsRule);
             List<String> orders = new ArrayList<String>();
             orders.add(orderIds);
             currentCheckOutResult.setOrder_ids(orders);
@@ -160,8 +157,6 @@ public class CheckoutMainActivity extends MainActivity implements ICheckOutView,
             initPaymentLayout();
             initOrderInfo();
         }
-
-
     }
 
 

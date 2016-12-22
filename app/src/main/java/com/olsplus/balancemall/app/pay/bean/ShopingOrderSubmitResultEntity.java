@@ -11,7 +11,7 @@ public class ShopingOrderSubmitResultEntity extends BaseResultEntity {
 
     private List<String> order_ids;
 
-    private double point_rule;
+    private float point_rule;
 
     private int points;
 
@@ -39,11 +39,11 @@ public class ShopingOrderSubmitResultEntity extends BaseResultEntity {
         this.order_ids = order_ids;
     }
 
-    public double getPoint_rule() {
+    public float getPoint_rule() {
         return point_rule;
     }
 
-    public void setPoint_rule(double point_rule) {
+    public void setPoint_rule(float point_rule) {
         this.point_rule = point_rule;
     }
 }

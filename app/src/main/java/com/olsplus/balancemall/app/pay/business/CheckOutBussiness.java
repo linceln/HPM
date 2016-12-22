@@ -62,9 +62,7 @@ public class CheckOutBussiness {
                     callback.onSumitOrderFailed("数据出错了");
                     return;
                 }
-//                String pointRule = String.valueOf(data.getPoint_rule());
-//                SPUtil.put(context,SPUtil.POINT_RULE,pointRule);
-                ApiConst.POINT_RULE = data.getPoint_rule();
+                SPUtil.put(context, SPUtil.POINTS_RULE, data.getPoint_rule());
                 callback.onSumitOrderSuccess(data);
             }
 

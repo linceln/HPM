@@ -64,7 +64,7 @@ public class SPUtil {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        if(object == null){
+        if (object == null) {
             return;
         }
         if (object instanceof String) {
@@ -93,29 +93,28 @@ public class SPUtil {
      * @return
      */
     public static Object get(Context context, String key, Object defaultObject) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
-                Context.MODE_PRIVATE);
-
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         if (defaultObject instanceof String) {
             return sp.getString(key, (String) defaultObject);
-        } else if (defaultObject instanceof Integer) {
-            return sp.getInt(key, (Integer) defaultObject);
         } else if (defaultObject instanceof Boolean) {
             return sp.getBoolean(key, (Boolean) defaultObject);
         } else if (defaultObject instanceof Float) {
             return sp.getFloat(key, (Float) defaultObject);
         } else if (defaultObject instanceof Long) {
             return sp.getLong(key, (Long) defaultObject);
+        } else if (defaultObject instanceof Integer) {
+            return sp.getInt(key, (Integer) defaultObject);
         }
         return null;
     }
 
-    /**
-     * 移除某个key值已经对应的值
-     *
-     * @param context
-     * @param key
-     */
+        /**
+         * 移除某个key值已经对应的值
+         *
+         * @param context
+         * @param key
+         */
+
     public static void remove(Context context, String key) {
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE);
