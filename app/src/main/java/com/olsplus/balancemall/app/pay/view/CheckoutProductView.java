@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.pay.bean.ShopingOrderSubmitResultEntity;
-import com.olsplus.balancemall.core.util.SPUtil;
 import com.olsplus.balancemall.core.util.UIUtil;
 
 public class CheckoutProductView extends LinearLayout implements View.OnClickListener {
@@ -90,17 +89,18 @@ public class CheckoutProductView extends LinearLayout implements View.OnClickLis
         current = shopingOrderSubmitResultEntity;
         orderAmount = shopingOrderSubmitResultEntity.getTotal_fee();
         orderAmountTv.setText(UIUtil.formatLablePrice(orderAmount));
-        points = (int) SPUtil.get(getContext(), SPUtil.POINTS, 0);
+//        points = (int) SPUtil.get(getContext(), SPUtil.POINTS, 0);
+        points = shopingOrderSubmitResultEntity.getPoints();
         double rule = shopingOrderSubmitResultEntity.getPoint_rule();
         integral = UIUtil.formatPrice(points * rule);
 
-        pointTv.setText("可用" + points + "积分,抵用现金" + integral + "元");
+        pointTv.setText("可用" + points + "积分，抵用现金" + integral + "元");
         if (integral > orderAmount) {
             integral = orderAmount;
             try {
                 int availablePoints = (int) (integral / rule);
                 pointsUsed = availablePoints;
-                pointTv.setText("可用" + availablePoints + "积分,抵用现金" + integral + "元");
+                pointTv.setText("可用" + availablePoints + "积分，抵用现金" + integral + "元");
             } catch (Throwable e) {
                 e.printStackTrace();
             }

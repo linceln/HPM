@@ -5,13 +5,23 @@ import com.olsplus.balancemall.core.bean.BaseResultEntity;
 
 import java.util.List;
 
-public class ShopingOrderSubmitResultEntity extends BaseResultEntity{
+public class ShopingOrderSubmitResultEntity extends BaseResultEntity {
 
     private double total_fee;
 
     private List<String> order_ids;
 
     private double point_rule;
+
+    private int points;
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     public double getTotal_fee() {
         return total_fee;
