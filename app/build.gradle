@@ -35,10 +35,10 @@ android {
     buildTypes {
         debug {
             // 混淆开启
-            minifyEnabled false
+            minifyEnabled true
             // 让安装包中的资源按4字节对齐，减少内存消耗
             zipAlignEnabled true
-            shrinkResources false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debugConfig
         }
