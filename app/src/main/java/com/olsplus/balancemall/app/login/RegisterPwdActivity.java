@@ -26,6 +26,9 @@ import java.util.concurrent.TimeUnit;
 
 import rx.functions.Action1;
 
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.dismissLoading;
+import static com.olsplus.balancemall.component.dialog.LoadingDialog.showLoading;
+
 public class RegisterPwdActivity extends BaseCompatActivity implements Action1 {
 
 
@@ -73,18 +76,21 @@ public class RegisterPwdActivity extends BaseCompatActivity implements Action1 {
     // 注册
     @Override
     public void call(Object o) {
+        showLoading(this, getString(R.string.loading_upload));
         if (loginBusiness == null) {
             loginBusiness = new LoginBusiness(this);
         }
         loginBusiness.register(bean.getMobile(), bean.getNickname(), bean.getPassword(), new ILoginRequest.RegisterCallback() {
             @Override
             public void onRegisterSuccess() {
+                dismissLoading();
                 ToastUtil.showShort(RegisterPwdActivity.this, R.string.upomp_lthj_quick_bind_prompt);
                 selectMall();
             }
 
             @Override
             public void onRegisterFailed(String msg) {
+                dismissLoading();
                 Toast.makeText(RegisterPwdActivity.this, msg, Toast.LENGTH_SHORT).show();
             }
         });

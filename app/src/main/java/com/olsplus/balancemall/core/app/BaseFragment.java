@@ -2,15 +2,15 @@ package com.olsplus.balancemall.core.app;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.olsplus.balancemall.core.util.DialogHelper;
+import com.trello.rxlifecycle.components.support.RxFragment;
 
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends RxFragment {
 
     protected DialogHelper mDialogHelper;
 

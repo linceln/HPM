@@ -4,6 +4,7 @@ package com.olsplus.balancemall.core.http;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import com.olsplus.balancemall.BuildConfig;
 import com.olsplus.balancemall.core.app.MyApplication;
 import com.olsplus.balancemall.core.util.EncrypUtil;
 import com.olsplus.balancemall.core.util.SPUtil;
@@ -26,7 +27,7 @@ public class HttpUtil {
     /**
      * 渠道名称
      */
-    public static String CHANNEL = "360";
+    public static String CHANNEL = BuildConfig.FLAVOR;
     private static String SECRET = "HePingMao*&@-_";
 
     public static String getUid() {
