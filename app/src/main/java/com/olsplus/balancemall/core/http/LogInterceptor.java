@@ -48,8 +48,6 @@ public class LogInterceptor implements Interceptor {
             e.printStackTrace();
         }
         LogUtil.e(TAG, "-----------------------------------End-------------------------------------");
-//        // 不能return response，一个response只能用一次
-//        return chain.proceed(request);
         okhttp3.MediaType mediaType = response.body().contentType();
         return response.newBuilder()
                 .body(okhttp3.ResponseBody.create(mediaType, content))

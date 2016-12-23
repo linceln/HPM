@@ -3,7 +3,6 @@ package com.olsplus.balancemall.core.app;
 import android.content.res.Resources;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
@@ -14,9 +13,10 @@ import android.widget.TextView;
 
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.bottom.BottomNavigateFragment;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
 
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity extends RxAppCompatActivity implements View.OnClickListener {
 
     private int titleResId = -1;
     private View titleView = null;
