@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class CmsHomeFragment extends BaseFragment implements IHomeView,HomeFunctionView.OnHomeFunctionClickListener {
+public class CmsHomeFragment extends BaseFragment implements IHomeView, HomeFunctionView.OnHomeFunctionClickListener {
 
     private ViewPager viewPager;
     private PageIndicator mIndicator;
@@ -59,7 +59,7 @@ public class CmsHomeFragment extends BaseFragment implements IHomeView,HomeFunct
         initData();
     }
 
-    private void initData(){
+    private void initData() {
         homeRequest = new HomeRequestImpl(mActivity);
         homeRequest.setView(this);
         homeRequest.getIndex();
@@ -68,12 +68,11 @@ public class CmsHomeFragment extends BaseFragment implements IHomeView,HomeFunct
     /**
      * 刷新首页
      */
-    public void refreshHome(){
-        if(homeRequest!=null){
+    public void refreshHome() {
+        if (homeRequest != null) {
             homeRequest.getIndex();
         }
     }
-
 
     @Override
     protected int getLayoutId() {
@@ -82,7 +81,7 @@ public class CmsHomeFragment extends BaseFragment implements IHomeView,HomeFunct
 
     @Override
     public void showError(String msg) {
-        ToastUtil.showShort(mActivity,msg);
+        ToastUtil.showShort(mActivity, msg);
     }
 
     @Override
@@ -124,13 +123,13 @@ public class CmsHomeFragment extends BaseFragment implements IHomeView,HomeFunct
     public void showServiceView(ArrayList<HomeProductResult> homeProductResults) {
 
         int count = homeProductResults.size();
-        for(int i = 0;i<count;i++){
+        for (int i = 0; i < count; i++) {
             View homeFunctionRoot = mLayoutInflater.inflate(R.layout.home_cms_card_function, rootView, false);
             TextView titleTv = (TextView) homeFunctionRoot.findViewById(R.id.title);
             HomeFunctionView homeFunctionView = (HomeFunctionView) homeFunctionRoot.findViewById(R.id.home_functions_view);
             homeFunctionView.setOnHomeFunctionClickListener(this);
             HomeProductResult homeProductResult = homeProductResults.get(i);
-            if(homeProductResult!=null){
+            if (homeProductResult != null) {
                 titleTv.setText(homeProductResult.getTitle());
                 homeFunctionView.init(homeProductResult.getServices());
             }
@@ -149,12 +148,12 @@ public class CmsHomeFragment extends BaseFragment implements IHomeView,HomeFunct
     }
 
     @Override
-    public void OnFunctionClick(String title,String url) {
-        if(TextUtils.isEmpty(url)){
+    public void OnFunctionClick(String title, String url) {
+        if (TextUtils.isEmpty(url)) {
             return;
         }
         Intent newIntent = new Intent(getActivity(), WebActivity.class);
-        newIntent.putExtra("url",url) ;
+        newIntent.putExtra("url", url);
         newIntent.putExtra("title", title);
         getActivity().startActivity(newIntent);
 //        Intent intent = new Intent(mActivity, CheckoutMainActivity.class);

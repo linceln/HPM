@@ -9,13 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.olsplus.balancemall.R;
 import com.olsplus.balancemall.app.home.bean.PromoteTopic;
 import com.olsplus.balancemall.core.util.ApiConst;
-import com.olsplus.balancemall.core.util.LogUtil;
 import com.olsplus.balancemall.core.util.ScreenUtil;
 
 import java.util.List;
@@ -109,8 +107,5 @@ public class HomeFunctionView extends LinearLayout {
 //        addView(localLinearLayout, new LayoutParams(
 //                LayoutParams.MATCH_PARENT,
 //                LayoutParams.WRAP_CONTENT));
-
     }
-
-
 }
