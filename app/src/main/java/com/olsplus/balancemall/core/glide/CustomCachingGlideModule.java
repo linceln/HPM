@@ -11,6 +11,7 @@ import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.module.GlideModule;
 
 public class CustomCachingGlideModule implements GlideModule {
+
     @Override
     public void applyOptions(Context context, GlideBuilder builder) {
 

@@ -26,7 +26,7 @@ public class SignInterceptor implements Interceptor {
     }
 
     /**
-     * 生成带sign参数的Request-
+     * 生成带sign参数的Request
      *
      * @param request
      * @return

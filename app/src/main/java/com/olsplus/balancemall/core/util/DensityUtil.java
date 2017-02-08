@@ -63,8 +63,7 @@ public class DensityUtil {
         return (pxVal / context.getResources().getDisplayMetrics().scaledDensity);
     }
 
-    public static int setDensityMarge(Context paramContext, float paramFloat)
-    {
-        return (int)(paramContext.getResources().getDisplayMetrics().density * paramFloat + 0.5F);
+    public static int setDensityMarge(Context paramContext, float paramFloat) {
+        return (int) (paramContext.getResources().getDisplayMetrics().density * paramFloat + 0.5F);
     }
 }

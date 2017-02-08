@@ -115,6 +115,5 @@ public class IPicker {
     public interface OnSelectedListener {
 
         void onSelected(List<String> paths);
-
     }
 }
